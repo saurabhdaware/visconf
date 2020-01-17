@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VisConf - Create a web based visual conference experience from the transcript and slides of your talk.</title>
+    <style>
+    .slides-display-container{
+        position: relative;
+        min-height: 300px;
+    }
+    .slide{
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+    }
+    .slide.show{display: block;}
+    </style>
+</head>
+<body>
+    <div class="slides-display-container"></div>
+    <button onclick="prevSlide()">Prv</button>
+    <button onclick="nextSlide()">Next</button>
+    <div class="current-text">...</div>
+    <button>Read Transcript</button>
+    <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

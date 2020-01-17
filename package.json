@@ -1,0 +1,28 @@
+{
+  "name": "visconf",
+  "version": "1.0.0",
+  "description": "A web based talk visualiser for the conference/meetup talks.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server",
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhdaware/visconf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saurabhdaware/visconf/issues"
+  },
+  "homepage": "https://github.com/saurabhdaware/visconf#readme",
+  "devDependencies": {
+    "file-loader": "^5.0.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  }
+}
