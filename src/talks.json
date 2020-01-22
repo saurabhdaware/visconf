@@ -3,9 +3,9 @@
         "saurabhdaware": { 
             "visconf-intro": {
                 "title": "Building and Publishing NPM Packages",
-                "eventName": "Mumbai JS",
-                "slidePdfLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/slides.pdf",
-                "transcriptLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/Transcript.md",
+                "eventName": "JSConf",
+                "slidePdfLink": "/presentation/slides.pdf",
+                "transcriptLink": "/presentation/Transcript.md",
                 "character": {
                     "skinColor": "#f30",
                     "tshirtColor": "#09f",

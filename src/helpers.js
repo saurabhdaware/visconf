@@ -6,6 +6,17 @@ function nextSlide() {
     document.querySelector(`.slide.slide-${++currentSlideNumber}`).classList.add('show');
 }
 
+function goToSlideNumber(slideNumber) {
+    const currentSlideEl = document.querySelector('.slide.show');
+    const newSlideEl = document.querySelector(`.slide.slide-${Number(slideNumber) + 1}`);
+
+    if(!newSlideEl) return;
+
+
+    currentSlideEl.classList.remove('show');
+    newSlideEl.classList.add('show');
+}
+
 function prevSlide() {
     const currentSlideEl = document.querySelector('.slide.show');
     let currentSlideNumber = Number(currentSlideEl.dataset.slide);
@@ -14,4 +25,11 @@ function prevSlide() {
     document.querySelector(`.slide.slide-${--currentSlideNumber}`).classList.add('show');
 }
 
-export { nextSlide, prevSlide }
+
+async function wait(time){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), time);
+    })
+}
+
+export { nextSlide, prevSlide, goToSlideNumber, wait }

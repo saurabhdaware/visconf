@@ -2,40 +2,51 @@ import '../public/index.html';
 import '../public/styles/main.css';
 import '../public/_redirects';
 
-const talk  = require('./talks.json');
+import '../public/example/Transcript.md';
+import '../public/example/slides.pdf';
 
-console.log(talk);
+const talks = require('./talks.json');
 import reader from './reader';
 import Slides from './Slides';
-import { nextSlide } from './helpers';
+import { nextSlide, wait, goToSlideNumber } from './helpers';
+
+const [username, slug ] = location.pathname.split('/').slice(1);
+document.title = `${slug} by ${username} || VisConf`;
 
 function main() {
-    const [username, slug ] = location.pathname.split('/').slice(1);
-    const userData = talk.data[username][slug];
+    if(!username || !slug) return;
+
+    const userData = talks.data[username][slug];
 
     if(!userData) {
         return;
     }
+
+    document.querySelector('.mike-holder').innerHTML = userData.eventName;
     setTranscript(userData.transcriptLink);
     setSlides(userData.slidePdfLink);
 }
+
+
 main();
+
+
 var transcript, mappedTranscript, flatTranscript;
 async function setTranscript(transcriptPath) {
     let data = await (await fetch(transcriptPath)).text();
     transcript = data;
+
     // mappedTranscript: [[text,...], [text, ...], [text, ...]]
     mappedTranscript = transcript.split('||').map(slide => slide.split('|'))
 
     // flatTranscript: [text, text, text]
     flatTranscript = mappedTranscript.flatMap(text => text);
-    console.log(flatTranscript);
-    readTranscript();
 }
 
 async function setSlides(pdfPath) {
     const slides = new Slides();
     const pdf = await slides.loadPDF(pdfPath);
+    document.querySelector('.slides-display-container').innerHTML = ''
     for(let pageNumber=1; pageNumber<=pdf._pdfInfo.numPages; pageNumber++) {
         document.querySelector('.slides-display-container').innerHTML += `
         <div class="slide slide-${pageNumber} ${pageNumber === 1 ? 'show' : '' }" data-slide=${pageNumber}>
@@ -62,10 +73,46 @@ function readTranscript() {
             if(index === slide.length - 1){
                 nextSlide();
                 return;
-            }            
+            }
         })
     }
 } 
 
+function setNewSlide(flatIndex) {
+    let prev = 0;
+    for(let index in mappedTranscript) {
+        if(flatIndex < (prev + mappedTranscript[index].length)) {
+            // console.log(mappedTranscript[index][flatIndex - prev]);
+            goToSlideNumber(index);
+            return [index, flatIndex - prev];
+        }
+
+        prev += mappedTranscript[index].length;
+    }
+}
+
+async function readMessages(index){
+    setNewSlide(index);
+    let text = flatTranscript[index];
+    if(text === undefined) return;
+    
+    await reader.readText(flatTranscript[index].replace(/\$wait/g, ''));
+    currentText.innerHTML = flatTranscript[index + 1].replace(/\$wait/g, '');
+    if(text.includes('$wait')){
+        await wait(3000);
+    }
+    readMessages(++index);
+
+}
+
+// function readTranscript() {
+//     currentText.innerHTML = flatTranscript[0];
+//     console.log(mappedTranscript);
+// }
 
 
+document.querySelector('.start-presentation').addEventListener('click', () => {
+    document.querySelector('.index-overlay').style.display = 'none';
+    currentText.innerHTML = flatTranscript[0];
+    readMessages(0);
+})

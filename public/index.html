@@ -20,7 +20,7 @@
     .presentation-container > .slides-display-container{
         position: relative;
         display: inline-block;
-        background-color: #f30;
+        background-color: #00f;
         height: 90%;
         width: 600px;
         top: 10px;
@@ -79,11 +79,32 @@
         border-radius: 50px;
         max-width: 270px;
     }
+    .index-overlay{
+        position: fixed;
+        bottom:0; 
+        left:0;
+        background:linear-gradient(to top,#000f, #0000);
+        height: 500px;
+        width: 100%;
+        z-index: 999;
+        padding: 20px 50px;
+        box-sizing: border-box;
+    }
+    .start-presentation{
+        color: #fff;
+        background-color: transparent;
+        border:none;
+        padding:10px;
+        font-size: 15pt;
+        cursor: pointer;
+        position: absolute;
+        bottom: 50px;
+    }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        <div class="slides-display-container"></div>
+        <div class="slides-display-container"><b style="color:#fff;margin:10px;display:inline-block">No Signal</b></div>
     </div>
     <div class="stage-container">
         <div class="character-container">
@@ -99,7 +120,9 @@
         <div class="stage-front"></div>
         <div class="mike-holder">JS Mumbai</div>
     </div>
-
+    <div class="index-overlay">
+        <button class="start-presentation">&#9658; &nbsp;Start</button>
+    </div>
     <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
     <script src="/main.js"></script>
 </body>
