@@ -15,7 +15,8 @@ class Slides {
 
     async renderPage(pageNumber) {
         const page = await this.pdf.getPage(pageNumber)
-        const scale = .7;
+        const scale = 600/page.view[2];
+        // 600 / 1000
         const viewport = page.getViewport({scale: scale});
 
         // Prepare canvas using PDF page dimensions
@@ -23,8 +24,10 @@ class Slides {
         const context = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
+        document.querySelector('.presentation-container').style.height = canvas.height + 20 + 'px';
 
-
+        // x = vh
+        // 600 = vw
 
         // Render PDF page into canvas context
         const renderContext = {

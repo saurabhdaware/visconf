@@ -4,6 +4,7 @@ class Reader {
     }
 
     async readText(message) {
+        if(message === undefined) message = '';
         return new Promise((resolve, reject) => {
             const msg = new SpeechSynthesisUtterance(message);
             msg.voice = this.voices[10]; // Note: some voices don't support altering params

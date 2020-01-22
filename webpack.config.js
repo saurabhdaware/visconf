@@ -21,13 +21,22 @@ module.exports = {
                 options: {
                     name: '[name].[ext]',
                 }
+            },
+            {
+                test: /\.(css)$/,
+                use: ['style-loader', 'css-loader'],
             }
         ]
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 5000
+        port: 5000,
+        historyApiFallback: {
+            rewrites:[
+                {from: /^\/$/, to:'dist/index.html'}
+            ]
+        }
     },
 
 };

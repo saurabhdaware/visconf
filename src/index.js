@@ -1,11 +1,24 @@
+import '../public/index.html';
+import '../public/styles/main.css';
+
+const talk  = require('./talks.json');
+
+console.log(talk);
 import reader from './reader';
 import Slides from './Slides';
-import '../public/index.html';
-import '../public/presentation/Transcript.md';
-import '../public/presentation/slides.pdf';
+import { nextSlide } from './helpers';
 
-setTranscript("presentation/Transcript.md");
-setSlides("presentation/slides.pdf");
+function main() {
+    const [username, slug ] = location.pathname.split('/').slice(1);
+    const userData = talk.data[username][slug];
+    
+    if(!userData) {
+        return;
+    }
+    setTranscript(userData.transcriptLink);
+    setSlides(userData.slidePdfLink);
+}
+main();
 var transcript, mappedTranscript, flatTranscript;
 async function setTranscript(transcriptPath) {
     let data = await (await fetch(transcriptPath)).text();
@@ -15,6 +28,7 @@ async function setTranscript(transcriptPath) {
 
     // flatTranscript: [text, text, text]
     flatTranscript = mappedTranscript.flatMap(text => text);
+    console.log(flatTranscript);
     readTranscript();
 }
 
@@ -23,7 +37,7 @@ async function setSlides(pdfPath) {
     const pdf = await slides.loadPDF(pdfPath);
     for(let pageNumber=1; pageNumber<=pdf._pdfInfo.numPages; pageNumber++) {
         document.querySelector('.slides-display-container').innerHTML += `
-        <div class="slide slide-${pageNumber} ${pageNumber === 1 ? 'show' : null }" data-slide=${pageNumber}>
+        <div class="slide slide-${pageNumber} ${pageNumber === 1 ? 'show' : '' }" data-slide=${pageNumber}>
             <canvas id="canvas-page-${pageNumber}"></canvas>
         </div>
         `
@@ -34,22 +48,6 @@ async function setSlides(pdfPath) {
 const currentText = document.querySelector('.current-text');
 
 
-function nextSlide() {
-    const currentSlideEl = document.querySelector('.slide.show');
-    let currentSlideNumber = Number(currentSlideEl.dataset.slide);
-
-    currentSlideEl.classList.remove('show');
-    document.querySelector(`.slide.slide-${++currentSlideNumber}`).classList.add('show');
-}
-
-function prevSlide() {
-    const currentSlideEl = document.querySelector('.slide.show');
-    let currentSlideNumber = Number(currentSlideEl.dataset.slide);
-
-    currentSlideEl.classList.remove('show');
-    document.querySelector(`.slide.slide-${--currentSlideNumber}`).classList.add('show');
-}
-
 let nextTextCounter = 0;
 
 function readTranscript() {
@@ -58,7 +56,7 @@ function readTranscript() {
         slide.forEach(async (text, index) => {
             const timeElapsed = await reader.readText(text);
             console.log(timeElapsed);
-            currentText.innerHTML = flatTranscript[nextTextCounter+1];
+            currentText.innerHTML = flatTranscript[nextTextCounter+1] !== undefined ? flatTranscript[nextTextCounter+1] : '';
             nextTextCounter++;
             if(index === slide.length - 1){
                 nextSlide();

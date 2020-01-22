@@ -6,26 +6,101 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VisConf - Create a web based visual conference experience from the transcript and slides of your talk.</title>
     <style>
-    .slides-display-container{
-        position: relative;
-        min-height: 300px;
+    html, body{
+        background-color: #111;
     }
-    .slide{
+    body{
+        padding: 40px;
+        box-sizing: border-box;
+    }
+    .presentation-container{
+        background-color: #222;
+        height: 350px;
+    }
+    .presentation-container > .slides-display-container{
+        position: relative;
+        display: inline-block;
+        background-color: #f30;
+        height: 90%;
+        width: 600px;
+        top: 10px;
+        left: 50%;
+        transform: translateX(calc(100px - 50%));
+    }
+    .stage-container{
+        perspective: 1000px;
+        width: 100%
+    }
+    .stage-platform{
+        position: relative;
+        height: 100px;
+        transform: rotateX(60deg) translateX(-50%);
+        width: calc(100% - 50px);
+        top: 25px;
+        left: 50%;
+        background-color: #881f04;
+    }
+    
+    .stage-front{
+        height: 100px;
+        width: 100%;
+        background-color: #660000;
+    }
+    .mike-holder{
         position: absolute;
-        top: 0;
-        left: 0;
+        height: 150px;
+        width: 100px;
+        background-color: #f90;
+        top: -50px;
+        left: 30px;
+        font-weight: bold;
+        padding: 20px 10px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .slide{
         display: none;
     }
-    .slide.show{display: block;}
+    .slide.show{
+        display: block;
+    }
+
+    .current-text{
+        position: absolute;
+        z-index: 10;
+        top: -170px;
+        left: 80px;
+        background-color: #fff;
+        display: inline-block;
+        padding: 10px 30px;
+        font-size: 10pt;
+        box-sizing: border-box;
+        border-radius: 50px;
+        max-width: 270px;
+    }
     </style>
 </head>
 <body>
-    <div class="slides-display-container"></div>
-    <button onclick="prevSlide()">Prv</button>
-    <button onclick="nextSlide()">Next</button>
-    <div class="current-text">...</div>
-    <button>Read Transcript</button>
+    <div class="presentation-container">
+        <div class="slides-display-container"></div>
+    </div>
+    <div class="stage-container">
+        <div class="character-container">
+            <span class="myhead"></span>
+            <span class="mybody"></span>
+            <span class="hands mylhand"></span>
+            <span class="hands myrhand"></span>
+            <span class="legs mylleg"></span>
+            <span class="legs myrleg"></span>
+        </div>
+        <div class="current-text">...</div>
+        <div class="stage-platform"></div>
+        <div class="stage-front"></div>
+        <div class="mike-holder">JS Mumbai</div>
+    </div>
+
     <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
-    <script src="main.js"></script>
+    <script src="/main.js"></script>
 </body>
 </html>
