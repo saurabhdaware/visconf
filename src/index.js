@@ -1,5 +1,6 @@
 import '../public/index.html';
 import '../public/styles/main.css';
+import '../public/_redirects';
 
 const talk  = require('./talks.json');
 
@@ -11,7 +12,7 @@ import { nextSlide } from './helpers';
 function main() {
     const [username, slug ] = location.pathname.split('/').slice(1);
     const userData = talk.data[username][slug];
-    
+
     if(!userData) {
         return;
     }

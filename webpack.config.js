@@ -16,6 +16,13 @@ module.exports = {
                 }
             },
             {
+                test: /(_redirects)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '_redirects',
+                }
+            },
+            {
                 test: /\.(html)$/,
                 loader: 'file-loader',
                 options: {

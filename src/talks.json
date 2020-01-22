@@ -1,7 +1,7 @@
 {
     "data": {
         "saurabhdaware": { 
-            "build-npm-packages": {
+            "visconf-intro": {
                 "title": "Building and Publishing NPM Packages",
                 "eventName": "Mumbai JS",
                 "slidePdfLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/slides.pdf",
@@ -12,8 +12,6 @@
                     "hairColor": "#222"
                 }
             }
-
-            
         }
     }
 }
