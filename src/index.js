@@ -88,22 +88,30 @@ async function startReadingFrom(index){
     if(text === undefined) return;
     
     await reader.readText(flatTranscript[index].replace(/\$wait(2|5|10)s/g, ''));
-    currentText.innerHTML = flatTranscript[index + 1].replace(/\$wait(2|5|10)s/g, '');
+
+    if(isPaused){
+        lastSlideIndex = index;
+        return;
+    }
+
     if(text.includes('$wait2s')){
         console.log("2s pause");
+        currentText.innerHTML = "...";
         await wait(2000);
     }
 
     if(text.includes('$wait5s')){
         console.log("5s pause");
+        currentText.innerHTML = "*points to slides*";
         await wait(5000);
     }
 
     if(text.includes('$wait10s')){
         console.log("10s pause");
+        currentText.innerHTML = "*points to slides*";
         await wait(10000);
     }
-
+    currentText.innerHTML = flatTranscript[index + 1].replace(/\$wait(2|5|10)s/g, '');
     lastSlideIndex = index;
 
     if(!isPaused) startReadingFrom(++index);
@@ -113,6 +121,10 @@ async function startReadingFrom(index){
 // Controls
 const startControl = document.querySelector('.control.start');
 const pauseControl = document.querySelector('.control.pause');
+const replayControl = document.querySelector('.control.restart');
+const muteVolumeControl = document.querySelector('.control.mute');
+const volumeOnControl = document.querySelector('.control.volumeon');
+const volumeToggleEl = document.querySelector('span.volume');
 
 startControl.addEventListener('click', () => {
     startControl.style.display = 'none';
@@ -125,6 +137,28 @@ startControl.addEventListener('click', () => {
 pauseControl.addEventListener('click', () => {
     startControl.style.display = 'inline-block';
     pauseControl.style.display = 'none';
+    speechSynthesis.cancel();
     isPaused = true;
+})
+
+replayControl.addEventListener('click', () => {
+    startControl.style.display = 'inline-block';
+    pauseControl.style.display = 'none';
+    lastSlideIndex = 0;
+    currentText.innerHTML = flatTranscript[0];
+    setNewSlide(0);
+    progressBar.style.width = '0%';
+    isPaused = true;
+})
+
+muteVolumeControl.addEventListener('click', () => {
+    volumeToggleEl.classList.remove('playing');
+    reader.volume = 0;
+    speechSynthesis.cancel();
+})
+
+volumeOnControl.addEventListener('click', () => {
+    volumeToggleEl.classList.add('playing');
+    reader.volume = 10;
 })
 

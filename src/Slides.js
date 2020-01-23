@@ -1,3 +1,5 @@
+import { isMobile } from './helpers';
+
 class Slides {
     constructor() {
         this.pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -14,8 +16,13 @@ class Slides {
     }
 
     async renderPage(pageNumber) {
-        const page = await this.pdf.getPage(pageNumber)
-        const scale = 600/page.view[2];
+        const page = await this.pdf.getPage(pageNumber);
+        let scale;
+        if(isMobile()) {
+            scale = 400/page.view[2];
+        }else {
+            scale = 600/page.view[2];
+        }
         // 600 / 1000
         const viewport = page.getViewport({scale: scale});
 

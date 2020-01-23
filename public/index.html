@@ -72,7 +72,7 @@
         z-index: 10;
         top: -170px;
         left: 80px;
-        background-color: #fff;
+        background-color: #fff9;
         display: inline-block;
         padding: 10px 30px;
         font-size: 10pt;
@@ -125,6 +125,77 @@
         position: absolute;
         
     }
+
+    .volume > .control.volumeon{
+        display: inline-block;
+    }
+    .volume > .control.mute{
+        display: none;
+    }
+
+    .volume.playing > .control.volumeon{
+        display: none;
+    }
+    .volume.playing > .control.mute{
+        display: inline-block;
+    }
+    .github-logo{
+        width: 40px;
+    }
+    .orientation-error{
+        padding:200px 30px;
+        box-sizing:border-box;
+        display:none;
+        position:fixed;
+        font-size:17pt;
+        z-index:99999;
+        top:0;left:0;
+        height:100%;width:100%;
+        background-color: #222d;
+        color: #ddd;
+        font-weight: bold;
+    }
+
+    @media (orientation: portrait){
+        .orientation-error{
+            display: block;
+        }
+    }
+
+    .orientation-error  .material-icons{
+        font-size: 40pt;
+    }
+    @media (max-width: 768px) {
+        body{
+            padding: 20px;
+            overflow: hidden;
+        }
+        .github-logo{
+            width: 30px;
+        }
+        .current-text{
+            left: 20px;
+            top: -230px;
+            font-size: 9pt;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            max-width: 140px;
+            padding:10px 10px;
+        }
+        .presentation-container > .slides-display-container{
+            width: 400px;
+        }
+        .control > .material-icons{
+            font-size: 20pt;
+        }
+        .index-overlay{
+            height: 300px;
+        }
+        .presentation-controls{
+            padding: 30px;
+        }
+    }
     </style>
 </head>
 <body>
@@ -148,12 +219,24 @@
     <div class="index-overlay">
         <div class="presentation-controls">
             <button title="start presentation" class="control start"><i class="material-icons">play_arrow</i></button>
-            <button class="control pause"><i class="material-icons">pause</i></button>
+            <button title="pause presentation" class="control pause"><i class="material-icons">pause</i></button>
+            <button title="restart presentation" class="control restart"><i class="material-icons">replay</i></button>
+            <span class="volume playing">
+                <button title="mute volume" class="control mute"><i class="material-icons">volume_up</i></button>
+                <button title="turn on volume" class="control volumeon"><i class="material-icons">volume_off</i></button>
+            </span>
+            <a style="float:right" target="_blank" rel="noopener" href="https://github.com/saurabhdaware/visconf"><img class="github-logo" style="background-color:#fff;border-radius: 100%;" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></a>
             <br/><br/>
             <div class="presentation-video-bar">
                 <div class="progress"></div>
             </div>
         </div>
+    </div>
+
+    <!-- FIxed -->
+    <div class="orientation-error">
+        VisConf is best viewed in landscape! <br/>Please rotate your screen to view the talk 🌻 <br/>
+        <br/><div style="text-align: center;"><i class="material-icons">screen_rotation</i></div>
     </div>
     <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
     <script src="/main.js"></script>

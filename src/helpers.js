@@ -25,6 +25,20 @@ function prevSlide() {
     document.querySelector(`.slide.slide-${--currentSlideNumber}`).classList.add('show');
 }
 
+function isMobile() { 
+    if( navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+    ){
+        return true;
+    } else {
+        return false;
+    }
+}
 
 async function wait(time){
     return new Promise((resolve, reject) => {
@@ -32,4 +46,4 @@ async function wait(time){
     })
 }
 
-export { nextSlide, prevSlide, goToSlideNumber, wait }
+export { nextSlide, prevSlide, goToSlideNumber, wait, isMobile }
