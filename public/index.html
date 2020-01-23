@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>VisConf - Create a web based visual conference experience from the transcript and slides of your talk.</title>
     <style>
     html, body{
@@ -90,15 +91,39 @@
         padding: 20px 50px;
         box-sizing: border-box;
     }
-    .start-presentation{
+    .control{
         color: #fff;
         background-color: transparent;
         border:none;
-        padding:10px;
-        font-size: 15pt;
+        /* padding:10px; */
         cursor: pointer;
+    }
+    .control > .material-icons{
+        font-size: 30pt;
+    }
+    .control.pause{
+        display: none;
+    }
+    .presentation-controls{
         position: absolute;
-        bottom: 50px;
+        bottom: 0px;
+        left: 0px;
+        padding: 50px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .presentation-video-bar{
+        background-color: #999;
+        height:3px; 
+        width:100%;
+        border-radius: 10px;
+    }
+    .presentation-video-bar > .progress{
+        background-color: #f90;
+        height: 3px;
+        display: inline-block;
+        position: absolute;
+        
     }
     </style>
 </head>
@@ -121,7 +146,14 @@
         <div class="mike-holder">JS Mumbai</div>
     </div>
     <div class="index-overlay">
-        <button class="start-presentation">&#9658; &nbsp;Start</button>
+        <div class="presentation-controls">
+            <button title="start presentation" class="control start"><i class="material-icons">play_arrow</i></button>
+            <button class="control pause"><i class="material-icons">pause</i></button>
+            <br/><br/>
+            <div class="presentation-video-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
     </div>
     <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
     <script src="/main.js"></script>

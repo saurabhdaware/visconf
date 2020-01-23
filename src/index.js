@@ -8,10 +8,17 @@ import '../public/example/slides.pdf';
 const talks = require('./talks.json');
 import reader from './reader';
 import Slides from './Slides';
-import { nextSlide, wait, goToSlideNumber } from './helpers';
+import { wait, goToSlideNumber } from './helpers';
 
 const [username, slug ] = location.pathname.split('/').slice(1);
 document.title = `${slug} by ${username} || VisConf`;
+
+// variables
+let isPaused = false;
+let lastSlideIndex = 0;
+
+// elements
+const progressBar = document.querySelector('.presentation-video-bar > .progress');
 
 function main() {
     if(!username || !slug) return;
@@ -60,29 +67,10 @@ async function setSlides(pdfPath) {
 const currentText = document.querySelector('.current-text');
 
 
-let nextTextCounter = 0;
-
-function readTranscript() {
-    currentText.innerHTML = flatTranscript[0];
-    for(let slide of mappedTranscript) {
-        slide.forEach(async (text, index) => {
-            const timeElapsed = await reader.readText(text);
-            console.log(timeElapsed);
-            currentText.innerHTML = flatTranscript[nextTextCounter+1] !== undefined ? flatTranscript[nextTextCounter+1] : '';
-            nextTextCounter++;
-            if(index === slide.length - 1){
-                nextSlide();
-                return;
-            }
-        })
-    }
-} 
-
 function setNewSlide(flatIndex) {
     let prev = 0;
     for(let index in mappedTranscript) {
         if(flatIndex < (prev + mappedTranscript[index].length)) {
-            // console.log(mappedTranscript[index][flatIndex - prev]);
             goToSlideNumber(index);
             return [index, flatIndex - prev];
         }
@@ -91,28 +79,52 @@ function setNewSlide(flatIndex) {
     }
 }
 
-async function readMessages(index){
+async function startReadingFrom(index){
     setNewSlide(index);
+    progressBar.style.width = index*100/flatTranscript.length + '%';
+
+
     let text = flatTranscript[index];
     if(text === undefined) return;
     
-    await reader.readText(flatTranscript[index].replace(/\$wait/g, ''));
-    currentText.innerHTML = flatTranscript[index + 1].replace(/\$wait/g, '');
-    if(text.includes('$wait')){
-        await wait(3000);
+    await reader.readText(flatTranscript[index].replace(/\$wait(2|5|10)s/g, ''));
+    currentText.innerHTML = flatTranscript[index + 1].replace(/\$wait(2|5|10)s/g, '');
+    if(text.includes('$wait2s')){
+        console.log("2s pause");
+        await wait(2000);
     }
-    readMessages(++index);
+
+    if(text.includes('$wait5s')){
+        console.log("5s pause");
+        await wait(5000);
+    }
+
+    if(text.includes('$wait10s')){
+        console.log("10s pause");
+        await wait(10000);
+    }
+
+    lastSlideIndex = index;
+
+    if(!isPaused) startReadingFrom(++index);
 
 }
 
-// function readTranscript() {
-//     currentText.innerHTML = flatTranscript[0];
-//     console.log(mappedTranscript);
-// }
+// Controls
+const startControl = document.querySelector('.control.start');
+const pauseControl = document.querySelector('.control.pause');
 
-
-document.querySelector('.start-presentation').addEventListener('click', () => {
-    document.querySelector('.index-overlay').style.display = 'none';
-    currentText.innerHTML = flatTranscript[0];
-    readMessages(0);
+startControl.addEventListener('click', () => {
+    startControl.style.display = 'none';
+    pauseControl.style.display = 'inline-block';
+    if(lastSlideIndex === 0) currentText.innerHTML = flatTranscript[0];
+    startReadingFrom(lastSlideIndex);
+    isPaused = false;
 })
+
+pauseControl.addEventListener('click', () => {
+    startControl.style.display = 'inline-block';
+    pauseControl.style.display = 'none';
+    isPaused = true;
+})
+
