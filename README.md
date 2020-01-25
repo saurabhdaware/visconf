@@ -1,7 +1,10 @@
 # VisConf
+![Version badge of the repository](https://img.shields.io/github/package-json/v/saurabhdaware/visconf?style=for-the-badge)
+
 A web based talk visualiser for the conference/meetup talks. 
 
 VisConf lets you generate an animated version of your talk from your slides and transcript.
+
 
 ***Example:*** https://visconf.netflify.com/saurabhdaware/visconf-intro
 
@@ -25,12 +28,19 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ```json
 {
     "data": {
+        // ...
         ":github-username": {
             ":slug-of-talk-title":{
                 "title": "My Cool Talk",
                 "eventName": "JSConf",
                 "slidePdfLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/slides.pdf", 
                 "transcriptLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/Transcript.md",
+                "character": {
+                    "skinColor": "#E0AB8B",
+                    "tshirtColor": "#09f",
+                    "hairColor": "#111",
+                    "hairStyle": "short"
+                }
             }
         }
     }
@@ -38,6 +48,8 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ```
 - Send Pull Request to the `master` branch of main repository
 - Done!! View your talk at `https://visconf.netlify.com/:github-username/:slug-of-talk-title` 🎉
+
+(You can checkout https://github.com/saurabhdaware/visconf-example for example)
 
 # Transcript Markdown
 In transcript you can use characters like `|`, `||` and `$wait5s`.
@@ -72,7 +84,11 @@ Hey There!
 
 
 # Contributing
-You can follow steps mentioned in [Locally Test Transcript and Slides](#locally-test-transcript-and-slides) above for contribution.
+- Fork this repository
+- git clone your fork
+- run `npm install` to install dependencies
+- `npm run dev` to run local server
+- Visit https://localhost:5000/example-username/test
 
 
 
