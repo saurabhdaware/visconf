@@ -28,7 +28,6 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ```json
 {
     "data": {
-        // ...
         ":github-username": {
             ":slug-of-talk-title":{
                 "title": "My Cool Talk",
