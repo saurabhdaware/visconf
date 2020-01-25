@@ -4,8 +4,8 @@
             "test": {
                 "title": "Building and Publishing NPM Packages",
                 "eventName": "JS Meetup",
-                "slidePdfLink": "/presentation/slides.pdf",
-                "transcriptLink": "/presentation/Transcript.md",
+                "slidePdfLink": "/example/slides.pdf",
+                "transcriptLink": "/example/Transcript.md",
                 "character": {
                     "skinColor": "#8B4513",
                     "tshirtColor": "#f30",

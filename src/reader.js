@@ -1,5 +1,3 @@
-import { wait } from './helpers';
-
 class Reader {
     constructor() {
         this.voices = window.speechSynthesis.getVoices();
@@ -20,8 +18,7 @@ class Reader {
             speechSynthesis.speak(msg);
 
             msg.onend = e => {
-                
-                    resolve(event.elapsedTime);
+                resolve(event.elapsedTime);
             }
         })
     }

@@ -3,6 +3,8 @@ const path = require('path');
 module.exports = {
     entry: {
         main: './src/index.js',
+        editor: './src/editor/editor.js',
+        create: './src/create/create.js'
     },
     output: {
         filename: '[name].js',
@@ -14,7 +16,7 @@ module.exports = {
                 test: /\.(pdf|md)$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'presentation/[name].[ext]',
+                    name: 'example/[name].[ext]',
                 }
             },
             {

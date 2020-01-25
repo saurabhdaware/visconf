@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create your talk</title>
+
+    <style>
+    html,body{
+        width: 100%;
+        overflow-x: hidden;
+        height: 100%;
+        box-sizing: border-box;
+        margin: 0px;
+    }
+    .character-edit{
+        display: flex;
+    }
+    .character-form{
+        flex: 1;
+    }
+    .character-preview{
+        position: relative;
+        width: 200px;
+    }
+    .character-container{
+        position: absolute !important;
+        left: 0px;
+        top: 30px !important;
+        height: 500px !important;width: 300px !important;
+        z-index: 0;
+    }
+    .mike-holder{
+        position: absolute;
+        height: 150px;
+        width: 100px;
+        background-color: #f90;
+        top: 95px;
+        left: 30px;
+        font-weight: bold;
+        padding: 20px 10px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .form-container{
+        padding: 100px;
+        box-sizing: border-box;
+    }
+    .form-field{
+        padding: 10px 50px;
+    }
+    .form-field input:not([type="color"]), .form-field select{
+        display: block;
+        padding: 5px 10px;
+        width: 80%;
+    }
+    .form-field input[type="color"] {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Create your Talk</h1>
+        <div class="form-field">
+            <label>Transcript.md URL</label>
+            <input type="url" id="transcript-url"/>
+        </div>
+        <div class="form-field">
+            <label>Slides PDF URL</label>
+            <input type="url" id="slides-pdf"/>
+        </div>
+        <div class="form-field">
+            <label>Event Name</label>
+            <input type="text" id="event-name"/>
+        </div>
+
+        <div class="character-edit">
+            <div class="character-form">
+                <div class="form-field">
+                    <label>Character Hair Style</label>
+                    <select>
+                        <option default value="short">Short</option>
+                        <option value="long">Long</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>Hair Color</label>
+                    <input type="color" id="hair-color"/>
+                </div>
+                <div class="form-field">
+                    <label>Skin Color</label>
+                    <input type="color" id="skin-color"/>
+                </div>
+                <div class="form-field">
+                    <label>TShirt Color</label>
+                    <input type="color" id="tshirt-color"/>
+                </div>
+            </div>
+            <div class="character-preview">
+                <div class="character-container">
+                    <span class="myhead"></span>
+                    <span class="myhair"></span>
+                    <span class="mybody"></span>
+                    <span class="hands mylhand"></span>
+                    <span class="hands myrhand"></span>
+                    <span class="legs mylleg"></span>
+                    <span class="legs myrleg"></span>
+                </div>
+                <div class="mike-holder">JS Mumbai</div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="/create.js"></script>
+</body>
+</html>
