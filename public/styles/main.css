@@ -1,6 +1,6 @@
 .character-container{
     position: fixed;
-    top: -110px;
+    top: -113px;
     left: 50px;
 }
 
@@ -23,6 +23,18 @@
     border-bottom: none;
     background-color:#ffe0bd;
     box-sizing: border-box;
+}
+
+.character-container > span.myhair{
+    position: absolute;
+    background-color: #111;
+    width: 35px;
+    left: -4px;
+    top: 0;
+    border-radius: 20px 20px 0px 0px;
+    z-index: -1;
+    display: none;
+    height: 50px;
 }
 
 .character-container > span.mybody{
@@ -48,7 +60,7 @@
 
 .character-container > span.mylhand{
     transform:rotate(-10deg);
-    left:26px;
+    left:25px;
 }
 
 .character-container > span.legs{

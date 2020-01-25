@@ -3,13 +3,14 @@
         "example-username": {
             "test": {
                 "title": "Building and Publishing NPM Packages",
-                "eventName": "JSConf",
+                "eventName": "JS Meetup",
                 "slidePdfLink": "/presentation/slides.pdf",
                 "transcriptLink": "/presentation/Transcript.md",
                 "character": {
-                    "skinColor": "#f30",
-                    "tshirtColor": "#09f",
-                    "hairColor": "#222"
+                    "skinColor": "#8B4513",
+                    "tshirtColor": "#f30",
+                    "hairColor": "#DAA520",
+                    "hairStyle": "long"
                 }
             }
         },
@@ -20,9 +21,10 @@
                 "slidePdfLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/slides.pdf",
                 "transcriptLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/Transcript.md",
                 "character": {
-                    "skinColor": "#f30",
+                    "skinColor": "#E0AB8B",
                     "tshirtColor": "#09f",
-                    "hairColor": "#222"
+                    "hairColor": "#111",
+                    "hairStyle": "short"
                 }
             }
         }
