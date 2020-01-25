@@ -1,30 +1,3 @@
-function nextSlide() {
-    const currentSlideEl = document.querySelector('.slide.show');
-    let currentSlideNumber = Number(currentSlideEl.dataset.slide);
-
-    currentSlideEl.classList.remove('show');
-    document.querySelector(`.slide.slide-${++currentSlideNumber}`).classList.add('show');
-}
-
-function goToSlideNumber(slideNumber) {
-    const currentSlideEl = document.querySelector('.slide.show');
-    const newSlideEl = document.querySelector(`.slide.slide-${Number(slideNumber) + 1}`);
-
-    if(!newSlideEl) return;
-
-
-    currentSlideEl.classList.remove('show');
-    newSlideEl.classList.add('show');
-}
-
-function prevSlide() {
-    const currentSlideEl = document.querySelector('.slide.show');
-    let currentSlideNumber = Number(currentSlideEl.dataset.slide);
-
-    currentSlideEl.classList.remove('show');
-    document.querySelector(`.slide.slide-${--currentSlideNumber}`).classList.add('show');
-}
-
 function isMobile() { 
     if( navigator.userAgent.match(/Android/i)
     || navigator.userAgent.match(/webOS/i)
@@ -76,4 +49,4 @@ async function wait(time){
     })
 }
 
-export { nextSlide, prevSlide, goToSlideNumber, wait, isMobile, openFullscreen, closeFullscreen }
+export { wait, isMobile, openFullscreen, closeFullscreen }

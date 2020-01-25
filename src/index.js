@@ -7,8 +7,8 @@ import '../public/example/slides.pdf';
 
 const talks = require('./talks.json');
 import reader from './reader';
-import Slides from './Slides';
-import { wait, goToSlideNumber, openFullscreen, closeFullscreen } from './helpers';
+import slides from './slides';
+import { wait, openFullscreen, closeFullscreen } from './helpers';
 
 const [username, slug ] = location.pathname.split('/').slice(1);
 document.title = `${slug} by ${username} || VisConf`;
@@ -19,22 +19,24 @@ let lastSlideIndex = 0;
 
 // elements
 const progressBar = document.querySelector('.presentation-video-bar > .progress');
+const currentText = document.querySelector('.current-text');
 
 function main() {
-    if(!username || !slug) return;
-
-    const userData = talks.data[username][slug];
-
-    if(!userData) {
+    if(!username || !slug) {
+        // Show Home Page
         return;
     }
 
+    const userData = talks.data[username][slug];
+    if(!userData) {
+        return;
+    }
 
     document.querySelector('.mike-holder').innerHTML = userData.eventName;
    
     setCharacterStyles(userData);
     setTranscript(userData.transcriptLink);
-    setSlides(userData.slidePdfLink);
+    slides.setSlides(userData.slidePdfLink);
 }
 
 
@@ -69,38 +71,11 @@ async function setTranscript(transcriptPath) {
     flatTranscript = mappedTranscript.flatMap(text => text);
 }
 
-async function setSlides(pdfPath) {
-    const slides = new Slides();
-    const pdf = await slides.loadPDF(pdfPath);
-    document.querySelector('.slides-display-container').innerHTML = ''
-    for(let pageNumber=1; pageNumber<=pdf._pdfInfo.numPages; pageNumber++) {
-        document.querySelector('.slides-display-container').innerHTML += `
-        <div class="slide slide-${pageNumber} ${pageNumber === 1 ? 'show' : '' }" data-slide=${pageNumber}>
-            <canvas id="canvas-page-${pageNumber}"></canvas>
-        </div>
-        `
-        slides.renderPage(pageNumber);
-    }
-}
-
-const currentText = document.querySelector('.current-text');
 
 
-function setNewSlide(flatIndex) {
-    let prev = 0;
-    for(let index in mappedTranscript) {
-        if(flatIndex < (prev + mappedTranscript[index].length)) {
-            goToSlideNumber(index);
-            return [index, flatIndex - prev];
-        }
-
-        prev += mappedTranscript[index].length;
-    }
-}
 
 async function startReadingFrom(index, onlyOnce = false){
-    console.log(index);
-    setNewSlide(index);
+    slides.setNewSlide(index, mappedTranscript);
     progressBar.style.width = index*100/flatTranscript.length + '%';
 
 
@@ -169,7 +144,7 @@ replayControl.addEventListener('click', () => {
     pauseTalk();
     // lastSlideIndex = 0;
     currentText.innerHTML = flatTranscript[0];
-    setNewSlide(0);
+    slides.setNewSlide(0, mappedTranscript);
     progressBar.style.width = '0%';
 })
 

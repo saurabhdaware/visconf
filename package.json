@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --host 0.0.0.0",
     "build": "webpack --config webpack.config.js"
   },
   "repository": {
