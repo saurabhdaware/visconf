@@ -29,7 +29,8 @@
         background-color: #111;
         height: 100%;
         width: 100%;
-        overflow-x: hidden;
+        margin: 0px;
+        overflow: hidden;
     }
     body{
         padding: 40px;
@@ -88,81 +89,6 @@
         display: block;
     }
 
-    .current-text{
-        position: absolute;
-        z-index: 10;
-        top: -170px;
-        left: 80px;
-        background-color: #fff9;
-        display: inline-block;
-        padding: 10px 30px;
-        font-size: 10pt;
-        box-sizing: border-box;
-        border-radius: 50px;
-        max-width: 270px;
-    }
-    .index-overlay{
-        position: fixed;
-        bottom:0; 
-        left:0;
-        background:linear-gradient(to top,#000f, #0000);
-        height: 500px;
-        width: 100%;
-        z-index: 999;
-        padding: 20px 50px;
-        box-sizing: border-box;
-    }
-    .control{
-        color: #fff;
-        background-color: transparent;
-        border:none;
-        /* padding:10px; */
-        cursor: pointer;
-    }
-    .control > .material-icons{
-        font-size: 30pt;
-    }
-    .control.pause{
-        display: none;
-    }
-    .presentation-controls{
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        padding: 50px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .presentation-video-bar{
-        background-color: #999;
-        height:3px; 
-        width:100%;
-        border-radius: 10px;
-    }
-    .presentation-video-bar > .progress{
-        background-color: #f90;
-        height: 3px;
-        display: inline-block;
-        position: absolute;
-        
-    }
-
-    .volume > .control.volumeon{
-        display: inline-block;
-    }
-    .volume > .control.mute{
-        display: none;
-    }
-
-    .volume.playing > .control.volumeon{
-        display: none;
-    }
-    .volume.playing > .control.mute{
-        display: inline-block;
-    }
-    .github-logo{
-        width: 40px;
-    }
     .orientation-error{
         padding:200px 30px;
         box-sizing:border-box;
@@ -195,39 +121,12 @@
         text-decoration: none;
         color: #fff;
     }
+
     @media (max-width: 768px) {
         body{
             padding: 20px;
+            width: 100%;
             overflow: hidden;
-        }
-        .github-logo{
-            width: 30px;
-        }
-        .current-text{
-            left: 20px;
-            top: -230px;
-            font-size: 9pt;
-            background-color: #000;
-            color: #fff;
-            border-radius: 5px;
-            max-width: 140px;
-            padding:10px 10px;
-        }
-        .presentation-container > .slides-display-container{
-            width: 400px;
-        }
-        .control > .material-icons{
-            font-size: 20pt;
-        }
-        .index-overlay{
-            height: 300px;
-        }
-        .presentation-controls{
-            padding: 30px;
-        }
-        .create-talk-button{
-            font-size: 10pt;
-            padding: 10px 30px;
         }
     }
 
