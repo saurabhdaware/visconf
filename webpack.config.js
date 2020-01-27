@@ -44,7 +44,7 @@ module.exports = {
         compress: true,
         port: 5000,
         historyApiFallback: {
-            rewrites:[
+            rewrites:[                
                 {from: /^\/$/, to:'dist/index.html'}
             ]
         }
