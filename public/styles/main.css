@@ -7,11 +7,12 @@
 .character-container > span{
     display:inline-block;
     position:absolute;
-    background-color:#ffe0bd;
     box-sizing: border-box;
 }
+
 .character-container > span:not(.mybody){
-    box-shadow:         3px 10px 16px #111; 
+    box-shadow:         3px 10px 16px #1119; 
+    background-color:#ffe0bd;
 }
 .character-container > span.myhead{
     height:35px;

@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = {
     entry: {
         main: './src/index.js',
-        editor: './src/editor/editor.js',
         create: './src/create/create.js'
     },
     output: {

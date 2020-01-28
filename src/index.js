@@ -2,8 +2,8 @@ import '../public/index.html';
 import '../public/styles/main.css';
 import '../public/_redirects';
 
-import '../public/example/Transcript.md';
-import '../public/example/slides.pdf';
+import '../example/Transcript.md';
+import '../example/slides.pdf';
 
 const talks = require('./talks.json');
 import reader from './reader';

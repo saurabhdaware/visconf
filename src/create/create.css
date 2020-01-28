@@ -17,10 +17,10 @@
     width: 200px;
 }
 .character-container{
-    position: absolute !important;
+    position: relative !important;
     left: 70px;
     top: 30px !important;
-    height: 500px !important;width: 300px !important;
+    height: 280px !important;width: 300px !important;
     z-index: 0;
 }
 .mike-holder{
@@ -55,6 +55,9 @@ body{
     width: 100%;
     font-size: 11pt;
 }
+select{
+    background-color: #eee;
+}
 .form-field input[type="color"] {
     display: block;
     width: 60px;
@@ -78,6 +81,7 @@ button.btn{
     padding: 8px 50px !important;
     font-size: 11pt;
     font-weight: bold;
+    background-color: #eee;
 }
 .auth-button > .material-icons{
     font-size: 16pt;
@@ -89,4 +93,39 @@ button.btn{
     position: relative;
     top: -4px;
 }
+.create-btn{
+    padding: 9px 50px !important;
+    font-size: 13pt; 
+    font-weight: bold;
+    background-color: #1c1e30;
+    color: #eee;
+}
 
+
+@media (max-width: 768px) {
+    body{
+        padding: 0px 0px;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    .create.form-container{
+        padding: 10px 30px 100px 30px;
+        min-height: 100%;
+    }
+    .login-info-display{
+        display: block;
+        padding: 14px 0px !important;
+    }
+    .character-edit{
+        display: block;
+    }
+
+    .create-btn{
+        position: fixed;
+        width: 100%;
+        bottom:0;
+        left:0;
+        padding: 23px 13px !important;
+    }
+}
