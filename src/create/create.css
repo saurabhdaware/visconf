@@ -27,7 +27,7 @@
     position: absolute;
     height: 150px;
     width: 100px;
-    background-color: #f0db4f;
+    background:linear-gradient(#f6eb51, #f0db4f);
     color: #323330;
     top: 95px;
     left: 60px;
