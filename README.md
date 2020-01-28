@@ -6,7 +6,7 @@ A web based talk visualiser for the conference/meetup talks.
 VisConf lets you generate an animated version of your talk from your slides and transcript.
 
 
-***Example:*** https://visconf.netflify.com/saurabhdaware/visconf-intro
+***Example:*** https://visconf.netlify.com/saurabhdaware/visconf-intro
 
 ![Screenshot of VisConf giving a visual look of conference](screenshot.png)
 
