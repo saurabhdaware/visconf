@@ -100,7 +100,12 @@ button.btn{
     background-color: #1c1e30;
     color: #eee;
 }
-
+.laptop{
+    position: absolute !important;
+    top: 65px;
+    right: 56px;
+    left: unset;
+}
 
 @media (max-width: 768px) {
     body{

@@ -21,7 +21,7 @@
 </head>
 <body>
 
-    <div class="create form-container">
+    <form class="create form-container">
         <h1>Create your Talk</h1>
         <div class="auth-container">
             <button class="btn auth-button netlify-login-button"><i class="material-icons">lock_open</i>&nbsp;<span>Login</span></button>
@@ -34,16 +34,20 @@
             <span class="login-username"></span>
         </div>
         <div class="form-field">
+            <label for="talk-title">Title</label>
+            <input type="text" id="talk-title" required/>
+        </div>
+        <div class="form-field">
             <label for="transcript-url">Transcript.md URL</label>
-            <input type="url" id="transcript-url"/>
+            <input type="url" id="transcript-url" required/>
         </div>
         <div class="form-field">
             <label for="slides-pdf">Slides PDF URL</label>
-            <input type="url" id="slides-pdf"/>
+            <input type="url" id="slides-pdf" required/>
         </div>
         <div class="form-field">
             <label for="event-name">Event Name</label>
-            <input type="text" id="event-name"/>
+            <input type="text" id="event-name" required/>
         </div>
 
         <div class="character-edit">
@@ -51,23 +55,27 @@
                 <h2>Character Config</h2>
                 <div class="form-field">
                     <label for="hairstyle">Character Hair Style</label>
-                    <select id="hairstyle">
+                    <select id="hairstyle" required>
                         <option default value="short">Short</option>
                         <option value="long">Long</option>
                     </select>
                 </div>
+                <div class="form-field">
+                    <label for="hairstyle">Character Voice</label>
+                    <select id="voice-select" required></select>
+                </div>
                 <div class="flex">
                     <div class="flex-1 form-field">
                         <label for="hair-color">Hair Color</label>
-                        <input type="color" id="hair-color"/>
+                        <input type="color" id="hair-color" required />
                     </div>
                     <div class="flex-1 form-field">
                         <label for="skin-color">Skin Color</label>
-                        <input type="color" id="skin-color"/>
+                        <input type="color" id="skin-color" required />
                     </div>
                     <div class="flex-1 form-field">
                         <label for="tshirt-color">TShirt Color</label>
-                        <input type="color" id="tshirt-color"/>
+                        <input type="color" id="tshirt-color" required />
                     </div>
                 </div>
             </div>
@@ -81,16 +89,19 @@
                     <span class="legs mylleg"></span>
                     <span class="legs myrleg"></span>
                 </div>
+                <div class="laptop">
+                    🥑
+                </div>
                 <div class="mike-holder">JS Mumbai</div>
             </div>
 
         </div>
         <div class="form-field">
-            <button class="btn create-btn">+ Create</button>
+            <button type="submit" class="btn create-btn">+ Create</button>
         </div>
 
         <!-- <div data-netlify-identity-menu></div> -->
-    </div>
+    </form>
     <script src="/create.js"></script>
 </body>
 </html>

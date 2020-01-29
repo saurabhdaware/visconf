@@ -2,13 +2,17 @@ import './create.html';
 import '../../public/styles/main.css';
 import './create.css';
 
+
 const env = require('../../configs/env');
+import reader from '../reader';
 
 const loginButton = document.querySelector('.netlify-login-button');
 const logoutButton = document.querySelector('.netlify-logout-button');
 const userNameEl = document.querySelector('.login-username');
 const emailTextEl = document.querySelector('.login-email');
+
 // inputs
+const talkTitleIp = document.querySelector('#talk-title');
 const transcriptLinkIp = document.querySelector('#transcript-url');
 const slidesPdfIp = document.querySelector('#slides-pdf');
 const eventNameIp = document.querySelector('#event-name');
@@ -16,9 +20,10 @@ const hairStyleIp = document.querySelector('#hairstyle');
 const hairColorIp = document.querySelector('#hair-color');
 const skinColorIp = document.querySelector('#skin-color');
 const tshirtColorIp = document.querySelector('#tshirt-color');
-
+const voiceSelectIp = document.querySelector('select#voice-select');
 
 let currentUser;
+let currentUsername;
 
 
 function getAuthHeader() {
@@ -43,7 +48,8 @@ function getUsername(u) {
     fetch(`${env.functionsEndpoint}/get-username`, options)
         .then(res => res.json())
         .then(res => {
-            userNameEl.innerHTML = `Username: ${res.username}`;
+            currentUsername = res.username;
+            userNameEl.innerHTML = `Username: <span style="opacity:.5">${res.username}</span>`;
         });
 }
 
@@ -140,27 +146,40 @@ logoutButton.addEventListener('click', () => {
     netlifyIdentity.logout();
 })
 
-document.querySelector('.create-btn').addEventListener('click', () => {
-    if(!currentUser) return;
-
-    const data = {
-        transcriptLink: 'dfshadsa'
-    }
-
-    const options = {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        headers: getAuthHeader(),
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-    }
-
-    console.log(options);
-
-    fetch(`${env.functionsEndpoint}/store-talk`, options)
-        .then(data => data.json())
-        .then(res => console.log(res));
+voiceSelectIp.addEventListener('change', e => {
+    reader.voiceIndex = Number(e.target.value);
+    reader.readText("Hi "+currentUser.user_metadata.full_name + " Have a great day!");
 })
 
+reader.populateVoiceList();
+if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = reader.populateVoiceList;
+}
+
+document.querySelector('form.create').addEventListener('submit', e => {
+    e.preventDefault();
+    const data = {
+        username: currentUser,
+        uid: currentUser.id,
+        talkTitle: talkTitleIp.value,
+        transcriptLink: transcriptLinkIp.value,
+        slidePdfLink: slidesPdfIp.value,
+        eventName: eventNameIp.value,
+        character: {
+            hairStyle: hairStyleIp.value,
+            hairColor: hairColorIp.value,
+            skinColor: skinColorIp.value,
+            tshirtColor: tshirtColorIp.value
+        },
+        voice:{
+            index: voiceSelectIp.value,
+            ...document.querySelectorAll('select#voice-select > option')[voiceSelectIp.value].dataset
+        } 
+    }
+
+    console.log(data);
+    
+})
 
 // Events
 
