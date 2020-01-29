@@ -67,7 +67,9 @@ select{
     border:none;
     cursor: pointer;
 }
-
+.form-field input[type="url"], .form-field #talk-title{
+    outline: none !important;
+}
 button.btn{
     border:none;
     padding:6px 10px;

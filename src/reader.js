@@ -23,24 +23,26 @@ class Reader {
     }
 
     populateVoiceList() {
-        if(typeof speechSynthesis === 'undefined') {
+        if(typeof speechSynthesis === 'undefined' || this.voices.length > 0) {
           return;
         }
         
         this.voices = speechSynthesis.getVoices();
+
         for(let i = 0; i < this.voices.length ; i++) {
             var option = document.createElement('option');
             option.textContent = this.voices[i].name + ' (' + this.voices[i].lang + ')';
             
-            if(this.voices[i].default) {
-                option.textContent += ' -- DEFAULT';
+            if(i === 2){
+                option.setAttribute('selected', true);
             }
-        
             option.setAttribute('data-lang', this.voices[i].lang);
             option.setAttribute('data-name', this.voices[i].name);
             option.setAttribute('value', i);
             document.getElementById("voice-select").appendChild(option);
         }
+
+
     }
 }
 

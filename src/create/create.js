@@ -5,6 +5,7 @@ import './create.css';
 
 const env = require('../../configs/env');
 import reader from '../reader';
+import { isURL } from '../helpers';
 
 const loginButton = document.querySelector('.netlify-login-button');
 const logoutButton = document.querySelector('.netlify-logout-button');
@@ -43,6 +44,8 @@ function getUsername(u) {
         headers: getAuthHeader(),
         body: JSON.stringify({}) // body data type must match "Content-Type" header
     }
+
+    userNameEl.innerHTML = `Username: <span style="opacity:.5; display: inline-block;width:100px;height:20px;background-color: #eee;"></span>`;
 
 
     fetch(`${env.functionsEndpoint}/get-username`, options)
@@ -104,6 +107,7 @@ eventNameIp.addEventListener('keyup', (e) => {
     document.querySelector('.mike-holder').innerHTML = e.target.value;
 })
 
+setHairStyle('long');
 hairStyleIp.addEventListener('change', (e) => {
     setHairStyle(e.target.value);
 })
@@ -134,10 +138,54 @@ tshirtColorIp.addEventListener('input', e => {
 tshirtColorIp.addEventListener('change', e => {
     setTshirtColor(tshirtColorIp.value);
 })
+// END: Character Styling
 
+
+
+let isErr = false;
+
+async function isURLFetchable(e) {
+    if(!isURL(e.target.value)) {
+        e.target.style.border = '1px solid #f30';
+        return;
+    }
+
+    return fetch(e.target.value)
+        .then(data => {
+            if(data.status === 200) {
+                e.target.style.border = '1px solid #0f0';
+                isErr = false;
+            }else{
+                e.target.style.border = '1px solid #f30';
+                isErr = true;
+            }
+        })
+        .catch(err => {
+            alert("The URL should be accessible with cors, Try CDN or Github Raw URLs");
+            e.target.style.border = '1px solid #f30';
+            isErr = true;
+        })
+}
+
+function validateTitle(titleEl) {
+    if(titleEl.value === '') return;
+
+    let titleSlug = titleEl.value.replace(/ /g, '-').toLowerCase();
+    document.querySelector('#talk-url-display').innerHTML = `After creating, Your talk will be visible on <span style="opacity: .6">https://visconf.netlfy.com/${currentUsername}/${titleSlug}</span>`;
+
+    if(/^[a-z 0-9]+$/i.test(titleEl.value)) {
+        titleEl.style.border = '1px solid #999';
+        isErr = false;
+        return true;
+
+    }else{
+        titleEl.style.border = '1px solid #f30';
+        isErr = true;
+        return false;
+    }
+}
 
 // Event Listeners
-
 loginButton.addEventListener('click', () => {
     netlifyIdentity.open();
 })
@@ -147,8 +195,33 @@ logoutButton.addEventListener('click', () => {
 })
 
 voiceSelectIp.addEventListener('change', e => {
+    speechSynthesis.cancel();
     reader.voiceIndex = Number(e.target.value);
-    reader.readText("Hi "+currentUser.user_metadata.full_name + " Have a great day!");
+    reader.readText(`HTML is a programming language`);
+})
+
+transcriptLinkIp.addEventListener('change', e => {
+    if(!e.target.value.toLowerCase().includes('.md')) {
+        e.target.style.border = '1px solid #f30';
+        alert("Transcript should have .md extension");
+        return;
+    }
+    isURLFetchable(e);
+});
+slidesPdfIp.addEventListener('change', e => {
+    if(!e.target.value.toLowerCase().includes('.pdf')) {
+        e.target.style.border = '1px solid #f30';
+        alert("Slides should have .pdf extension");
+        return;
+    }
+    isURLFetchable(e);
+});
+
+talkTitleIp.addEventListener('keyup', e => {
+    validateTitle(e.target);
+})
+talkTitleIp.addEventListener('blur', e => {
+    validateTitle(e.target);
 })
 
 reader.populateVoiceList();
@@ -159,7 +232,7 @@ if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !=
 document.querySelector('form.create').addEventListener('submit', e => {
     e.preventDefault();
     const data = {
-        username: currentUser,
+        username: currentUsername,
         uid: currentUser.id,
         talkTitle: talkTitleIp.value,
         transcriptLink: transcriptLinkIp.value,
@@ -177,11 +250,19 @@ document.querySelector('form.create').addEventListener('submit', e => {
         } 
     }
 
+    if(!data.username || !data.uid || isErr) {
+        alert("Error occured while validating the form, Check fields with red border, make sure your transcript and slides are hosted on public CDN or GitHub and you are properly logged in");
+        return;
+    }
+
     console.log(data);
     
 })
 
-// Events
+
+
+
+// Netlify Events
 
 netlifyIdentity.on('init', user => {
     if(!user) {

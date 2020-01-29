@@ -35,7 +35,8 @@
         </div>
         <div class="form-field">
             <label for="talk-title">Title</label>
-            <input type="text" id="talk-title" required/>
+            <input autocomplete="off" type="text" id="talk-title" required/>
+            <span id="talk-url-display"></span>
         </div>
         <div class="form-field">
             <label for="transcript-url">Transcript.md URL</label>
@@ -56,8 +57,8 @@
                 <div class="form-field">
                     <label for="hairstyle">Character Hair Style</label>
                     <select id="hairstyle" required>
-                        <option default value="short">Short</option>
-                        <option value="long">Long</option>
+                        <option value="short">Short</option>
+                        <option selected value="long">Long</option>
                     </select>
                 </div>
                 <div class="form-field">
@@ -92,7 +93,7 @@
                 <div class="laptop">
                     🥑
                 </div>
-                <div class="mike-holder">JS Mumbai</div>
+                <div class="mike-holder">VisConf</div>
             </div>
 
         </div>
