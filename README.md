@@ -20,18 +20,17 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ---
 
 # How to Create your Visual Talk
-***Note: Since I'm working on new create page, I've tempororily disabled the old PR process for creating talk. Till then you can keep your transcripts and slides ready by following the next steps***
 - Create [Transcript.md](https://github.com/saurabhdaware/visconf-example/blob/master/Transcript.md) file and write your transcript (You can use [Transcript Markdown](#transcript-markdown)) 
 - Convert your slides to **PDF** file
 - Upload `slides.pdf` and `transcript.md` to CDN (even GitHub Repository works)
-
+- Visit https://visconf.netlify.com/create and fill a form 
 (You can checkout https://github.com/saurabhdaware/visconf-example for example)
 
 # Transcript Markdown
 In transcript you can use characters like `|`, `||` and `$wait5s`.
 
-- Single dash (`|`) will change the text in bubble.
-- Double dash (`||`) changes your slide number 
+- Single dash (`|`) will switch the text in bubble.
+- Double dash (`||`) changes to next slide. 
 - `$wait2s`, `$wait5s`, and `$wait10s` can be used to make a pause while talking for 2sec, 5sec, and 10sec respectively.
 
 Example Transcript:
@@ -51,12 +50,11 @@ Hey There!
 
 # Locally Test Transcript and Slides
 
-- Fork this repository
-- git clone your fork
+- `git clone` this repository
 - run `npm install`
-- Copy paste your `slides.pdf` and `transcript.md` to [public/example/](public/example/)
+- Copy paste your `slides.pdf` and `transcript.md` to [example/](example/)
 - run `npm run dev`
-- View your changes in https://localhost:5000/example-username/test
+- View your changes in https://localhost:5000/me/test
 
 
 # Contributing
@@ -64,8 +62,9 @@ Hey There!
 - git clone your fork
 - run `npm install` to install dependencies
 - `npm run dev` to run local server
-- Visit https://localhost:5000/example-username/test
+- Visit https://localhost:5000/me/test
+
+Built with Vanilla JavaScript, WebPack & Netlify <3
 
 
-
-Hope this tool will help! Please share :D Thank You 🌻
+Please share :D Thank You 🌻

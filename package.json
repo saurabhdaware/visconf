@@ -1,11 +1,11 @@
 {
   "name": "visconf",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "A web based talk visualiser for the conference/meetup talks.",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --host 0.0.0.0 --config webpack.prod.js",
+    "dev": "webpack-dev-server --host 0.0.0.0 --config webpack.dev.js",
     "start": "webpack-dev-server --host 0.0.0.0 --config webpack.dev.js",
     "watch": "npm run start",
     "build": "rm -rf dist && webpack --config webpack.prod.js"
