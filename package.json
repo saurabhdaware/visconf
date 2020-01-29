@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --host 0.0.0.0 --config webpack.prod.js",
-    "dev:local": "webpack-dev-server --host 0.0.0.0 --config webpack.dev.js",
-    "watch": "npm run dev:local",
+    "start": "webpack-dev-server --host 0.0.0.0 --config webpack.dev.js",
+    "watch": "npm run start",
     "build": "rm -rf dist && webpack --config webpack.prod.js"
   },
   "repository": {
