@@ -70,6 +70,9 @@ select{
 .form-field input[type="url"], .form-field #talk-title{
     outline: none !important;
 }
+.form-field input:disabled{
+    cursor: not-allowed;
+}
 button.btn{
     border:none;
     padding:6px 10px;

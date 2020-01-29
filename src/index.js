@@ -12,6 +12,9 @@ const env = require('../configs/env');
 
 const [username, slug ] = location.pathname.split('/').slice(1);
 
+if(location.hash.startsWith('#confirmation_token') && !location.href.includes('create')){
+    location.href = "create.html/"+ location.hash;
+}
 // variables
 let isPaused = false;
 let lastSlideIndex = 0;
