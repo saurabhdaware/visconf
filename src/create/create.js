@@ -224,17 +224,13 @@ talkTitleIp.addEventListener('blur', e => {
     validateTitle(e.target);
 })
 
-reader.populateVoiceList();
-if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = reader.populateVoiceList;
-}
-
 document.querySelector('form.create').addEventListener('submit', e => {
     e.preventDefault();
     const data = {
         username: currentUsername,
         uid: currentUser.id,
         talkTitle: talkTitleIp.value,
+        slug: talkTitleIp.value.toLowerCase().replace(/ /g, '-'),
         transcriptLink: transcriptLinkIp.value,
         slidePdfLink: slidesPdfIp.value,
         eventName: eventNameIp.value,
@@ -255,8 +251,24 @@ document.querySelector('form.create').addEventListener('submit', e => {
         return;
     }
 
-    console.log(data);
-    
+
+    const options = {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        headers: getAuthHeader(),
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    }
+
+    fetch(`${env.functionsEndpoint}/store-talk`, options)
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            if(res.success === true) {
+                document.querySelector('div.success-message').innerHTML = `Your talk is now visible on <a style="color: #09f;" href="${res.message}">${res.message}</a>`;
+            }
+        });
+
+
 })
 
 

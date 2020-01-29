@@ -4,6 +4,10 @@ class Reader {
         this.voiceIndex = 10;
         this.volume = 10;
         this.populateVoiceList = this.populateVoiceList.bind(this);
+        this.populateVoiceList();
+        if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = this.populateVoiceList;
+        }
     }
 
     async readText(message) {

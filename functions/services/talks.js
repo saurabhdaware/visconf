@@ -1,19 +1,6 @@
-const { client, q, headers } = require('../config');
+const { headers } = require('../config');
 const fauny = require('../helpers/fauny');
 
-//
-// {
-//     "w3434324": "saurabhdaware",
-//     "t43545": "venkatesh"
-// }
-
-// {
-//     "saurabhdaware": {
-//         "my-talk": {
-//             "transcriptLink": ''
-//         }
-//     }
-// }
 function send(code, data) {
     return {
         statusCode: code,
@@ -22,8 +9,34 @@ function send(code, data) {
     }
 }
 
+async function getTalk(event, context) {
+    if(event.httpMethod !== 'GET') {
+        return send(200, { success: false, message: 'Method Not Allowed' })
+    }
+    const { username, slug } = event.queryStringParameters;
+
+    return fauny.read('talks_by_username_and_slug', [username, slug])
+        .then(res => {
+            return send(200, {success: true, message: res.data});
+        })
+
+}
+
 async function storeTalk(event, context) {
-    return send(200, {success: true})
+    if(event.httpMethod !== 'POST') {
+        return send(200, { success: false, message: 'Method Not Allowed' })
+    }
+    const { user } = context.clientContext;
+    const body = JSON.parse(event.body);
+
+    if(user.sub !== body.uid){
+        return send(405, {success: false, message: 'UnAuthorized'});
+    }
+
+    return fauny.create('talks', body)
+        .then(() => {
+            return send(200, {success: true, message: `https://visconf.netlify.com/${body.username}/${body.slug}`});
+        })
 }
 
 /*
@@ -86,5 +99,6 @@ async function getUsername(event, context) {
 
 module.exports = {
     storeTalk,
+    getTalk,
     getUsername
 }

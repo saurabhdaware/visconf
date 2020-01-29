@@ -1,8 +1,9 @@
-const { storeTalk, getUsername } = require('./services/talks');
+const { storeTalk, getTalk, getUsername } = require('./services/talks');
 
 const routes = {
     '/routes/store-talk': storeTalk,
-    '/routes/get-username': getUsername
+    '/routes/get-username': getUsername,
+    '/routes/get-talk': getTalk
 }
 
 

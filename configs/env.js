@@ -1,4 +1,4 @@
 module.exports = {
-    functionsEndpoint: 'http://localhost:34567/routes', // https://visconf.netlify.com/functions
-    test: 'test'
+    // functionsEndpoint: 'http://localhost:34567/routes',
+    functionsEndpoint: 'https://visconf.netlify.com/functions/routes',
 }

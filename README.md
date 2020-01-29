@@ -6,7 +6,7 @@ A web based talk visualiser for the conference/meetup talks.
 VisConf lets you generate an animated version of your talk from your slides and transcript.
 
 
-***Example:*** https://visconf.netflify.com/saurabhdaware/visconf-intro
+***Example:*** https://visconf.netlify.com/saurabhdaware/visconf-intro
 
 ![Screenshot of VisConf giving a visual look of conference](screenshot.png)
 
@@ -20,33 +20,10 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ---
 
 # How to Create your Visual Talk
+***Note: Since I'm working on new create page, I've tempororily disabled the old PR process for creating talk. Till then you can keep your transcripts and slides ready by following the next steps***
 - Create [Transcript.md](https://github.com/saurabhdaware/visconf-example/blob/master/Transcript.md) file and write your transcript (You can use [Transcript Markdown](#transcript-markdown)) 
 - Convert your slides to **PDF** file
 - Upload `slides.pdf` and `transcript.md` to CDN (even GitHub Repository works)
-- Fork this repository and take clone of your fork
-- Edit [src/talks.json](src/talks.json) file and add your configurations in following format
-```json
-{
-    "data": {
-        ":github-username": {
-            ":slug-of-talk-title":{
-                "title": "My Cool Talk",
-                "eventName": "JSConf",
-                "slidePdfLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/slides.pdf", 
-                "transcriptLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/Transcript.md",
-                "character": {
-                    "skinColor": "#E0AB8B",
-                    "tshirtColor": "#09f",
-                    "hairColor": "#111",
-                    "hairStyle": "short"
-                }
-            }
-        }
-    }
-}
-```
-- Send Pull Request to the `master` branch of main repository
-- Done!! View your talk at `https://visconf.netlify.com/:github-username/:slug-of-talk-title` 🎉
 
 (You can checkout https://github.com/saurabhdaware/visconf-example for example)
 

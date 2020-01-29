@@ -1,8 +1,14 @@
+.character-container.hide{
+    top: -50px !important;
+    transition: top .5s ease;
+}
 .character-container{
     position: fixed;
     top: -113px;
     left: 50px;
+    transition: top .5s ease;
 }
+
 
 .character-container > span{
     display:inline-block;

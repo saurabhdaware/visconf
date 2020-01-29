@@ -5,13 +5,12 @@ import '../public/_redirects';
 import '../example/Transcript.md';
 import '../example/slides.pdf';
 
-const talks = require('./talks.json');
 import reader from './reader';
 import slides from './slides';
 import { wait, openFullscreen, closeFullscreen } from './helpers';
+const env = require('../configs/env');
 
 const [username, slug ] = location.pathname.split('/').slice(1);
-document.title = `${slug} by ${username} || VisConf`;
 
 // variables
 let isPaused = false;
@@ -21,26 +20,38 @@ let lastSlideIndex = 0;
 const progressBar = document.querySelector('.presentation-video-bar > .progress');
 const currentText = document.querySelector('.current-text');
 
-function main() {
+function main(userData) {
     if(!username || !slug) {
         // Show Home Page
         return;
     }
 
-    const userData = talks.data[username][slug];
     if(!userData) {
         return;
     }
 
     document.querySelector('.mike-holder').innerHTML = userData.eventName;
-   
+    document.querySelector('.character-container').classList.remove('hide');
+    
     setCharacterStyles(userData);
     setTranscript(userData.transcriptLink);
+    setCharacterVoice(userData.voice);
     slides.setSlides(userData.slidePdfLink);
 }
 
+if(username && slug) {
+    document.title = `${slug} by ${username} || VisConf`;
+    fetch(`${env.functionsEndpoint}/get-talk?username=${username}&slug=${slug}`)
+        .then(res => res.json())
+        .then(res => {
+            if(res.success === true){
+                main(res.message);
+            }
+        })
+}
 
-main();
+// main();
+
 
 
 function setCharacterStyles(userData) {
@@ -57,6 +68,10 @@ function setCharacterStyles(userData) {
         document.querySelector('.character-container > span.myhair').style.display = 'inline';
         document.querySelector('.character-container > span.myhair').style.backgroundColor = userData.character.hairColor || '#111';
     }
+}
+
+function setCharacterVoice(voice) {
+    reader.voiceIndex = voice.index;
 }
 
 var transcript, mappedTranscript, flatTranscript;
