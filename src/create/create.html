@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create your talk</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+    html,body{
+        width: 100%;
+        overflow-x: hidden;
+        height: 100%;
+        box-sizing: border-box;
+        margin: 0px;
+        color: #1c1e30;
+    }
+    </style>
+</head>
+<body>
+
+    <form class="create form-container">
+        <h1>Create your Talk</h1>
+        <div class="auth-container">
+            <button class="btn auth-button netlify-login-button"><i class="material-icons">lock_open</i>&nbsp;<span>Login</span></button>
+            <button class="btn auth-button netlify-logout-button"><i class="material-icons">lock</i>&nbsp;<span>Logout</span></button>
+            <span class="login-info-display" style="padding: 10px 20px;">
+                <span class="login-email"></span>
+            </span>
+        </div>
+        <div class="form-field">
+            <span class="login-username"></span>
+        </div>
+        <div class="form-field">
+            <label for="talk-title">Title</label>
+            <input autocomplete="off" type="text" id="talk-title" required/>
+            <span id="talk-url-display"></span>
+        </div>
+        <div class="form-field">
+            <label for="transcript-url">Transcript.md URL</label>
+            <input type="url" id="transcript-url" required/>
+        </div>
+        <div class="form-field">
+            <label for="slides-pdf">Slides PDF URL</label>
+            <input type="url" id="slides-pdf" required/>
+        </div>
+        <div class="form-field">
+            <label for="event-name">Event Name</label>
+            <input type="text" id="event-name" required/>
+        </div>
+
+        <div class="character-edit">
+            <div class="character-form">
+                <h2>Character Config</h2>
+                <div class="form-field">
+                    <label for="hairstyle">Character Hair Style</label>
+                    <select id="hairstyle" required>
+                        <option value="short">Short</option>
+                        <option selected value="long">Long</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="hairstyle">Character Voice</label>
+                    <select id="voice-select" required></select>
+                </div>
+                <div class="flex">
+                    <div class="flex-1 form-field">
+                        <label for="hair-color">Hair Color</label>
+                        <input type="color" id="hair-color" required />
+                    </div>
+                    <div class="flex-1 form-field">
+                        <label for="skin-color">Skin Color</label>
+                        <input type="color" id="skin-color" required />
+                    </div>
+                    <div class="flex-1 form-field">
+                        <label for="tshirt-color">TShirt Color</label>
+                        <input type="color" id="tshirt-color" required />
+                    </div>
+                </div>
+            </div>
+            <div class="character-preview">
+                <div class="character-container">
+                    <span class="myhead skin"></span>
+                    <span class="myhair"></span>
+                    <span class="mybody"></span>
+                    <span class="hands mylhand skin"></span>
+                    <span class="hands myrhand skin"></span>
+                    <span class="legs mylleg"></span>
+                    <span class="legs myrleg"></span>
+                </div>
+                <div class="laptop">
+                    🥑
+                </div>
+                <div class="mike-holder">VisConf</div>
+            </div>
+
+        </div>
+        <div class="form-field">
+            <button type="submit" class="btn create-btn">+ Create</button>
+        </div>
+        <div class="success-message"></div>
+
+        <!-- <div data-netlify-identity-menu></div> -->
+    </form>
+    <script src="/create.js"></script>
+</body>
+</html>

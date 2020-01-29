@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
     entry: {
         main: './src/index.js',
+        create: './src/create/create.js'
     },
     output: {
         filename: '[name].js',
@@ -14,7 +15,7 @@ module.exports = {
                 test: /\.(pdf|md)$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'presentation/[name].[ext]',
+                    name: 'example/[name].[ext]',
                 }
             },
             {
@@ -42,7 +43,7 @@ module.exports = {
         compress: true,
         port: 5000,
         historyApiFallback: {
-            rewrites:[
+            rewrites:[                
                 {from: /^\/$/, to:'dist/index.html'}
             ]
         }

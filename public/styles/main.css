@@ -1,17 +1,24 @@
+.character-container.hide{
+    top: -50px !important;
+    transition: top .5s ease;
+}
 .character-container{
     position: fixed;
     top: -113px;
     left: 50px;
+    transition: top .5s ease;
 }
+
 
 .character-container > span{
     display:inline-block;
     position:absolute;
-    background-color:#ffe0bd;
     box-sizing: border-box;
 }
+
 .character-container > span:not(.mybody){
-    box-shadow:         3px 10px 16px #111; 
+    box-shadow:         3px 10px 16px #1119; 
+    background-color:#ffe0bd;
 }
 .character-container > span.myhead{
     height:35px;
@@ -130,9 +137,10 @@
     height:3px; 
     width:100%;
     border-radius: 10px;
+    margin-top: 14px;
 }
 .presentation-video-bar > .progress{
-    background-color: #f90;
+    background: linear-gradient(to right, #f0db4f, #f6eb51);
     height: 3px;
     display: inline-block;
     position: absolute;
@@ -156,7 +164,24 @@
 .github-logo{
     width: 40px;
 }
+.laptop{
+    width: 50px;
+    height: 30px;
+    background: linear-gradient(#ddd, #999);
+    position: absolute;
+    top: -75px;
+    left: 68px;
+    font-size: 9pt;
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+    box-shadow:         3px 10px 16px #1119; 
+}
 
+.github-corner svg{
+    width: 70px;
+    height: 70px;
+}
 @media (max-width: 768px) {
     .github-logo{
         width: 30px;
@@ -165,7 +190,7 @@
         left: 20px;
         top: -230px;
         font-size: 9pt;
-        background-color: #000;
+        background-color: #0008;
         color: #fff;
         border-radius: 5px;
         max-width: 140px;
@@ -185,6 +210,11 @@
     }
     .create-talk-button{
         font-size: 10pt;
-        padding: 10px 30px;
+        padding: 10px 10px;
+    }
+
+    .github-corner svg{
+        width: 50px;
+        height: 50px;
     }
 }
