@@ -21,7 +21,7 @@ const hairStyleIp = document.querySelector('#hairstyle');
 const hairColorIp = document.querySelector('#hair-color');
 const skinColorIp = document.querySelector('#skin-color');
 const tshirtColorIp = document.querySelector('#tshirt-color');
-const voiceSelectIp = document.querySelector('select#voice-select');
+// const voiceSelectIp = document.querySelector('select#voice-select');
 
 let currentUser;
 let currentUsername;
@@ -63,13 +63,17 @@ function loginHandler(user) {
     emailTextEl.innerHTML = `Logged in as ${user.email}`;
     netlifyIdentity.close();
     getUsername(user);
-
+    document.querySelectorAll('input').forEach(el => el.disabled = false);
 }
 
 function logoutHandler() {
     loginButton.style.display = 'inline-block';
     logoutButton.style.display = 'none';
     emailTextEl.innerHTML = '';
+    userNameEl.innerHTML = `<span style="color:#f30">Login to continue</span>`;
+    currentUser = undefined;
+    currentUsername = undefined;
+    document.querySelectorAll('input').forEach(el => el.disabled = true);
 }
 
 
@@ -194,11 +198,11 @@ logoutButton.addEventListener('click', () => {
     netlifyIdentity.logout();
 })
 
-voiceSelectIp.addEventListener('change', e => {
-    speechSynthesis.cancel();
-    reader.voiceIndex = Number(e.target.value);
-    reader.readText(`HTML is a programming language`);
-})
+// voiceSelectIp.addEventListener('change', e => {
+//     speechSynthesis.cancel();
+//     reader.voiceIndex = Number(e.target.value);
+//     reader.readText(`HTML is a programming language`);
+// })
 
 transcriptLinkIp.addEventListener('change', e => {
     if(!e.target.value.toLowerCase().includes('.md')) {
@@ -239,11 +243,11 @@ document.querySelector('form.create').addEventListener('submit', e => {
             hairColor: hairColorIp.value,
             skinColor: skinColorIp.value,
             tshirtColor: tshirtColorIp.value
-        },
-        voice:{
-            index: voiceSelectIp.value,
-            ...document.querySelectorAll('select#voice-select > option')[voiceSelectIp.value].dataset
-        } 
+        }
+        // voice:{
+        //     index: voiceSelectIp.value,
+        //     ...document.querySelectorAll('select#voice-select > option')[voiceSelectIp.value].dataset
+        // } 
     }
 
     if(!data.username || !data.uid || isErr) {

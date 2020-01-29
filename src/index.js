@@ -35,7 +35,7 @@ function main(userData) {
     
     setCharacterStyles(userData);
     setTranscript(userData.transcriptLink);
-    setCharacterVoice(userData.voice);
+    // setCharacterVoice(userData.voice);
     slides.setSlides(userData.slidePdfLink);
 }
 
@@ -70,9 +70,9 @@ function setCharacterStyles(userData) {
     }
 }
 
-function setCharacterVoice(voice) {
-    reader.voiceIndex = voice.index;
-}
+// function setCharacterVoice(voice) {
+//     reader.voiceIndex = voice.index;
+// }
 
 var transcript, mappedTranscript, flatTranscript;
 async function setTranscript(transcriptPath) {
