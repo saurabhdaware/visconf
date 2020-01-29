@@ -8,7 +8,9 @@ const routes = {
 
 
 exports.handler = async (event, context) => {
-    const re = routes[event.path];
+    // Sorry god of good practices :(
+    const re = Object.values(routes)[Object.keys(routes).findIndex(route => event.path.endsWith(route))];
+
     if(!re){
         return {
             statusCode: 404,
