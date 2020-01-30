@@ -1,9 +1,11 @@
 import { isMobile } from './helpers';
-import pdfjsLib from 'pdfjs-dist/webpack';
+import pdfjsLib from 'pdfjs-dist';
 
 
 class Slides {
-    constructor() {}
+    constructor() {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@2.2.228/build/pdf.worker.min.js"
+    }
 
     async loadPDF(url) {
         var loadingTask = pdfjsLib.getDocument(url);
