@@ -26,7 +26,12 @@ async function storeTalk(event, context) {
     if(event.httpMethod !== 'POST') {
         return send(200, { success: false, message: 'Method Not Allowed' })
     }
+    
     const { user } = context.clientContext;
+    if(!user) {
+        return send(405, {success: false, message: 'UnAuthorized'});
+    }
+
     const body = JSON.parse(event.body);
 
     if(user.sub !== body.uid){

@@ -128,8 +128,8 @@ hairStyleIp.addEventListener('change', (e) => {
     setHairStyle(e.target.value);
 })
 
-setHairColor('#222222');
-hairColorIp.value = '#222222';
+setHairColor('#111111');
+hairColorIp.value = '#111111';
 hairColorIp.addEventListener('input', e => {
     setHairColor(hairColorIp.value);
 })
