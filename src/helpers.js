@@ -55,9 +55,13 @@ function closeFullscreen() {
 
 
 async function wait(time){
-    return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(), time);
+    let timeInterval;
+    
+    let promise = new Promise((resolve, reject) => {
+        timeInterval = setTimeout(() => resolve(), time);
     })
+
+    return {promise, timeInterval}
 }
 
 export { wait, isMobile, isURL, openFullscreen, closeFullscreen }

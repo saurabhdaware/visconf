@@ -5,7 +5,7 @@ import { wait, openFullscreen, closeFullscreen } from './helpers';
 
 // variables
 export let isPaused = false;
-export let lastSlideIndex = 0;
+export let currentIndex = 0;
 
 // elements
 const progressBar = document.querySelector('.presentation-video-bar > .progress');
@@ -59,23 +59,25 @@ async function setTranscript(transcriptPath) {
 }
 
 
+let timers = [];
+async function startReadingFrom(){
+    slides.setNewSlide(currentIndex, mappedTranscript);
+    progressBar.style.width = currentIndex*100/flatTranscript.length + '%';
 
 
-async function startReadingFrom(index, onlyOnce = false){
-    slides.setNewSlide(index, mappedTranscript);
-    progressBar.style.width = index*100/flatTranscript.length + '%';
-
-
-    let text = flatTranscript[index];
+    let text = flatTranscript[currentIndex];
     if(text === undefined) return;
+    console.log(currentIndex);
+
+    currentText.innerHTML = flatTranscript[currentIndex].replace(/\$wait(2|5|10)s/g, '');
     
-    lastSlideIndex = index;
+    
     await reader.readText(text.replace(/\$wait(2|5|10)s/g, ''));
 
     if(isPaused){
-        lastSlideIndex = index;
         return;
     }
+
 
 
     if(text.includes('$wait2s')){
@@ -92,19 +94,14 @@ async function startReadingFrom(index, onlyOnce = false){
         currentText.innerHTML = "*points to slides*";
         await wait(10000);
     }
-    currentText.innerHTML = flatTranscript[index + 1].replace(/\$wait(2|5|10)s/g, '');
-    
-    if(!isPaused && !onlyOnce) startReadingFrom(++index);
+
+
+    if(!isPaused){
+        currentIndex++;
+        startReadingFrom();
+    }
 
 }
-
-// skipPrevControl.addEventListener('click', () => {
-//     // Skip Prev
-//     let i = lastSlideIndex - 1;
-//     speechSynthesis.cancel();
-//     startReadingFrom(i, true);
-// })
-
 
 
 // Controls
@@ -115,14 +112,14 @@ const muteVolumeControl = document.querySelector('.control.mute');
 const volumeOnControl = document.querySelector('.control.volumeon');
 const volumeToggleEl = document.querySelector('span.volume');
 const skipNextControl = document.querySelector('.control.skip-next');
-// const skipPrevControl = document.querySelector('.control.skip-previous');
+const skipPrevControl = document.querySelector('.control.skip-previous');
 
 
 function startTalk() {
     startControl.style.display = 'none';
     pauseControl.style.display = 'inline-block';
-    if(lastSlideIndex === 0) currentText.innerHTML = flatTranscript[0];
-    startReadingFrom(lastSlideIndex);
+    if(currentIndex === 0) currentText.innerHTML = flatTranscript[0];
+    startReadingFrom();
     isPaused = false;
 }
 
@@ -130,19 +127,17 @@ function startTalk() {
 function pauseTalk() {
     startControl.style.display = 'inline-block';
     pauseControl.style.display = 'none';
-    speechSynthesis.cancel();
     isPaused = true;
+    speechSynthesis.cancel();
 }
 
 startControl.addEventListener('click', startTalk);
 pauseControl.addEventListener('click', pauseTalk);
 
 replayControl.addEventListener('click', () => {
-    pauseTalk();
-    // lastSlideIndex = 0;
     currentText.innerHTML = flatTranscript[0];
-    slides.setNewSlide(0, mappedTranscript);
-    progressBar.style.width = '0%';
+    currentIndex = -1;
+    speechSynthesis.cancel();
 })
 
 muteVolumeControl.addEventListener('click', () => {
@@ -180,9 +175,14 @@ document.querySelector('.fullscreen-exit').addEventListener('click', () => {
 
 skipNextControl.addEventListener('click', () => {
     // Skip Next
-    let i = lastSlideIndex + 1;
+    currentText.innerHTML = flatTranscript[currentIndex + 1];
     speechSynthesis.cancel();
-    startReadingFrom(i, true);
+})
+
+skipPrevControl.addEventListener('click', e => {
+    currentText.innerHTML = flatTranscript[currentIndex - 1];
+    currentIndex-=2;
+    speechSynthesis.cancel();
 })
 
 export default {
@@ -190,6 +190,5 @@ export default {
     setCharacterStyles,
     setTranscript,
     startReadingFrom,
-    isPaused,
-    lastSlideIndex
+    isPaused
 }
