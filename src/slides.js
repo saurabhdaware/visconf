@@ -1,13 +1,12 @@
 import { isMobile } from './helpers';
+import pdfjsLib from 'pdfjs-dist/webpack';
+
 
 class Slides {
-    constructor() {
-        this.pdfjsLib = window['pdfjs-dist/build/pdf'];
-        this.pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-    }
+    constructor() {}
 
     async loadPDF(url) {
-        var loadingTask = this.pdfjsLib.getDocument(url);
+        var loadingTask = pdfjsLib.getDocument(url);
         return loadingTask.promise
             .then(pdf => {
                 this.pdf = pdf;

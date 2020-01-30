@@ -32,6 +32,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "faunadb": "^2.11.1"
+    "faunadb": "^2.11.1",
+    "pdfjs-dist": "^2.2.228"
   }
 }
