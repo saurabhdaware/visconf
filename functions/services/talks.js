@@ -83,6 +83,8 @@ async function getUsername(event, context) {
     }
 
     const { user } = context.clientContext;
+    if(!user) return send(405, {success: false, message: "Unauthorized Access, Invalid User"});
+
     return fauny.read('users_by_uid', user.sub)
         .then(res => {
             return res.data.username;

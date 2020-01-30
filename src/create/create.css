@@ -53,6 +53,7 @@ body{
     display: block;
     padding: 7px 10px;
     width: 100%;
+    box-sizing: border-box;
     font-size: 11pt;
 }
 select{

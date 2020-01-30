@@ -49,11 +49,23 @@ function getUsername(u) {
 
 
     fetch(`${env.functionsEndpoint}/get-username`, options)
-        .then(res => res.json())
         .then(res => {
-            currentUsername = res.username;
-            userNameEl.innerHTML = `Username: <span style="opacity:.5">${res.username}</span>`;
-        });
+            if(!res.ok && res.status !== 200) {
+                netlifyIdentity.logout();
+                return;
+            }
+            return res.json();
+        })
+        .then(res => {
+            console.log(res);
+            if(res.username) {
+                currentUsername = res.username;
+                userNameEl.innerHTML = `Username: <span style="opacity:.5">${res.username}</span>`;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 function loginHandler(user) {
@@ -230,6 +242,8 @@ talkTitleIp.addEventListener('blur', e => {
 
 document.querySelector('form.create').addEventListener('submit', e => {
     e.preventDefault();
+    if(!currentUser) return false;
+
     const data = {
         username: currentUsername,
         uid: currentUser.id,
