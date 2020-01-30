@@ -1,33 +1,30 @@
-Hey There!
-| I am Saurabh, and today I am super excited to announce VisConf!!
+Hey everyone! Welcome to VisConf's NotConf Conference
+| Today I will talk about how you can write and test your transcripts locally.
+| Currently, to test your transcript locally, you have to run the project on your machine
+| Lets see how we can do it.
 
-|| A lot of times in meetups, I see talks on some amazing topics
-| Sadly small meetups do not have resources to record and publish these talks
-| However the world needs to see them $wait2s
+|| To run the project locally, you have to take clone of the github repository.
+| Then cd to the project and run npm install to install dependencies.
+| start project locally using npm run dev $wait5s
 
-|| So randomly I had the idea of creating an animated version of these talks
-| VisConf lets you generate an animated version of talk from transcript and slides
-| All you have to do is upload transcript and slides.pdf and paste links in visconf.netlify.com/create
+|| Now you'll have visconf running on localhost:5000
+| The project has 'example/' directory which includes slides.pdf and transcript.md
+| The current slides that you are viewing and the transcript come from that directory.
+| You can edit files in 'example/' and the changes will be reflected on localhost:5000/me/test $wait5s
 
-|| Lets discuss this in details
+|| In transcript, you can write characters as shown in slides. $wait10s
+| Single vertical dash will change the text like
+| this
+| you 
+| can
+| change text with single dash
+| dollar wait 2s, dollar wait 5s and dollar wait 10s will make the talk pause like this $wait10s
 
-|| To create your own virtual talk, visit visconf.netlify.com/create or click on "Create your talk" button below
-| First, you will have to create transcript.md file
-| Let's see the slides first $wait10s
-| As shown in the slides, single vertical slash will switch to next text bubble
-| double vertical slash will change to next slide
-| $ wait 2s, 5s, or 10s will make a pause while talking for respective time.
+|| Here's an example of a transcript $wait10s
+| $wait10s
 
-||Once you have your transcript.md ready, convert your slides to .pdf format
-| Upload slides.pdf and transcript.md to CDN or a Github Repository
-| As you can see in the slides, I have created a Github Repository with these files. $wait5s
-| You can checkout example on github/saurabhdaware/visconf-example
+|| You can also see live example on the link shown
+| The GitHub link has the transcript and slides and the talk is live on the 2nd link $wait5s
 
-|| Next, as mentioned earlier, visit visconf.netlify.com/create 
-| or click on this "Create your talk" button below
-| This link will take you to a form where you have to enter transcript and slides link...
-| ...Event name, and you can customize your character $wait5s
-
-
-|| And that's it! your talk will be visible on visconf.netlify.com/username/title-slug $wait2s
-| Thank You! You can drop questions on my twitter. Bye!
+|| Thank you for joining in to the talk
+| Do drop a start on VisConf's Github Repository.
