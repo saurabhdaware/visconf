@@ -36,6 +36,8 @@ function openFullscreen() {
     } else if (elem.msRequestFullscreen) { /* IE/Edge */
         elem.msRequestFullscreen();
     }
+
+    screen.orientation.lock("landscape-primary")
 }
 
 /* Close fullscreen */

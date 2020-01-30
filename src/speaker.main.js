@@ -1,6 +1,7 @@
 import reader from './reader';
 import slides from './slides';
-import { wait } from './helpers';
+import { wait, openFullscreen, closeFullscreen } from './helpers';
+
 
 // variables
 export let isPaused = false;
@@ -161,6 +162,14 @@ document.querySelector('.fullscreen').addEventListener('click', () => {
     document.querySelector('.fullscreen-exit').style.display = 'inline-block';
     document.querySelector('.fullscreen').style.display = 'none';
 })
+
+document.querySelector('#rotate-screen-button').addEventListener('click', () => {
+    // Full screen
+    openFullscreen();
+    document.querySelector('.fullscreen-exit').style.display = 'inline-block';
+    document.querySelector('.fullscreen').style.display = 'none';
+})
+
 
 document.querySelector('.fullscreen-exit').addEventListener('click', () => {
     // Exit full screen

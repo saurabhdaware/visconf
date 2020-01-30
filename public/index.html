@@ -107,6 +107,11 @@
         font-weight: bold;
     }
 
+    #rotate-screen-button{
+        text-align: center;display:block;width: 100%;padding: 10px;
+        box-shadow:3px 10px 16px #1119; 
+    }
+
     @media (orientation: portrait){
         .orientation-error{
             display: block;
@@ -114,7 +119,7 @@
     }
 
     .orientation-error  .material-icons{
-        font-size: 40pt;
+        font-size: 25pt;
     }
 
     .create-talk-button{
@@ -195,8 +200,8 @@
    
   
     <div class="orientation-error">
-        VisConf is best viewed in landscape! <br/>Please rotate your screen to view the talk 🌻 <br/>
-        <br/><div style="text-align: center;"><i class="material-icons">screen_rotation</i></div>
+        VisConf is best viewed in landscape! <br/> Please click the button below or rotate your screen to view the talk 🌻 <br/>
+        <br/><button id="rotate-screen-button"><i class="material-icons">screen_rotation</i> <span style="position:relative;top:-9px;left: 6px;font-size: 15pt;font-weight: bold;">Rotate</span></button>
     </div>
     <script src="/main.js"></script>
 </body>
