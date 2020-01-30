@@ -67,7 +67,6 @@ async function startReadingFrom(){
 
     let text = flatTranscript[currentIndex];
     if(text === undefined) return;
-    console.log(currentIndex);
 
     currentText.innerHTML = flatTranscript[currentIndex].replace(/\$wait(2|5|10)s/g, '');
     
