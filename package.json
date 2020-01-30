@@ -1,6 +1,6 @@
 {
   "name": "visconf",
-  "version": "0.6.2",
+  "version": "0.6.13",
   "description": "A web based talk visualiser for the conference/meetup talks.",
   "private": true,
   "scripts": {
