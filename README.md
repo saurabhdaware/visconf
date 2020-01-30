@@ -23,7 +23,7 @@ VisConf lets you generate an animated version of your talk from your slides and 
 - Create [Transcript.md](https://github.com/saurabhdaware/visconf-example/blob/master/Transcript.md) file and write your transcript (You can use [Transcript Markdown](#transcript-markdown)) 
 - Convert your slides to **PDF** file
 - Upload `slides.pdf` and `transcript.md` to CDN (even GitHub Repository works)
-- Visit https://visconf.netlify.com/create and fill a form 
+- Visit https://visconf.netlify.com/create and fill the form 
 (You can checkout https://github.com/saurabhdaware/visconf-example for example)
 
 # Transcript Markdown
