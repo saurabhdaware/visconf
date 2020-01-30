@@ -178,7 +178,28 @@
     box-shadow:         3px 10px 16px #1119; 
     border-radius: 2px;
 }
-
+.mic{
+    width: 3px;
+    height: 30px;
+    background-color: #222;
+    position: absolute;
+    top: -75px;
+    left: 64px;
+    font-size: 9pt;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow:         3px 10px 5px #111; 
+    border-radius: 2px;
+}
+.mic.one{
+    top: -71px;
+    left: 50px;
+    transform: rotate(20deg);
+}
+.mic.two{
+    left: 77px;
+    transform: rotate(-20deg);
+}
 .github-corner svg{
     width: 70px;
     height: 70px;
