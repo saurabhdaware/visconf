@@ -140,7 +140,7 @@
     margin-top: 14px;
 }
 .presentation-video-bar > .progress{
-    background: linear-gradient(to right, #f0db4f, #f6eb51);
+    background: linear-gradient(to left, #ffff00, #f6eb51);
     height: 3px;
     display: inline-block;
     position: absolute;
@@ -227,6 +227,8 @@
     .control.captions{
         outline: none;
         border-bottom: 2px solid #ff0;
+        padding: 1px 0px;
+        margin: 0px 6px;
     }
     .index-overlay{
         height: 140px;

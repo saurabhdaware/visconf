@@ -74,13 +74,9 @@ async function startReadingFrom(){
 
     currentText.innerHTML = flatTranscript[currentIndex].replace(/\$wait(2|5|10)s/g, '');
     
-    
+    console.log(currentIndex);
+
     await reader.readText(text.replace(/\$wait(2|5|10)s/g, ''));
-
-    if(isPaused){
-        return;
-    }
-
 
 
     if(text.includes('$wait2s')){
@@ -136,6 +132,10 @@ function pauseTalk() {
 function replayTalk() {
     currentText.innerHTML = flatTranscript[0];
     currentIndex = -1;
+    if(isPaused){
+        currentIndex++;
+        startReadingFrom();
+    }
     speechSynthesis.cancel();
 }
 
@@ -153,12 +153,20 @@ function turnVolumeOn() {
 function skipNext() {
     // Skip Next
     currentText.innerHTML = flatTranscript[currentIndex + 1];
+    if(isPaused){
+        currentIndex++;
+        startReadingFrom();
+    }
     speechSynthesis.cancel();
 }
 
 function skipPrev() {
     currentText.innerHTML = flatTranscript[currentIndex - 1];
     currentIndex-=2;
+    if(isPaused){
+        currentIndex++;
+        startReadingFrom();    
+    }
     speechSynthesis.cancel();
 }
 
