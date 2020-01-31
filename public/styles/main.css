@@ -224,8 +224,12 @@
     .control > .material-icons{
         font-size: 20pt;
     }
+    .control.captions{
+        outline: none;
+        border-bottom: 2px solid #ff0;
+    }
     .index-overlay{
-        height: 300px;
+        height: 140px;
     }
     .presentation-controls{
         padding: 30px;

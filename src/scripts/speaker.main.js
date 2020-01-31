@@ -116,7 +116,7 @@ const volumeOnControl = document.querySelector('.control.volumeon');
 const volumeToggleEl = document.querySelector('span.volume');
 const skipNextControl = document.querySelector('.control.skip-next');
 const skipPrevControl = document.querySelector('.control.skip-previous');
-
+const captionsControl = document.querySelector('.control.captions');
 
 function startTalk() {
     startControl.style.display = 'none';
@@ -162,6 +162,19 @@ function skipPrev() {
     speechSynthesis.cancel();
 }
 
+function toggleCaptions() {
+    if(currentText.style.display === 'none') {
+        // show captions
+        currentText.style.display = 'block';
+        captionsControl.style.borderBottom = '2px solid #ff0';
+    }else {
+        // hide captions
+        currentText.style.display = 'none';
+        captionsControl.style.borderBottom = 'none';
+
+    }
+}
+
 startControl.addEventListener('click', startTalk);
 pauseControl.addEventListener('click', pauseTalk);
 replayControl.addEventListener('click', replayTalk);
@@ -169,6 +182,7 @@ muteVolumeControl.addEventListener('click', turnVolumeOff);
 volumeOnControl.addEventListener('click', turnVolumeOn);
 skipNextControl.addEventListener('click',skipNext);
 skipPrevControl.addEventListener('click', skipPrev);
+captionsControl.addEventListener('click', toggleCaptions);
 
 document.querySelector('.fullscreen').addEventListener('click', openFullscreen);
 document.querySelector('#rotate-screen-button').addEventListener('click', openFullscreen)
