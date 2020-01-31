@@ -37,7 +37,9 @@ function openFullscreen() {
         elem.msRequestFullscreen();
     }
 
-    screen.orientation.lock("landscape-primary")
+    document.querySelector('.fullscreen-exit').style.display = 'inline-block';
+    document.querySelector('.fullscreen').style.display = 'none';
+    screen.orientation.lock("landscape-primary");
 }
 
 /* Close fullscreen */
@@ -51,6 +53,9 @@ function closeFullscreen() {
     } else if (document.msExitFullscreen) { /* IE/Edge */
         document.msExitFullscreen();
     }
+
+    document.querySelector('.fullscreen-exit').style.display = 'none';
+    document.querySelector('.fullscreen').style.display = 'inline-block';
 }
 
 

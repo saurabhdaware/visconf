@@ -1,11 +1,15 @@
 import reader from './reader';
 import slides from './slides';
 import { wait, openFullscreen, closeFullscreen } from './helpers';
-
+import { talk } from '../templates';
 
 // variables
 export let isPaused = false;
 export let currentIndex = 0;
+
+// Set HTML for main speaker element
+document.querySelector('#app').innerHTML = talk;
+
 
 // elements
 const progressBar = document.querySelector('.presentation-video-bar > .progress');
@@ -122,7 +126,6 @@ function startTalk() {
     isPaused = false;
 }
 
-
 function pauseTalk() {
     startControl.style.display = 'inline-block';
     pauseControl.style.display = 'none';
@@ -130,59 +133,46 @@ function pauseTalk() {
     speechSynthesis.cancel();
 }
 
-startControl.addEventListener('click', startTalk);
-pauseControl.addEventListener('click', pauseTalk);
-
-replayControl.addEventListener('click', () => {
+function replayTalk() {
     currentText.innerHTML = flatTranscript[0];
     currentIndex = -1;
     speechSynthesis.cancel();
-})
+}
 
-muteVolumeControl.addEventListener('click', () => {
+function turnVolumeOff() {
     volumeToggleEl.classList.remove('playing');
     reader.volume = 0;
     speechSynthesis.cancel();
-})
+}
 
-volumeOnControl.addEventListener('click', () => {
+function turnVolumeOn() {
     volumeToggleEl.classList.add('playing');
     reader.volume = 10;
-})
+}
 
-document.querySelector('.fullscreen').addEventListener('click', () => {
-    // Full screen
-    openFullscreen();
-    document.querySelector('.fullscreen-exit').style.display = 'inline-block';
-    document.querySelector('.fullscreen').style.display = 'none';
-})
-
-document.querySelector('#rotate-screen-button').addEventListener('click', () => {
-    // Full screen
-    openFullscreen();
-    document.querySelector('.fullscreen-exit').style.display = 'inline-block';
-    document.querySelector('.fullscreen').style.display = 'none';
-})
-
-
-document.querySelector('.fullscreen-exit').addEventListener('click', () => {
-    // Exit full screen
-    closeFullscreen();
-    document.querySelector('.fullscreen-exit').style.display = 'none';
-    document.querySelector('.fullscreen').style.display = 'inline-block';
-})
-
-skipNextControl.addEventListener('click', () => {
+function skipNext() {
     // Skip Next
     currentText.innerHTML = flatTranscript[currentIndex + 1];
     speechSynthesis.cancel();
-})
+}
 
-skipPrevControl.addEventListener('click', e => {
+function skipPrev() {
     currentText.innerHTML = flatTranscript[currentIndex - 1];
     currentIndex-=2;
     speechSynthesis.cancel();
-})
+}
+
+startControl.addEventListener('click', startTalk);
+pauseControl.addEventListener('click', pauseTalk);
+replayControl.addEventListener('click', replayTalk);
+muteVolumeControl.addEventListener('click', turnVolumeOff);
+volumeOnControl.addEventListener('click', turnVolumeOn);
+skipNextControl.addEventListener('click',skipNext);
+skipPrevControl.addEventListener('click', skipPrev);
+
+document.querySelector('.fullscreen').addEventListener('click', openFullscreen);
+document.querySelector('#rotate-screen-button').addEventListener('click', openFullscreen)
+document.querySelector('.fullscreen-exit').addEventListener('click', closeFullscreen)
 
 export default {
     init,

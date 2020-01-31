@@ -6,7 +6,9 @@ import '../example/Transcript.md';
 import '../example/slides.pdf';
 
 const env = require('../configs/env');
-import speaker from './speaker.main';
+import speaker from './scripts/speaker.main';
+
+import { talk } from './templates';
 
 // redirect to create for registration confirmation
 if(location.hash.startsWith('#confirmation_token') && !location.href.includes('create')){
@@ -16,7 +18,7 @@ if(location.hash.startsWith('#confirmation_token') && !location.href.includes('c
 
 const [username, slug ] = location.pathname.split('/').slice(1);
 
-if(!username || !slug){
+if(!username || !slug || (username === 'me' && slug === 'test')){
     const defaultUser = {
         "username": "me",
         "talkTitle": "test",
@@ -26,9 +28,9 @@ if(!username || !slug){
         "eventName": "VisConf <br/>Test",
         "character": {
             "hairStyle": "long",
-            "hairColor": "#fde968",
-            "skinColor": "#e2c4a1",
-            "tshirtColor": "#ff001f"
+            "hairColor": "#1f0900",
+            "skinColor": "#724e25",
+            "tshirtColor": "#67abd3"
         },
         "voice": {
             "index": "2",

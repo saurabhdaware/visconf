@@ -4,8 +4,7 @@ import './create.css';
 
 
 const env = require('../../configs/env');
-import reader from '../reader';
-import { isURL } from '../helpers';
+import { isURL } from '../scripts/helpers';
 
 const loginButton = document.querySelector('.netlify-login-button');
 const logoutButton = document.querySelector('.netlify-logout-button');
