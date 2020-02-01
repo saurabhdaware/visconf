@@ -165,6 +165,11 @@ async function isURLFetchable(e) {
         return;
     }
 
+    if(e.target.value.includes('https://github.com/')){
+        // change usual github URLs to Raw URLs
+        e.target.value = e.target.value.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/blob', '');
+    }
+
     return fetch(e.target.value)
         .then(data => {
             if(data.status === 200) {

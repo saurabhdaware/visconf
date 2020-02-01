@@ -1,3 +1,119 @@
+html, body{
+    background-color: #111;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif;
+}
+body{
+    padding: 40px;
+    box-sizing: border-box;
+}
+.presentation-container{
+    background-color: #222;
+    height: 350px;
+}
+.presentation-container > .slides-display-container{
+    position: relative;
+    display: inline-block;
+    background-color: #00f;
+    height: 90%;
+    width: 600px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(calc(100px - 50%));
+}
+.stage-container{
+    perspective: 1000px;
+    width: 100%
+}
+.stage-platform{
+    position: relative;
+    height: 100px;
+    transform: rotateX(60deg) translateX(-50%);
+    width: calc(100% - 50px);
+    top: 25px;
+    left: 50%;
+    background-color: #881f04;
+}
+
+.stage-front{
+    height: 100px;
+    width: 100%;
+    background-color: #660000;
+}
+.mike-holder{
+    position: absolute;
+    height: 150px;
+    width: 100px;
+    background: linear-gradient(#f6eb51, #f0db4f);
+    color: #222;        
+    top: -50px;
+    left: 30px;
+    font-weight: bold;
+    padding: 20px 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.slide{
+    display: none;
+}
+.slide.show{
+    display: block;
+}
+
+.orientation-error{
+    padding:200px 30px;
+    box-sizing:border-box;
+    display:none;
+    position:fixed;
+    font-size:17pt;
+    z-index:99999;
+    top:0;left:0;
+    height:100%;width:100%;
+    background-color: #222e;
+    color: #ddd;
+    font-weight: bold;
+}
+
+#rotate-screen-button{
+    text-align: center;display:block;width: 100%;padding: 10px;
+    box-shadow:3px 10px 16px #1119; 
+}
+
+@media (orientation: portrait){
+    .orientation-error{
+        display: block;
+    }
+}
+
+.orientation-error  .material-icons{
+    font-size: 25pt;
+}
+
+.create-talk-button{
+    font-size: 14pt;
+    position: relative; 
+    bottom: 6px;
+    padding:14px 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    body{
+        padding: 20px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+
 .character-container.hide{
     top: -50px !important;
     transition: top .5s ease;
@@ -204,6 +320,14 @@
     width: 70px;
     height: 70px;
 }
+
+.control.captions{
+    outline: none;
+    border-bottom: 2px solid #ff0;
+    padding: 1px 0px;
+    margin: 0px 6px;
+}
+
 @media (max-width: 768px) {
     .github-logo{
         width: 30px;
@@ -221,14 +345,11 @@
     .presentation-container > .slides-display-container{
         width: 400px;
     }
+    .presentation-container{
+        height: 260px;
+    }
     .control > .material-icons{
         font-size: 20pt;
-    }
-    .control.captions{
-        outline: none;
-        border-bottom: 2px solid #ff0;
-        padding: 1px 0px;
-        margin: 0px 6px;
     }
     .index-overlay{
         height: 140px;

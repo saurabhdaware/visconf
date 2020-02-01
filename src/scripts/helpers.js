@@ -39,7 +39,8 @@ function openFullscreen() {
 
     document.querySelector('.fullscreen-exit').style.display = 'inline-block';
     document.querySelector('.fullscreen').style.display = 'none';
-    screen.orientation.lock("landscape-primary");
+    screen.orientation.lock("landscape-primary")
+        .catch(console.warn);
 }
 
 /* Close fullscreen */
@@ -65,4 +66,24 @@ async function wait(time){
     });
 }
 
-export { wait, isMobile, isURL, openFullscreen, closeFullscreen }
+const defaultUser = {
+    "username": "me",
+    "talkTitle": "test",
+    "slug": "test",
+    "transcriptLink": "/example/Transcript.md",
+    "slidePdfLink": "/example/slides.pdf",
+    "eventName": "VisConf <br/>Test",
+    "character": {
+        "hairStyle": "long",
+        "hairColor": "#1f0900",
+        "skinColor": "#724e25",
+        "tshirtColor": "#67abd3"
+    },
+    "voice": {
+        "index": "2",
+        "lang": "en-GB",
+        "name": "Google UK English Female"
+    }
+}
+
+export { wait, isMobile, isURL, openFullscreen, closeFullscreen, defaultUser }

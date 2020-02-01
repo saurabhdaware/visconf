@@ -62,3 +62,39 @@ export const talk = /* html */`
     <br/><button id="rotate-screen-button"><i class="material-icons">screen_rotation</i> <span style="position:relative;top:-9px;left: 6px;font-size: 15pt;font-weight: bold;">Rotate</span></button>
     </div>
 `;
+
+export const editor = /* html */ `
+<div class="editor-component">
+    <div style="color: #999;padding: 10px 0px;">
+        Hey there! Here you can edit and test your transcript and slides. <br>Once you're ready with your slides and transcript, you can follow <a style="color: #09f9;" href="#create-talk-steps">steps given below to create your talk</a>.
+    </div>
+    <div class="form-field">
+        
+        <label>Slides (PDF) URL <small style="color: #555">(<a target="_blank" rel="noopener" style="color: #09f9;" href="https://smallpdf.com/ppt-to-pdf">Convert your PPT to PDF file</a> and upload it to a CDN like <a target="_blank" rel="noopener" style="color: #09f9;" href="https://cloudinary.com">cloudinary</a> (even GitHub works))</small></label>
+        <input id="slides-input" type="text" />
+        <button class="btn editor-btn fetch-slides-btn">
+            Fetch Slides
+        </button>
+        <div class="editor-presentation-preview">
+
+        </div>
+    </div>
+    <div class="form-field transcript-editor">
+        <label>Transcript &nbsp;<small style="color: #555">(Auto Save Active)</small></label>
+        <div class="textarea" id="transcript-editor" contenteditable="true"></div>
+    </div>
+    <div class="form-field">
+        <button class="btn editor-btn download-transcript-button">Download Transcript.md</button>&nbsp; &nbsp;
+        <button class="btn editor-btn show-talk-button-2">Preview</button>
+    </div>
+    <div class="form-field" id="create-talk-steps">
+        <h2>How to create talk</h2>
+        <ol>
+            <li>Test your transcript and slides on this page</li>
+            <li>Download Transcript.md</li>
+            <li>Upload Transcript.md to a CDN like cloudinary or Github Repository</li>
+            <li>Visit <a href="create">Create</a> page and paste links there</li>
+        </ol>
+    </div>
+</div>
+`

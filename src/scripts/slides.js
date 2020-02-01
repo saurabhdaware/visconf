@@ -16,13 +16,18 @@ class Slides {
             })
     }
 
-    async renderPage(pageNumber) {
+    async renderPage(pageNumber, definedScale = undefined) {
         const page = await this.pdf.getPage(pageNumber);
+        
         let scale;
-        if(isMobile()) {
-            scale = 400/page.view[2];
-        }else {
-            scale = 600/page.view[2];
+        if(definedScale){
+            scale = definedScale;
+        }else{
+            if(isMobile()) {
+                scale = 400/page.view[2];
+            }else {
+                scale = 600/page.view[2];
+            }
         }
         // 600 / 1000
         const viewport = page.getViewport({scale: scale});
@@ -32,18 +37,16 @@ class Slides {
         const context = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-        document.querySelector('.presentation-container').style.height = canvas.height + 20 + 'px';
 
-        // x = vh
-        // 600 = vw
+        if(document.querySelector('.presentation-container')) {
+            document.querySelector('.presentation-container').style.height = canvas.height + 20 + 'px';
+        }
 
         // Render PDF page into canvas context
         const renderContext = {
             canvasContext: context,
             viewport: viewport
         };
-
-
 
         const renderTask = page.render(renderContext);
         

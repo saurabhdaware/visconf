@@ -7,8 +7,14 @@ import '../example/slides.pdf';
 
 const env = require('../configs/env');
 import speaker from './scripts/speaker.main';
-
+import { defaultUser, openFullscreen } from './scripts/helpers';
 import { talk } from './templates';
+
+// Set HTML
+document.querySelector('#app').innerHTML = talk;
+
+// Important event listeners that need to be added before initiating slides
+document.querySelector('#rotate-screen-button').addEventListener('click', openFullscreen)
 
 // redirect to create for registration confirmation
 if(location.hash.startsWith('#confirmation_token') && !location.href.includes('create')){
@@ -19,25 +25,6 @@ if(location.hash.startsWith('#confirmation_token') && !location.href.includes('c
 const [username, slug ] = location.pathname.split('/').slice(1);
 
 if(!username || !slug || (username === 'me' && slug === 'test')){
-    const defaultUser = {
-        "username": "me",
-        "talkTitle": "test",
-        "slug": "test",
-        "transcriptLink": "/example/Transcript.md",
-        "slidePdfLink": "/example/slides.pdf",
-        "eventName": "VisConf <br/>Test",
-        "character": {
-            "hairStyle": "long",
-            "hairColor": "#1f0900",
-            "skinColor": "#724e25",
-            "tshirtColor": "#67abd3"
-        },
-        "voice": {
-            "index": "2",
-            "lang": "en-GB",
-            "name": "Google UK English Female"
-        }
-    }
     speaker.init(defaultUser)
 
 }else if(username && slug) {

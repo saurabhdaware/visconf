@@ -64,7 +64,11 @@ Hey There!
 - `npm run dev` to run local server
 - Visit https://localhost:5000/me/test
 
-Built with Vanilla JavaScript, WebPack & Netlify <3
 
+---
 
-Please share :D Thank You 🌻
+[<img alt="Buy me a Coffee Button" width=200 src="https://cdn.buymeacoffee.com/buttons/default-orange.png">](https://www.buymeacoffee.com/ctd6809)
+
+Built with Vanilla JavaScript, WebPack, Netlify, FaunaDB <3
+
+Thank You 🌻

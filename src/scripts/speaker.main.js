@@ -1,19 +1,31 @@
 import reader from './reader';
 import slides from './slides';
 import { wait, openFullscreen, closeFullscreen } from './helpers';
-import { talk } from '../templates';
 
 // variables
 export let isPaused = false;
 export let currentIndex = 0;
 
 // Set HTML for main speaker element
-document.querySelector('#app').innerHTML = talk;
 
 
 // elements
-const progressBar = document.querySelector('.presentation-video-bar > .progress');
-const currentText = document.querySelector('.current-text');
+let progressBar, 
+currentText, 
+startControl, 
+pauseControl, 
+replayControl, 
+muteVolumeControl, 
+volumeOnControl, 
+volumeToggleEl,
+skipNextControl,
+skipPrevControl,
+captionsControl;
+
+
+let transcript, mappedTranscript;
+export let flatTranscript;
+
 
 function init(userData) {
     if(!userData) {
@@ -24,9 +36,36 @@ function init(userData) {
     document.querySelector('.character-container').classList.remove('hide');
     
     setCharacterStyles(userData);
-    setTranscript(userData.transcriptLink);
-    // setCharacterVoice(userData.voice);
+    setTranscript(userData.transcriptLink, userData.isTranscriptText);
     slides.setSlides(userData.slidePdfLink);
+
+
+    progressBar = document.querySelector('.presentation-video-bar > .progress');
+    currentText = document.querySelector('.current-text');
+
+    // Controls
+    startControl = document.querySelector('.control.start');
+    pauseControl = document.querySelector('.control.pause');
+    replayControl = document.querySelector('.control.restart');
+    muteVolumeControl = document.querySelector('.control.mute');
+    volumeOnControl = document.querySelector('.control.volumeon');
+    volumeToggleEl = document.querySelector('span.volume');
+    skipNextControl = document.querySelector('.control.skip-next');
+    skipPrevControl = document.querySelector('.control.skip-previous');
+    captionsControl = document.querySelector('.control.captions');
+
+    startControl.addEventListener('click', startTalk);
+    pauseControl.addEventListener('click', pauseTalk);
+    replayControl.addEventListener('click', replayTalk);
+    muteVolumeControl.addEventListener('click', turnVolumeOff);
+    volumeOnControl.addEventListener('click', turnVolumeOn);
+    skipNextControl.addEventListener('click',skipNext);
+    skipPrevControl.addEventListener('click', skipPrev);
+    captionsControl.addEventListener('click', toggleCaptions);
+
+    document.querySelector('.fullscreen').addEventListener('click', openFullscreen);
+    document.querySelector('.fullscreen-exit').addEventListener('click', closeFullscreen)
+
 }
 
 
@@ -48,12 +87,13 @@ function setCharacterStyles(userData) {
 }
 
 
-let transcript, mappedTranscript;
-export let flatTranscript;
-
-async function setTranscript(transcriptPath) {
-    let data = await (await fetch(transcriptPath)).text();
-    transcript = data;
+async function setTranscript(transcriptData, isText=false) {
+    if(!isText){
+        let data = await (await fetch(transcriptData)).text();
+        transcript = data;
+    }else{
+        transcript = transcriptData;
+    }
 
     // mappedTranscript: [[text,...], [text, ...], [text, ...]]
     mappedTranscript = transcript.split('||').map(slide => slide.split('|'))
@@ -63,7 +103,6 @@ async function setTranscript(transcriptPath) {
 }
 
 
-let timers = [];
 async function startReadingFrom(){
     slides.setNewSlide(currentIndex, mappedTranscript);
     progressBar.style.width = currentIndex*100/flatTranscript.length + '%';
@@ -74,7 +113,6 @@ async function startReadingFrom(){
 
     currentText.innerHTML = flatTranscript[currentIndex].replace(/\$wait(2|5|10)s/g, '');
     
-    console.log(currentIndex);
 
     await reader.readText(text.replace(/\$wait(2|5|10)s/g, ''));
 
@@ -103,16 +141,7 @@ async function startReadingFrom(){
 }
 
 
-// Controls
-const startControl = document.querySelector('.control.start');
-const pauseControl = document.querySelector('.control.pause');
-const replayControl = document.querySelector('.control.restart');
-const muteVolumeControl = document.querySelector('.control.mute');
-const volumeOnControl = document.querySelector('.control.volumeon');
-const volumeToggleEl = document.querySelector('span.volume');
-const skipNextControl = document.querySelector('.control.skip-next');
-const skipPrevControl = document.querySelector('.control.skip-previous');
-const captionsControl = document.querySelector('.control.captions');
+
 
 function startTalk() {
     startControl.style.display = 'none';
@@ -183,18 +212,6 @@ function toggleCaptions() {
     }
 }
 
-startControl.addEventListener('click', startTalk);
-pauseControl.addEventListener('click', pauseTalk);
-replayControl.addEventListener('click', replayTalk);
-muteVolumeControl.addEventListener('click', turnVolumeOff);
-volumeOnControl.addEventListener('click', turnVolumeOn);
-skipNextControl.addEventListener('click',skipNext);
-skipPrevControl.addEventListener('click', skipPrev);
-captionsControl.addEventListener('click', toggleCaptions);
-
-document.querySelector('.fullscreen').addEventListener('click', openFullscreen);
-document.querySelector('#rotate-screen-button').addEventListener('click', openFullscreen)
-document.querySelector('.fullscreen-exit').addEventListener('click', closeFullscreen)
 
 export default {
     init,
