@@ -93,7 +93,7 @@ export const editor = /* html */ `
             <li>Test your transcript and slides on this page</li>
             <li>Download Transcript.md</li>
             <li>Upload Transcript.md to a CDN like cloudinary or Github Repository</li>
-            <li>Visit <a href="create">Create</a> page and paste links there</li>
+            <li>Visit <a style="color: #09f;" href="create">Create</a> page and paste links there</li>
         </ol>
     </div>
 </div>

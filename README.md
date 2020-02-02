@@ -15,16 +15,14 @@ VisConf lets you generate an animated version of your talk from your slides and 
 # Table of Content
 - [How to Create your Visual Talk](#how-to-create-your-visual-talk)
 - [Transcript Markdown Guide](#transcript-markdown)
-- [Locally Test Transcript and Slides](#locally-test-transcript-and-slides)
 
 ---
 
 # How to Create your Visual Talk
-- Create [Transcript.md](https://github.com/saurabhdaware/visconf-example/blob/master/Transcript.md) file and write your transcript (You can use [Transcript Markdown](#transcript-markdown)) 
-- Convert your slides to **PDF** file
-- Upload `slides.pdf` and `transcript.md` to CDN (even GitHub Repository works)
+- Convert your slides to **PDF** file and upload to CDN or GitHub repository.
+- Write and test your transcript on [visconf.netlify.com/editor](https://visconf.netlify.com/editor) and upload the transcript file to CDN or GitHub repository.
 - Visit https://visconf.netlify.com/create and fill the form 
-(You can checkout https://github.com/saurabhdaware/visconf-example for example)
+(You can checkout https://github.com/saurabhdaware/visconf-example for example of transcript and slides)
 
 # Transcript Markdown
 In transcript you can use characters like `|`, `||` and `$wait5s`.
@@ -48,21 +46,8 @@ Hey There!
 
 ```
 
-# Locally Test Transcript and Slides
-
-- `git clone` this repository
-- run `npm install`
-- Copy paste your `slides.pdf` and `transcript.md` to [example/](example/)
-- run `npm run dev`
-- View your changes in https://localhost:5000/me/test
-
-
 # Contributing
-- Fork this repository
-- git clone your fork
-- run `npm install` to install dependencies
-- `npm run dev` to run local server
-- Visit https://localhost:5000/me/test
+Checkout [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing and local setup.
 
 
 ---

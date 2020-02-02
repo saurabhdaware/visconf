@@ -3,7 +3,7 @@ import '../../public/styles/main.css';
 import './editor.css';
 
 import speaker from '../scripts/speaker.main';
-import { defaultUser, isURL } from '../scripts/helpers';
+import { defaultUser, isURL, isMobile, openFullscreen, closeFullscreen } from '../scripts/helpers';
 import { talk, editor } from '../templates';
 import slides from '../scripts/slides';
 
@@ -73,6 +73,9 @@ function showTalk() {
     newUser.slidePdfLink = slidesUrlVal;
 
     speaker.init(newUser);
+    if(isMobile()) {
+        openFullscreen();
+    }
 }
 
 let slidesInput;
@@ -84,7 +87,13 @@ function showEditor() {
 
     document.querySelector('#transcript-editor').addEventListener('input', handleAutoSave);
     slidesInput = document.querySelector('input#slides-input');
-
+    if(isMobile()) {
+        try{
+            closeFullscreen();
+        }catch(e) {
+            console.log(e);
+        }
+    }
     setEditorSlides();
     document.querySelector('.fetch-slides-btn').addEventListener('click', setEditorSlides)
     document.querySelector('.download-transcript-button').addEventListener('click', downloadTranscript)
