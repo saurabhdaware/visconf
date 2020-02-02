@@ -11,25 +11,25 @@ export const talk = /* html */`
     </a>
     </div>
     <div class="stage-container">
-    <div class="character-container hide">
-        <span class="myhead"></span>
-        <span class="myhair"></span>
-        <span class="mybody"></span>
-        <span class="hands mylhand"></span>
-        <span class="hands myrhand"></span>
-        <span class="legs mylleg"></span>
-        <span class="legs myrleg"></span>
+        <div class="character-container hide">
+            <span class="myhead"></span>
+            <span class="myhair"></span>
+            <span class="mybody"></span>
+            <span class="hands mylhand"></span>
+            <span class="hands myrhand"></span>
+            <span class="legs mylleg"></span>
+            <span class="legs myrleg"></span>
+        </div>
+        <div class="stage-platform"></div>
+        <div class="stage-front"></div>
+        <div class="laptop">
+            🥑
+        </div>
+        <div class="mic one"></div>
+        <div class="mic two"></div>
+        <div class="mike-holder">VisConf</div>
     </div>
     <div class="current-text">...</div>
-    <div class="stage-platform"></div>
-    <div class="stage-front"></div>
-    <div class="laptop">
-        🥑
-    </div>
-    <div class="mic one"></div>
-    <div class="mic two"></div>
-    <div class="mike-holder">VisConf</div>
-    </div>
     <div class="index-overlay">
     <div class="presentation-controls">
         <button title="skip previous" class="control skip-previous"><i class="material-icons">skip_previous</i></button>

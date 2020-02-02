@@ -342,13 +342,14 @@ body{
         left: 50%;
         transform: translateX(-50%);
         top: unset;
-        bottom: 160px;
+        bottom: 70px;
         max-width: 94%;
         font-size: 9pt;
         background-color: #0008;
         color: #fff;
         border-radius: 5px;
         padding:10px 10px;
+        z-index: 9999;
     }
     .presentation-container > .slides-display-container{
         width: 400px;

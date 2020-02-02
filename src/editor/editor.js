@@ -27,7 +27,10 @@ Hi there!
 || Doggo!!!
 | Let's wait here for 10 seconds and appreciate doggo hair spaghetti $wait10s
 
-|| Umm... okaayyy $wait2s
+|| Here's phineas looking at you 
+| are you a platypus? 
+| Perry's a platypus
+| but hey, where's perry?
 
 || a telly tubby! 
 | or a kitty?? 
