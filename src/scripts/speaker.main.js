@@ -123,12 +123,12 @@ async function startReadingFrom(){
     }
 
     if(text.includes('$wait5s')){
-        currentText.innerHTML = "*points to slides*";
+        currentText.innerHTML = "*5s pause*";
         await wait(5000);
     }
 
     if(text.includes('$wait10s')){
-        currentText.innerHTML = "*points to slides*";
+        currentText.innerHTML = "*10s pause*";
         await wait(10000);
     }
 
