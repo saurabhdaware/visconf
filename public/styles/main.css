@@ -206,7 +206,7 @@ body{
 .current-text{
     position: absolute;
     z-index: 10;
-    top: -170px;
+    top: 170px;
     left: 80px;
     background-color: #fff9;
     display: inline-block;
