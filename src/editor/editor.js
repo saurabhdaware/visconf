@@ -8,6 +8,36 @@ import { talk, editor } from '../templates';
 import slides from '../scripts/slides';
 
 let activeTab = 'editor';
+const defaultTranscriptText = `
+Hi there!
+| Baby yoda here!
+| I am here to show you guys random pictures!!!
+
+|| This is slide 2
+| Here's a random lorem ipsum text
+| lots of lorem ipsum
+
+|| Here's me with a tea
+| Drink tea
+| Also drink water
+| Water you doing?
+
+|| umm idk why morty's here
+
+|| Doggo!!!
+| Let's wait here for 10 seconds and appreciate doggo hair spaghetti $wait10s
+
+|| Umm... okaayyy $wait2s
+
+|| a telly tubby! or a kitty?? or a telly tubby
+| noo its kitty
+| could be telly tubby tho
+| anyway
+
+|| Thenks
+`
+
+
 function setActiveTab(tab) {
     const previewButton = document.querySelector('button.show-talk-button');
     const editorButton = document.querySelector('button.show-editor-button');
@@ -95,8 +125,8 @@ function prettifyTranscript(data) {
 }
 
 function editorDataLoad() {
-    document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(window.localStorage.getItem('editor-content'));
-    document.querySelector('#slides-input').value = window.localStorage.getItem('editor-slides-url');
+    document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(window.localStorage.getItem('editor-content') || defaultTranscriptText);
+    document.querySelector('#slides-input').value = window.localStorage.getItem('editor-slides-url') || "https://res.cloudinary.com/saurabhdaware/image/upload/v1580631896/npm/random.pdf";
 }
 
 
