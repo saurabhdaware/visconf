@@ -10,31 +10,34 @@ import slides from '../scripts/slides';
 let activeTab = 'editor';
 const defaultTranscriptText = `
 Hi there!
-| Baby yoda here!
+| John Doe here!
 | I am here to show you guys random pictures!!!
 
 || This is slide 2
 | Here's a random lorem ipsum text
 | lots of lorem ipsum
 
-|| Here's me with a tea
+|| Here's baby yoda with a tea
 | Drink tea
 | Also drink water
 | Water you doing?
 
-|| umm idk why morty's here
+|| umm i dont know why morty's here..
 
 || Doggo!!!
 | Let's wait here for 10 seconds and appreciate doggo hair spaghetti $wait10s
 
 || Umm... okaayyy $wait2s
 
-|| a telly tubby! or a kitty?? or a telly tubby
-| noo its kitty
-| could be telly tubby tho
+|| a telly tubby! 
+| or a kitty?? 
+| or a telly tubby
+| noo its a kitty
+| could be a telly tubby tho
 | anyway
 
 || Thenks
+| Bye!
 `
 
 

@@ -42,14 +42,15 @@ export const talk = /* html */`
         </span>
 
         <button style="float: right" title="toggle captions" class="control captions"><i class="material-icons">closed_caption</i></button s>
-        <button style="float: right" title="restart presentation" class="control restart"><i class="material-icons">replay</i></button s>
         <span class="volume playing" style="float: right">
             <button title="mute volume" class="control mute"><i class="material-icons">volume_up</i></button>
             <button title="turn on volume" class="control volumeon"><i class="material-icons">volume_off</i></button>
         </span>
-        <a style="float: right" title="Create talk button" class="create-talk-button" href="https://visconf.netlify.com/create"  class="control"> <b>+</b> &nbsp;Create your talk</a>
+        <a style="float: right" title="Create talk button" class="create-talk-button" href="https://visconf.netlify.com/editor"  class="control"> <b>+</b> &nbsp;Create your talk</a>
         <div class="presentation-video-bar">
-            <div class="progress"></div>
+            <div class="progress-meter">
+                <div class="progress"></div>
+            </div>
         </div>
     </div>
     </div>

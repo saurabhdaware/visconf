@@ -1,30 +1,29 @@
-Hey everyone! Welcome to VisConf's NotConf Conference
-| Today I will talk about how you can write and test your transcripts locally.
-| Currently, to test your transcript locally, you have to run the project on your machine
-| Lets see how we can do it.
+Hi there!
+| John Doe here!
+| I am here to show you guys random pictures!!!
 
-|| To run the project locally, you have to take clone of the github repository.
-| Then cd to the project and run npm install to install dependencies.
-| start project locally using npm run dev $wait5s
+|| This is slide 2
+| Here's a random lorem ipsum text
+| lots of lorem ipsum
 
-|| Now you'll have visconf running on localhost:5000
-| The project has 'example/' directory which includes slides.pdf and transcript.md
-| The current slides that you are viewing and the transcript come from that directory.
-| You can edit files in 'example/' and the changes will be reflected on localhost:5000/me/test $wait5s
+|| Here's baby yoda with a tea
+| Drink tea
+| Also drink water
+| Water you doing?
 
-|| In transcript, you can write characters as shown in slides. $wait10s
-| Single vertical dash will change the text like
-| this
-| you 
-| can
-| change text with single dash
-| dollar wait 2s, dollar wait 5s and dollar wait 10s will make the talk pause like this $wait10s
+|| umm i dont know why morty's here..
 
-|| Here's an example of a transcript $wait10s
-| $wait10s
+|| Doggo!!!
+| Let's wait here for 10 seconds and appreciate doggo hair spaghetti $wait10s
 
-|| You can also see live example on the link shown
-| The GitHub link has the transcript and slides and the talk is live on the 2nd link $wait5s
+|| Umm... okaayyy $wait2s
 
-|| Thank you for joining in to the talk
-| Do drop a start on VisConf's Github Repository.
+|| a telly tubby! 
+| or a kitty?? 
+| or a telly tubby
+| noo its a kitty
+| could be a telly tubby tho
+| anyway
+
+|| Thenks
+| Bye!

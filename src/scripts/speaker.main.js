@@ -1,6 +1,6 @@
 import reader from './reader';
 import slides from './slides';
-import { wait, openFullscreen, closeFullscreen } from './helpers';
+import { useWait, openFullscreen, closeFullscreen } from './helpers';
 
 // variables
 export let isPaused = false;
@@ -11,10 +11,10 @@ export let currentIndex = 0;
 
 // elements
 let progressBar, 
+progressBarContainer,
 currentText, 
 startControl, 
 pauseControl, 
-replayControl, 
 muteVolumeControl, 
 volumeOnControl, 
 volumeToggleEl,
@@ -40,13 +40,14 @@ function init(userData) {
     slides.setSlides(userData.slidePdfLink);
 
 
-    progressBar = document.querySelector('.presentation-video-bar > .progress');
+    progressBar = document.querySelector('.presentation-video-bar .progress');
+    progressBarContainer = document.querySelector('.presentation-video-bar');
+
     currentText = document.querySelector('.current-text');
 
     // Controls
     startControl = document.querySelector('.control.start');
     pauseControl = document.querySelector('.control.pause');
-    replayControl = document.querySelector('.control.restart');
     muteVolumeControl = document.querySelector('.control.mute');
     volumeOnControl = document.querySelector('.control.volumeon');
     volumeToggleEl = document.querySelector('span.volume');
@@ -56,13 +57,13 @@ function init(userData) {
 
     startControl.addEventListener('click', startTalk);
     pauseControl.addEventListener('click', pauseTalk);
-    replayControl.addEventListener('click', replayTalk);
     muteVolumeControl.addEventListener('click', turnVolumeOff);
     volumeOnControl.addEventListener('click', turnVolumeOn);
     skipNextControl.addEventListener('click',skipNext);
     skipPrevControl.addEventListener('click', skipPrev);
     captionsControl.addEventListener('click', toggleCaptions);
 
+    progressBarContainer.addEventListener('click', progressBarClickHandler)
     document.querySelector('.fullscreen').addEventListener('click', openFullscreen);
     document.querySelector('.fullscreen-exit').addEventListener('click', closeFullscreen)
 
@@ -107,7 +108,11 @@ async function startReadingFrom(){
     slides.setNewSlide(currentIndex, mappedTranscript);
     progressBar.style.width = currentIndex*100/flatTranscript.length + '%';
 
-
+    if(currentIndex >= flatTranscript.length) {
+        pauseTalk();
+        currentIndex = 0;
+        return;
+    }
     let text = flatTranscript[currentIndex];
     if(text === undefined) return;
 
@@ -117,19 +122,21 @@ async function startReadingFrom(){
     await reader.readText(text.replace(/\$wait(2|5|10)s/g, ''));
 
 
+    
     if(text.includes('$wait2s')){
         currentText.innerHTML = "...";
-        await wait(2000);
+        await useWait(2000);
     }
 
+    
     if(text.includes('$wait5s')){
         currentText.innerHTML = "*5s pause*";
-        await wait(5000);
+        await useWait(5000);
     }
 
     if(text.includes('$wait10s')){
         currentText.innerHTML = "*10s pause*";
-        await wait(10000);
+        await useWait(10000);
     }
 
 
@@ -141,7 +148,10 @@ async function startReadingFrom(){
 }
 
 
-
+function progressBarClickHandler(e) {
+    let clickPositionX = Math.floor(e.offsetX*flatTranscript.length/e.target.offsetWidth);
+    jumpTo(clickPositionX);
+}
 
 function startTalk() {
     startControl.style.display = 'none';
@@ -158,9 +168,9 @@ function pauseTalk() {
     speechSynthesis.cancel();
 }
 
-function replayTalk() {
-    currentText.innerHTML = flatTranscript[0];
-    currentIndex = -1;
+function jumpTo(i = 0) {
+    currentText.innerHTML = flatTranscript[i];
+    currentIndex = i - 1;
     if(isPaused){
         currentIndex++;
         startReadingFrom();

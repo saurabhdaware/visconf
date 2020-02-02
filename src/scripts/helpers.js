@@ -59,12 +59,23 @@ function closeFullscreen() {
     document.querySelector('.fullscreen').style.display = 'inline-block';
 }
 
+let breakWait = false;
+async function useWait(time) {
+    return new Promise((resolve) => {
+        let counter = 0;
+        let interval = setInterval(() => {
+            if(breakWait || counter === 10){
+                breakWait = false;
+                resolve();
+                clearInterval(interval);
+            }
 
-async function wait(time){
-    return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(), time);
-    });
+            counter++;
+        }, time/10);
+    })
 }
+
+
 
 const defaultUser = {
     "username": "me",
@@ -86,4 +97,4 @@ const defaultUser = {
     }
 }
 
-export { wait, isMobile, isURL, openFullscreen, closeFullscreen, defaultUser }
+export { useWait, isMobile, isURL, openFullscreen, closeFullscreen, defaultUser }
