@@ -1,11 +1,3 @@
-html, body{
-    background-color: #111;
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    overflow: hidden;
-    font-family: 'Oswald', sans-serif;
-}
 body{
     padding: 40px;
     box-sizing: border-box;
@@ -100,14 +92,6 @@ body{
     padding:14px 10px;
     text-decoration: none;
     color: #fff;
-}
-
-@media (max-width: 768px) {
-    body{
-        padding: 20px;
-        width: 100%;
-        overflow: hidden;
-    }
 }
 
 
