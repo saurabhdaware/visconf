@@ -1,6 +1,7 @@
 import reader from './reader';
 import slides from './slides';
 import { useWait, openFullscreen, closeFullscreen } from './helpers';
+import NoSleep from 'nosleep.js';
 
 // variables
 export let isPaused = false;
@@ -8,6 +9,7 @@ export let currentIndex = 0;
 
 // Set HTML for main speaker element
 
+const noSleep = new NoSleep();
 
 // elements
 let progressBar, 
@@ -156,6 +158,7 @@ function progressBarClickHandler(e) {
 function startTalk() {
     startControl.style.display = 'none';
     pauseControl.style.display = 'inline-block';
+    noSleep.enable();
     if(currentIndex === 0) currentText.innerHTML = flatTranscript[0];
     startReadingFrom();
     isPaused = false;
@@ -164,6 +167,7 @@ function startTalk() {
 function pauseTalk() {
     startControl.style.display = 'inline-block';
     pauseControl.style.display = 'none';
+    noSleep.disable();
     isPaused = true;
     speechSynthesis.cancel();
 }

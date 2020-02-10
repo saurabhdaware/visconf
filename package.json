@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "faunadb": "^2.11.1",
+    "nosleep.js": "^0.9.0",
     "pdfjs-dist": "^2.2.228"
   }
 }
