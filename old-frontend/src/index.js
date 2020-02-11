@@ -5,6 +5,10 @@ import '../public/_redirects';
 import '../example/Transcript.md';
 import '../example/slides.pdf';
 
+import '../public/images/logo-512.png';
+import '../public/images/logo-192.png';
+import '../public/images/favicon.ico';
+
 const env = require('../configs/env');
 import speaker from './scripts/speaker.main';
 import { defaultUser, openFullscreen } from './scripts/helpers';
@@ -22,11 +26,10 @@ if(location.hash.startsWith('#confirmation_token') && !location.href.includes('c
 }
 
 
-const [username, slug ] = location.pathname.split('/').slice(1);
+const [ username, slug ] = location.pathname.split('/').slice(1);
 
 if(!username || !slug || (username === 'me' && slug === 'test')){
     speaker.init(defaultUser)
-
 }else if(username && slug) {
     document.title = `${slug} by ${username} || VisConf`;
     fetch(`${env.functionsEndpoint}/get-talk?username=${username}&slug=${slug}`)
@@ -35,5 +38,8 @@ if(!username || !slug || (username === 'me' && slug === 'test')){
             if(res.success === true){
                 speaker.init(res.message);
             }
+        })
+        .catch(err => {
+            console.log(err);
         })
 }

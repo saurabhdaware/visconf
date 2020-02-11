@@ -34,6 +34,13 @@ module.exports = {
                 }
             },
             {
+                test: /\.(png|ico)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[ext]',
+                }
+            },
+            {
                 test: /\.(css)$/,
                 use: ['style-loader', 'css-loader'],
             }
