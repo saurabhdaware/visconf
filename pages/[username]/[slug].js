@@ -1,23 +1,22 @@
-import Head from 'next/head';
 import { Fragment } from 'react';
+import Meta from '../../components/Meta';
+import Talk from '../../components/Talk';
 
-const Talk = ({queryParams}) => {
+const Main = ({metaInfo}) => {
   return (
     <Fragment>
-      <Head>
-        <title>{queryParams.slug} by {queryParams.username}</title>
-      </Head>
-      <div>
-        <p>Hello Next.js</p>
-      </div>
+      <Meta metaInfo={metaInfo} />
+      <Talk />
     </Fragment>
   );
 }
 
-Talk.getInitialProps = async ({ req, res, match, history, location, ...ctx })  => {
+Main.getInitialProps = async ctx  => {
   return {
-    queryParams: ctx.query
+    metaInfo: {
+      title: `${ctx.query.slug.replace(/-/g, ' ')} by ${ctx.query.username} | VisConf`
+    }
   }
 }
 
-export default Talk;
+export default Main;

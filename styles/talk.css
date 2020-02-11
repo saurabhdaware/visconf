@@ -1,0 +1,412 @@
+html, body{
+  background-color: #111;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  overflow: hidden;
+  font-family: 'Oswald', sans-serif;
+}
+@media (max-width: 768px) {
+  body{
+      padding: 20px;
+      width: 100%;
+      overflow: hidden;
+  }
+}
+body{
+  padding: 40px;
+  box-sizing: border-box;
+}
+.presentation-container{
+  background-color: #222;
+  height: 350px;
+}
+.presentation-container > .slides-display-container{
+  position: relative;
+  display: inline-block;
+  background-color: #00f;
+  height: 90%;
+  width: 600px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(calc(100px - 50%));
+}
+.stage-container{
+  perspective: 1000px;
+  width: 100%
+}
+.stage-platform{
+  position: relative;
+  height: 100px;
+  transform: rotateX(60deg) translateX(-50%);
+  width: calc(100% - 50px);
+  top: 25px;
+  left: 50%;
+  background-color: #881f04;
+}
+
+.stage-front{
+  height: 100px;
+  width: 100%;
+  background-color: #660000;
+}
+.mike-holder{
+  position: absolute;
+  height: 150px;
+  width: 100px;
+  background: linear-gradient(#f6eb51, #f0db4f);
+  color: #222;        
+  top: -50px;
+  left: 30px;
+  font-weight: bold;
+  padding: 20px 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.slide{
+  display: none;
+}
+.slide.show{
+  display: block;
+}
+
+.orientation-error{
+  padding:200px 30px;
+  box-sizing:border-box;
+  display:none;
+  position:fixed;
+  font-size:17pt;
+  z-index:99999;
+  top:0;left:0;
+  height:100%;width:100%;
+  background-color: #222e;
+  color: #ddd;
+  font-weight: bold;
+}
+
+#rotate-screen-button{
+  text-align: center;display:block;width: 100%;padding: 10px;
+  box-shadow:3px 10px 16px #1119; 
+}
+
+@media (orientation: portrait){
+  .orientation-error{
+      display: block;
+  }
+}
+
+.orientation-error  .material-icons{
+  font-size: 25pt;
+}
+
+.create-talk-button{
+  font-size: 14pt;
+  position: relative; 
+  bottom: 6px;
+  padding:14px 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+
+.character-container.hide{
+  top: -50px !important;
+  transition: top .5s ease;
+}
+.character-container{
+  position: fixed;
+  top: -113px;
+  left: 50px;
+  transition: top .5s ease;
+}
+
+
+.character-container > span{
+  display:inline-block;
+  position:absolute;
+  box-sizing: border-box;
+}
+
+.character-container > span:not(.mybody){
+  box-shadow:         3px 10px 16px #1119; 
+  background-color:#ffe0bd;
+}
+.character-container > span.myhead{
+  height:35px;
+  width:27px;
+  border-radius:100%;
+  border:15px solid #111;
+  border-right:none;
+  border-left:none;
+  border-bottom: none;
+  background-color:#ffe0bd;
+  box-sizing: border-box;
+}
+
+.character-container > span.myhair{
+  position: absolute;
+  background-color: #111;
+  width: 35px;
+  left: -4px;
+  top: 0;
+  border-radius: 20px 20px 0px 0px;
+  z-index: -1;
+  display: none;
+  height: 50px;
+}
+
+.character-container > span.mybody{
+  top:37px;
+  left:-1px;
+  height:35px;
+  width:29px;
+  background-color: #09f;
+  z-index:1;
+  border-radius:5px;
+}
+
+.character-container > span.hands{
+  height:38px;
+  width:7px;
+  border-radius:100%;
+  border-top:20px solid #035891;
+  left:-5px;
+  top:38px;
+  transform-origin: top center;
+  transform: rotate(10deg);
+}
+
+.character-container > span.mylhand{
+  transform:rotate(-10deg);
+  left:25px;
+}
+
+.character-container > span.legs{
+  height:30px;
+  width:10px;
+  left:3px;
+  top:65px;
+  transform-origin: top center;
+  transform: rotate(10deg);
+  border:3px solid #aaa;
+  border-radius:0px 0px 5px 5px;
+}
+
+.character-container > span.myrleg{
+  transform:rotate(-10deg);
+  left:15px;
+}
+
+
+.current-text{
+  position: absolute;
+  z-index: 100000000;
+  top: unset;
+  bottom: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0009;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 30px;
+  font-size: 10pt;
+  box-sizing: border-box;
+  border-radius: 10px;
+  max-width: 80%;
+}
+.index-overlay{
+  position: fixed;
+  bottom:0; 
+  left:0;
+  background:linear-gradient(to top,#000f, #0000);
+  height: 500px;
+  width: 100%;
+  z-index: 999;
+  padding: 20px 50px;
+  box-sizing: border-box;
+}
+.control{
+  color: #fff;
+  background-color: transparent;
+  border:none;
+  /* padding:10px; */
+  cursor: pointer;
+}
+.control > .material-icons{
+  font-size: 30pt;
+}
+.control.pause{
+  display: none;
+}
+.presentation-controls{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 50px 50px 30px 50px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.progress-meter{
+  background-color: #999;
+  height:3px; 
+  width:100%;
+  border-radius: 10px;
+}
+.presentation-video-bar{
+  padding: 15px 0px 15px 0px;
+  cursor: pointer;
+}
+.presentation-video-bar .progress{
+  background: linear-gradient(to left, #ffff00, #f6eb51);
+  height: 3px;
+  display: inline-block;
+  position: absolute;
+  
+}
+
+.volume > .control.volumeon{
+  display: inline-block;
+}
+.volume > .control.mute{
+  display: none;
+}
+
+.volume.playing > .control.volumeon{
+  display: none;
+}
+.volume.playing > .control.mute{
+  display: inline-block;
+}
+
+.github-logo{
+  width: 40px;
+}
+.laptop{
+  width: 50px;
+  height: 30px;
+  background: linear-gradient(#ddd, #999);
+  position: absolute;
+  top: -75px;
+  left: 68px;
+  font-size: 9pt;
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+  box-shadow:         3px 10px 16px #1119; 
+  border-radius: 2px;
+}
+.mic{
+  width: 3px;
+  height: 30px;
+  background-color: #222;
+  position: absolute;
+  top: -75px;
+  left: 64px;
+  font-size: 9pt;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow:         3px 10px 5px #111; 
+  border-radius: 2px;
+}
+.mic.one{
+  top: -71px;
+  left: 50px;
+  transform: rotate(20deg);
+}
+.mic.two{
+  left: 77px;
+  transform: rotate(-20deg);
+}
+.github-corner svg{
+  width: 70px;
+  height: 70px;
+}
+
+.control.captions{
+  outline: none;
+  border-bottom: 2px solid #ff0;
+  padding: 1px 0px;
+  margin: 0px 6px;
+}
+
+/* PRESENTATION CONTAINER STYLES */
+.presentation-container{
+  position: relative;
+}
+
+.sponsor-holder{
+  position: absolute; 
+  top: 10px; 
+  left: 10px; 
+  color: #999; 
+  width: 30%; 
+  text-align: center;
+}
+
+.sponsor-title{
+  font-weight: bold;
+  font-size: 14pt;
+  margin:10px 0px;
+}
+.become-sponsor-button{
+  color: #777; text-decoration: none
+}
+.become-sponsor-button .material-icons{
+  position:relative;top: 3px;font-size: 13pt;
+}
+.default-nosignal-text{
+  color:#fff;margin:15px;position: absolute; bottom: 0;display:inline-block
+}
+
+.float-right{
+  float: right !important;
+}
+@media (max-width: 768px) {
+  .github-logo{
+      width: 30px;
+  }
+  body{
+      padding: 10px 20px;
+  }
+  .current-text{
+      left: 50%;
+      transform: translateX(-50%);
+      top: unset;
+      bottom: -24px;
+      max-width: 94% !important;
+      font-size: 9pt;
+      background-color: #0008;
+      color: #fff;
+      border-radius: 5px;
+      padding:10px 10px;
+      z-index: 99999999999;
+  }
+  .presentation-container > .slides-display-container{
+      width: 400px;
+  }
+  .presentation-container{
+      height: 260px;
+  }
+  .control > .material-icons{
+      font-size: 20pt;
+  }
+  .index-overlay{
+      height: 140px;
+  }
+  .presentation-controls{
+      padding: 30px 30px 10px 30px;
+  }
+  .create-talk-button{
+      font-size: 10pt;
+      padding: 10px 10px;
+  }
+
+  .github-corner svg{
+      width: 50px;
+      height: 50px;
+  }
+}
