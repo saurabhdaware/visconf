@@ -10,6 +10,8 @@ const Talk = () => {
         </div>
       </div>
       <div className="slides-display-container"><span className="default-nosignal-text"><b>NO SIGNAL</b> <br/>Attempting to Connect...</span></div>
+      
+      {/* Everything around stage */}
       <div className="stage-container">
         <div className="character-container">
             <span className="myhead"></span>
@@ -29,7 +31,11 @@ const Talk = () => {
         <div className="mic two"></div>
         <div className="mike-holder">VisConf</div>
       </div>
+
+
       <div className="current-text">Hi there! My name is Saurabh and I am here to talk about something super cool</div>
+      
+      {/* Controls */}
       <div className="index-overlay">
         <div className="presentation-controls">
           <button title="skip previous" className="control skip-previous"><i className="material-icons">skip_previous</i></button>
@@ -53,6 +59,12 @@ const Talk = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Fixed Positioned Content */}
+      <div class="orientation-error">
+        VisConf is best viewed in landscape! <br/> Please click the button below or rotate your screen to view the talk 🌻 <br/>
+        <br/><button id="rotate-screen-button"><i class="material-icons">screen_rotation</i> <span style={{position: 'relative', top:'-9px', left: '6px', fontSize: '15pt', fontWeight: 'bold'}}>Rotate</span></button>
       </div>
     </div>
   )
