@@ -1,5 +1,5 @@
 html, body{
-  background-color: #111;
+  background-color: #090B10;
   height: 100%;
   width: 100%;
   margin: 0px;
@@ -21,13 +21,14 @@ body{
 }
 
 .presentation-container{
-  background-color: #222;
+  background-color: #151e2c;
   height: 350px;
+  box-shadow:3px 10px 16px #111f; 
 }
 .presentation-container > .slides-display-container{
   position: relative;
   display: inline-block;
-  background-color: #00f;
+  background-color:#00f;
   height: 90%;
   width: 600px;
   top: 10px;
@@ -42,23 +43,23 @@ body{
   position: relative;
   height: 100px;
   transform: rotateX(60deg) translateX(-50%);
-  width: calc(100% - 50px);
+  width: calc(100% - 56px);
   top: 25px;
   left: 50%;
-  background-color: #881f04;
+  background: linear-gradient(to bottom right,#3f5369 10%, #26384b 100%);
 }
 
 .stage-front{
   height: 100px;
   width: 100%;
-  background-color: #660000;
+  background-color: #212e3d;
 }
 .mike-holder{
   position: absolute;
   height: 150px;
   width: 100px;
-  background: linear-gradient(#f6eb51, #f0db4f);
-  color: #222;        
+  background: linear-gradient(#0e50df, #082d7e);
+  color: #fff;        
   top: -50px;
   left: 30px;
   font-weight: bold;
@@ -209,7 +210,7 @@ body{
   position: fixed;
   z-index: 5;
   top: unset;
-  bottom: 110px;
+  bottom: 130px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #0009;
@@ -357,15 +358,38 @@ body{
   margin:10px 0px;
 }
 .become-sponsor-button{
-  color: #777; text-decoration: none
+  color: #777; text-decoration: none;
+  font-size: 10pt;
+}
+.sponsor-container a{
+  text-decoration: none;
+  color: #999;
+}
+.sponsor-col {
+  display: inline-block;
+  padding: 0px 10px;
+}
+.sponsor-col img{
+  width: 45px;
+}
+.sponsor-col.eotm img{
+  width: 40px;
+}
+.sponsor-col span{
+  font-size: 9pt;
+}
+.sponsor-col span{
+  display: block;
 }
 .become-sponsor-button .material-icons{
-  position:relative;top: 3px;font-size: 13pt;
+  position:relative;top: 3px;font-size: 10pt;
 }
 .default-nosignal-text{
   color:#fff;margin:15px;position: absolute; bottom: 0;display:inline-block
 }
-
+.become-sponsor-container{
+  padding: 0px 0px 10px 0px;
+}
 .float-right{
   float: right !important;
 }
@@ -382,6 +406,21 @@ body{
     width: max-content;
     max-width: 400px;
     padding: 10px 10px;
+  }
+  .sponsor-col img{
+    width: 35px;
+  }
+  .sponsor-col.eotm img{
+    width: 30px;
+  }
+  .sponsor-col span{
+    font-size: 8pt;
+  }
+  .sponsor-title{
+    margin: 1px;
+  }
+  .become-sponsor-container{
+    padding: 0px 0px 3px 0px;
   }
   .presentation-container > .slides-display-container{
     width: 400px;

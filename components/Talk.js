@@ -1,15 +1,28 @@
 import '../styles/talk.css';
+import Link from 'next/link';
 
 const Talk = () => {
   return (
     <div className="presentation-container">
       <div className="sponsor-holder">
         <div className="sponsor-title"><small>🌠</small> VisConf <small>🌠</small></div>
+        <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button" target="_blank" rel="noopner">Become a Sponsor&nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
         <div className="sponsor-container">
-          <a className="become-sponsor-button" target="_blank" rel="noopner" href="http://paypal.me/saurabhdaware99">Become a Sponsor&nbsp;<span className="material-icons">favorite_border</span></a>
+          <div className="sponsor-col">
+            <a href="https://pocketbook.cc" target="_blank" rel="noopener norefferer">
+              <img src="https://pocketbook.cc/logo-192.png"/>
+              <span>PocketBook.cc</span>
+            </a>
+          </div>
+          <div className="sponsor-col eotm">
+            <a href="https://eotm.ml" target="_blank" rel="noopener norefferer">
+              <img src="https://res.cloudinary.com/saurabhdaware/image/upload/c_scale,h_50/v1541420665/brands/logo.png"/>
+              <span>Edge of The Matrix</span>
+            </a>
+          </div>
         </div>
       </div>
-      <div className="slides-display-container"><span className="default-nosignal-text"><b>NO SIGNAL</b> <br/>Attempting to Connect...</span></div>
+      <div className="slides-display-container"><span className="default-nosignal-text"><small>Source: HDMI <br/>NO SIGNAL<br/>Attempting to Connect...</small> </span></div>
       
       {/* Everything around stage */}
       <div className="stage-container">
@@ -33,7 +46,7 @@ const Talk = () => {
       </div>
 
 
-      <div className="current-text">Hi there! My name is Saurabh and I am here to talk about something super cool</div>
+      <div className="current-text">Hi! </div>
       
       {/* Controls */}
       <div className="index-overlay">
