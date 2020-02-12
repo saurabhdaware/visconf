@@ -62,9 +62,9 @@ const Talk = () => {
       </div>
 
       {/* Fixed Positioned Content */}
-      <div class="orientation-error">
+      <div className="orientation-error">
         VisConf is best viewed in landscape! <br/> Please click the button below or rotate your screen to view the talk 🌻 <br/>
-        <br/><button id="rotate-screen-button"><i class="material-icons">screen_rotation</i> <span style={{position: 'relative', top:'-9px', left: '6px', fontSize: '15pt', fontWeight: 'bold'}}>Rotate</span></button>
+        <br/><button id="rotate-screen-button"><i className="material-icons">screen_rotation</i> <span style={{position: 'relative', top:'-9px', left: '6px', fontSize: '15pt', fontWeight: 'bold'}}>Rotate</span></button>
       </div>
     </div>
   )
