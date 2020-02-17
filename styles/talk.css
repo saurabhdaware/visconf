@@ -46,20 +46,23 @@ body{
   width: calc(100% - 56px);
   top: 25px;
   left: 50%;
-  background: linear-gradient(to bottom right,#3f5369 10%, #26384b 100%);
+  /* background: linear-gradient(to bottom right,#3f5369 10%, #26384b 100%); */
+  background: linear-gradient(to right,#aa200e, #581b1b);
 }
 
 .stage-front{
   height: 100px;
   width: 100%;
-  background-color: #212e3d;
+  /* background-color: #212e3d; */
+  background-color: #581b1b;
 }
 .mike-holder{
   position: absolute;
   height: 150px;
   width: 100px;
-  background: linear-gradient(#0e50df, #082d7e);
-  color: #fff;        
+  /* background: linear-gradient(#0e50df, #082d7e); */
+  background: linear-gradient(#fcee33, #c2b145);
+  color: #222;
   top: -50px;
   left: 30px;
   font-weight: bold;
