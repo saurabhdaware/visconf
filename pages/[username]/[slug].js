@@ -20,10 +20,10 @@ Main.getInitialProps = async ctx  => {
     },
     fetchedData: defaultUser
   }
-
+  
   let data;
   try{
-    const response = await fetch(`http://localhost:34567/routes/get-talk?username=${ctx.query.username}&slug=${ctx.query.slug}`);
+    const response = await fetch(`${process.env.endpoint}/get-talk?username=${ctx.query.username}&slug=${ctx.query.slug}`);
     if(!response) {
       return errResponse;
     }

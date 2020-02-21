@@ -1,0 +1,87 @@
+.character-container.hide{
+  top: -50px !important;
+  transition: top .5s ease;
+}
+.character-container{
+  position: fixed;
+  top: -113px;
+  left: 50px;
+  transition: top .5s ease;
+}
+
+
+.character-container > span{
+  display:inline-block;
+  position:absolute;
+  box-sizing: border-box;
+}
+
+.character-container > span:not(.mybody){
+  box-shadow:         3px 10px 16px #1119; 
+  background-color:#ffe0bd;
+}
+.character-container > span.myhead{
+  height:35px;
+  width:27px;
+  border-radius:100%;
+  border:15px solid #111;
+  border-right:none;
+  border-left:none;
+  border-bottom: none;
+  background-color:#ffe0bd;
+  box-sizing: border-box;
+}
+
+.character-container > span.myhair{
+  position: absolute;
+  background-color: #111;
+  width: 35px;
+  left: -4px;
+  top: 0;
+  border-radius: 20px 20px 0px 0px;
+  z-index: -1;
+  display: none;
+  height: 50px;
+}
+
+.character-container > span.mybody{
+  top:37px;
+  left:-1px;
+  height:35px;
+  width:29px;
+  background-color: #09f;
+  z-index:1;
+  border-radius:5px;
+}
+
+.character-container > span.hands{
+  height:38px;
+  width:7px;
+  border-radius:100%;
+  border-top:20px solid #035891;
+  left:-5px;
+  top:38px;
+  transform-origin: top center;
+  transform: rotate(10deg);
+}
+
+.character-container > span.mylhand{
+  transform:rotate(-10deg);
+  left:25px;
+}
+
+.character-container > span.legs{
+  height:30px;
+  width:10px;
+  left:3px;
+  top:65px;
+  transform-origin: top center;
+  transform: rotate(10deg);
+  border:3px solid #aaa;
+  border-radius:0px 0px 5px 5px;
+}
+
+.character-container > span.myrleg{
+  transform:rotate(-10deg);
+  left:15px;
+}

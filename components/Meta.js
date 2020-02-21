@@ -2,9 +2,9 @@ import Head from 'next/head';
 
 const Meta = ({metaInfo}) => {
   const description = `Checkout ${metaInfo.title} | VisConf. VisConf lets you generate an animated version of talk from transcript and slides.`
-  const url = metaInfo.url;
-  const ogImage = metaInfo.ogImage;
-  const title = metaInfo.title;
+  const url = metaInfo.url || 'https://visconf.in';
+  const ogImage = metaInfo.ogImage || '';
+  const title = metaInfo.title || 'VisConf';
 
   return (
     <Head>

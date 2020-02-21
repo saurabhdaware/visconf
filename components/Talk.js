@@ -3,9 +3,31 @@ import Link from 'next/link';
 import slides from '../scripts/slides';
 import { useEffect, useState } from 'react';
 
+import Character from './Character';
+
+function setCharacterStyles(userData) {
+  document.querySelectorAll(".character-container > span")
+      .forEach(el => el.style.backgroundColor = userData.character.skinColor || '#ffe0bd');
+
+  document.querySelector('.character-container > span.myhead').style.backgroundColor = userData.character.skinColor || "#ffe0bd";
+  document.querySelector('.character-container > span.myhead').style.borderTop = `15px solid ${userData.character.hairColor}` || "15px solid #111";
+  document.querySelector('.character-container > span.mybody').style.backgroundColor = userData.character.tshirtColor || '#09f';
+  document.querySelectorAll('.character-container > span.hands')
+      .forEach(el => el.style.borderTop = `20px solid ${userData.character.tshirtColor}` || '20px solid #035891');
+
+  if(userData.character.hairStyle && userData.character.hairStyle === 'long') {
+      document.querySelector('.character-container > span.myhair').style.display = 'inline';
+      document.querySelector('.character-container > span.myhair').style.backgroundColor = userData.character.hairColor || '#111';
+  }
+}
+
 function init(userData) {
   if(!userData) return;
   slides.setSlides(userData.slidePdfLink);
+  document.querySelector('.mike-holder').innerHTML = userData.eventName;
+  document.querySelector('.character-container').classList.remove('hide');
+  setCharacterStyles(userData);
+
 }
 
 const Talk = ({fetchedData}) => {
@@ -38,15 +60,7 @@ const Talk = ({fetchedData}) => {
 
       {/* Everything around stage */}
       <div className="stage-container">
-        <div className="character-container hide">
-            <span className="myhead"></span>
-            <span className="myhair"></span>
-            <span className="mybody"></span>
-            <span className="hands mylhand"></span>
-            <span className="hands myrhand"></span>
-            <span className="legs mylleg"></span>
-            <span className="legs myrleg"></span>
-        </div>
+        <Character />
         <div className="stage-platform"></div>
         <div className="stage-front"></div>
         <div className="laptop">
