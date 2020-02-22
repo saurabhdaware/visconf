@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import Character from './Character';
 import Sponsors from './Sponsors';
 
+function startReading() {
+  responsiveVoice.speak("Letss doo this", "UK English Male");
+}
+
 function setCharacterStyles(userData) {
   document.querySelectorAll(".character-container > span")
       .forEach(el => el.style.backgroundColor = userData.character.skinColor || '#ffe0bd');
@@ -59,7 +63,7 @@ const Talk = ({fetchedData}) => {
       <div className="index-overlay">
         <div className="presentation-controls">
           <button title="skip previous" className="control skip-previous"><i className="material-icons">skip_previous</i></button>
-          <button className="control start" title="start presentation"><i className="material-icons">play_arrow</i></button>
+          <button onClick={e => startReading()} className="control start" title="start presentation"><i className="material-icons">play_arrow</i></button>
           <button className="control pause" title="pause presentation"><i className="material-icons">pause</i></button>
           <button title="skip next" className="control skip-next"><i className="material-icons">skip_next</i></button>
           <span className="screen-size float-right" >
