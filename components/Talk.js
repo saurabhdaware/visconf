@@ -4,6 +4,7 @@ import slides from '../scripts/slides';
 import { useEffect, useState } from 'react';
 
 import Character from './Character';
+import Sponsors from './Sponsors';
 
 function setCharacterStyles(userData) {
   document.querySelectorAll(".character-container > span")
@@ -27,7 +28,6 @@ function init(userData) {
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
   setCharacterStyles(userData);
-
 }
 
 const Talk = ({fetchedData}) => {
@@ -38,20 +38,7 @@ const Talk = ({fetchedData}) => {
       <div className="sponsor-holder">
         <div className="sponsor-title"><small>🌠</small> VisConf <small>🌠</small></div>
         <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button" target="_blank" rel="noopner">Become a Partner&nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
-        <div className="sponsor-container">
-          <div className="sponsor-col">
-            <a href="https://pocketbook.cc" target="_blank" rel="noopener norefferer">
-              <img src="https://pocketbook.cc/logo-192.png"/>
-              <span>PocketBook.cc</span>
-            </a>
-          </div>
-          <div className="sponsor-col eotm">
-            <a href="https://eotm.ml" target="_blank" rel="noopener norefferer">
-              <img src="https://res.cloudinary.com/saurabhdaware/image/upload/c_scale,h_50/v1541420665/brands/logo.png"/>
-              <span>Edge of The Matrix</span>
-            </a>
-          </div>
-        </div>
+        <Sponsors />
       </div>
       <div className="slides-display-container"><span className="default-nosignal-text"><small>Source: HDMI <br/>NO SIGNAL<br/>Attempting to Connect...</small> </span></div>
       <a href="https://github.com/saurabhdaware/visconf" target="_blank" className="github-corner" aria-label="View source on GitHub">
@@ -60,15 +47,9 @@ const Talk = ({fetchedData}) => {
 
       {/* Everything around stage */}
       <div className="stage-container">
-        <Character />
         <div className="stage-platform"></div>
         <div className="stage-front"></div>
-        <div className="laptop">
-          🥑
-        </div>
-        <div className="mic one"></div>
-        <div className="mic two"></div>
-        <div className="mike-holder">VisConf</div>
+        <Character />
       </div>
 
 

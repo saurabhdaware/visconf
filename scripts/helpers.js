@@ -7,19 +7,19 @@ function isMobile() {
   || navigator.userAgent.match(/BlackBerry/i)
   || navigator.userAgent.match(/Windows Phone/i)
   ){
-      return true;
+    return true;
   } else {
-      return false;
+    return false;
   }
 }
 
 function isURL(str) {
   const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
   return !!pattern.test(str);
 }
 
@@ -29,31 +29,31 @@ function openFullscreen() {
   const elem = document.documentElement;
 
   if (elem.requestFullscreen) {
-      elem.requestFullscreen();
+    elem.requestFullscreen();
   } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
+    elem.mozRequestFullScreen();
   } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-      elem.webkitRequestFullscreen();
+    elem.webkitRequestFullscreen();
   } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
+    elem.msRequestFullscreen();
   }
 
   document.querySelector('.fullscreen-exit').style.display = 'inline-block';
   document.querySelector('.fullscreen').style.display = 'none';
   screen.orientation.lock("landscape-primary")
-      .catch(console.warn);
+    .catch(console.warn);
 }
 
 /* Close fullscreen */
 function closeFullscreen() {
   if (document.exitFullscreen) {
-      document.exitFullscreen();
+    document.exitFullscreen();
   } else if (document.mozCancelFullScreen) { /* Firefox */
-      document.mozCancelFullScreen();
+    document.mozCancelFullScreen();
   } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-      document.webkitExitFullscreen();
+    document.webkitExitFullscreen();
   } else if (document.msExitFullscreen) { /* IE/Edge */
-      document.msExitFullscreen();
+    document.msExitFullscreen();
   }
 
   document.querySelector('.fullscreen-exit').style.display = 'none';
@@ -63,16 +63,16 @@ function closeFullscreen() {
 let breakWait = false;
 async function useWait(time) {
   return new Promise((resolve) => {
-      let counter = 0;
-      let interval = setInterval(() => {
-          if(breakWait || counter === 10){
-              breakWait = false;
-              resolve();
-              clearInterval(interval);
-          }
+    let counter = 0;
+    let interval = setInterval(() => {
+      if(breakWait || counter === 10){
+        breakWait = false;
+        resolve();
+        clearInterval(interval);
+      }
 
-          counter++;
-      }, time/10);
+      counter++;
+    }, time/10);
   })
 }
 
@@ -82,19 +82,19 @@ const defaultUser = {
   "username": "me",
   "talkTitle": "test",
   "slug": "test",
-  "transcriptLink": "",
+  "transcriptLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/Transcript.md",
   "slidePdfLink": "https://res.cloudinary.com/saurabhdaware/image/upload/v1580631896/npm/random.pdf",
   "eventName": "VisConf <br/>Test",
   "character": {
-      "hairStyle": "long",
-      "hairColor": "#1f0900",
-      "skinColor": "#724e25",
-      "tshirtColor": "#67abd3"
+    "hairStyle": "long",
+    "hairColor": "#1f0900",
+    "skinColor": "#724e25",
+    "tshirtColor": "#67abd3"
   },
   "voice": {
-      "index": "2",
-      "lang": "en-GB",
-      "name": "Google UK English Female"
+    "index": "2",
+    "lang": "en-GB",
+    "name": "Google UK English Female"
   }
 }
 
