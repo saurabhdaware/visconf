@@ -35,8 +35,6 @@ const Meta = ({metaInfo}) => {
         
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" />
-        <script src="https://code.responsivevoice.org/responsivevoice.js?key=4C23o1Zz"></script>
-
       <title>{title}</title>
     </Head>
   )

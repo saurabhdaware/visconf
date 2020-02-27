@@ -158,9 +158,7 @@ body{
 .control > .material-icons{
   font-size: 30pt;
 }
-.control.pause{
-  display: none;
-}
+
 .presentation-controls{
   position: absolute;
   bottom: 0px;
@@ -187,19 +185,6 @@ body{
   
 }
 
-.volume > .control.volumeon{
-  display: inline-block;
-}
-.volume > .control.mute{
-  display: none;
-}
-
-.volume.playing > .control.volumeon{
-  display: none;
-}
-.volume.playing > .control.mute{
-  display: inline-block;
-}
 
 .github-logo{
   width: 40px;

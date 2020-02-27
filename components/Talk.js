@@ -1,47 +1,49 @@
 import '../styles/talk.css';
 import Link from 'next/link';
-import slides from '../scripts/slides';
 import { useEffect, useState } from 'react';
 
 import Character from './Character';
 import Sponsors from './Sponsors';
 
-function startReading() {
-  responsiveVoice.speak("Letss doo this", "UK English Male");
-}
+import slides from '../scripts/slides';
 
-function setCharacterStyles(userData) {
-  document.querySelectorAll(".character-container > span")
-      .forEach(el => el.style.backgroundColor = userData.character.skinColor || '#ffe0bd');
+import { 
+  getTranscipt, 
+  openFullscreen, 
+  closeFullscreen ,
+  toggleCaptions,
+  setCharacterStyles
+} from '../scripts/helpers';
 
-  document.querySelector('.character-container > span.myhead').style.backgroundColor = userData.character.skinColor || "#ffe0bd";
-  document.querySelector('.character-container > span.myhead').style.borderTop = `15px solid ${userData.character.hairColor}` || "15px solid #111";
-  document.querySelector('.character-container > span.mybody').style.backgroundColor = userData.character.tshirtColor || '#09f';
-  document.querySelectorAll('.character-container > span.hands')
-      .forEach(el => el.style.borderTop = `20px solid ${userData.character.tshirtColor}` || '20px solid #035891');
+import TalkMain from '../scripts/TalkMain';
 
-  if(userData.character.hairStyle && userData.character.hairStyle === 'long') {
-      document.querySelector('.character-container > span.myhair').style.display = 'inline';
-      document.querySelector('.character-container > span.myhair').style.backgroundColor = userData.character.hairColor || '#111';
-  }
-}
+let talk;
 
-function init(userData) {
+async function init(userData, setIsReadyToTalk) {
   if(!userData) return;
   slides.setSlides(userData.slidePdfLink);
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
   setCharacterStyles(userData);
+  
+  const transcript = await getTranscipt(userData.transcriptLink)
+  talk = new TalkMain(userData.voiceName || "UK English Male", transcript);
+  setIsReadyToTalk(true);
 }
 
+
 const Talk = ({fetchedData}) => {
-  useEffect(() => init(fetchedData), [fetchedData]);
+  const [isReadyToTalk, setIsReadyToTalk] = useState(false);
+  useEffect(() => init(fetchedData, setIsReadyToTalk), [fetchedData]);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isVolumeOn, setIsVolumeOn] = useState(true);
+  const [isTalking, setIsTalking] = useState(false);
 
   return (
     <div className="presentation-container">
       <div className="sponsor-holder">
         <div className="sponsor-title"><small>🌠</small> VisConf <small>🌠</small></div>
-        <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button" target="_blank" rel="noopner">Become a Partner&nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
+        <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button" target="_blank" rel="noopner">Become a Supporter &nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
         <Sponsors />
       </div>
       <div className="slides-display-container"><span className="default-nosignal-text"><small>Source: HDMI <br/>NO SIGNAL<br/>Attempting to Connect...</small> </span></div>
@@ -63,19 +65,45 @@ const Talk = ({fetchedData}) => {
       <div className="index-overlay">
         <div className="presentation-controls">
           <button title="skip previous" className="control skip-previous"><i className="material-icons">skip_previous</i></button>
-          <button onClick={e => startReading()} className="control start" title="start presentation"><i className="material-icons">play_arrow</i></button>
-          <button className="control pause" title="pause presentation"><i className="material-icons">pause</i></button>
-          <button title="skip next" className="control skip-next"><i className="material-icons">skip_next</i></button>
-          <span className="screen-size float-right" >
-            <button title="turn to fullscreen" className="control fullscreen"><i className="material-icons">fullscreen</i></button>
-            <button title="fullscreen exit" className="control fullscreen-exit"><i className="material-icons">fullscreen_exit</i></button>
-          </span>
 
-          <button title="toggle captions" className="control captions float-right"><i className="material-icons">closed_caption</i></button>
-          <span className="volume playing float-right" >
-            <button title="mute volume" className="control mute"><i className="material-icons">volume_up</i></button>
-            <button title="turn on volume" className="control volumeon"><i className="material-icons">volume_off</i></button>
-          </span>
+          {
+            // isTalking
+            isReadyToTalk
+            ? (
+              isTalking
+              ? <button onClick={e => talk.pauseHandler(setIsTalking)} className="control pause" title="pause presentation"><i className="material-icons">pause</i></button>
+              : <button onClick={e => talk.startHandler(setIsTalking)} className="control start" title="start presentation"><i className="material-icons">play_arrow</i></button>
+            )
+            : null
+          }
+
+          <button title="skip next" className="control skip-next"><i className="material-icons">skip_next</i></button>
+
+          {
+            // isFullScreen
+            isFullScreen
+            ? <button 
+                onClick={e => {closeFullscreen(); setIsFullScreen(false)}} 
+                title="fullscreen exit" 
+                className="control fullscreen-exit float-right"
+              ><i className="material-icons">fullscreen_exit</i></button>
+
+            : <button 
+                onClick={e => {openFullscreen(); setIsFullScreen(true)}} 
+                title="turn to fullscreen"
+                className="control fullscreen float-right"
+              ><i className="material-icons">fullscreen</i></button>
+          }
+
+          <button onClick={toggleCaptions} title="toggle captions" className="control captions float-right"><i className="material-icons">closed_caption</i></button>
+
+          {
+            // isVolumeOn
+            isVolumeOn
+            ? <button onClick={e => {setIsVolumeOn(false)}} title="turn on volume" className="control volumeon float-right"><i className="material-icons">volume_off</i></button>
+            : <button onClick={e => {setIsVolumeOn(true)}} title="mute volume" className="control mute float-right"><i className="material-icons">volume_up</i></button>
+          }
+
           <a title="Create talk button" rel="noopener noreferer" href="editor" target="_blank" className="create-talk-button control float-right"> <b>+</b> &nbsp;Create your talk</a>
           <div className="presentation-video-bar">
             <div className="progress-meter">

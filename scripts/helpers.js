@@ -38,8 +38,6 @@ function openFullscreen() {
     elem.msRequestFullscreen();
   }
 
-  document.querySelector('.fullscreen-exit').style.display = 'inline-block';
-  document.querySelector('.fullscreen').style.display = 'none';
   screen.orientation.lock("landscape-primary")
     .catch(console.warn);
 }
@@ -55,35 +53,64 @@ function closeFullscreen() {
   } else if (document.msExitFullscreen) { /* IE/Edge */
     document.msExitFullscreen();
   }
-
-  document.querySelector('.fullscreen-exit').style.display = 'none';
-  document.querySelector('.fullscreen').style.display = 'inline-block';
 }
 
-let breakWait = false;
-async function useWait(time) {
-  return new Promise((resolve) => {
-    let counter = 0;
-    let interval = setInterval(() => {
-      if(breakWait || counter === 10){
-        breakWait = false;
-        resolve();
-        clearInterval(interval);
-      }
-
-      counter++;
-    }, time/10);
+async function wait(time) {
+  return new Promise(resolve => {
+    setTimeout(resolve, time);
   })
 }
 
+async function getTranscipt(transcriptData, isText = false) {
+  let transcript;
+  if(!isText){
+    let data = await (await fetch(transcriptData)).text();
+    transcript = data;
+  }else{
+    transcript = transcriptData;
+  }
+
+  return transcript;
+}
+
+
+function toggleCaptions() {
+  const captionHolder = document.querySelector('.current-text');
+  const captionControl = document.querySelector('.control.captions');
+  if(captionHolder.style.display === 'none') {
+    // show captions
+    captionHolder.style.display = 'block';
+    captionControl.style.borderBottom = '2px solid #ff0';
+  }else {
+    // hide captions
+    captionHolder.style.display = 'none';
+    captionControl.style.borderBottom = 'none';
+  }
+}
+
+function setCharacterStyles(userData) {
+  document.querySelectorAll(".character-container > span")
+      .forEach(el => el.style.backgroundColor = userData.character.skinColor || '#ffe0bd');
+
+  document.querySelector('.character-container > span.myhead').style.backgroundColor = userData.character.skinColor || "#ffe0bd";
+  document.querySelector('.character-container > span.myhead').style.borderTop = `15px solid ${userData.character.hairColor}` || "15px solid #111";
+  document.querySelector('.character-container > span.mybody').style.backgroundColor = userData.character.tshirtColor || '#09f';
+  document.querySelectorAll('.character-container > span.hands')
+      .forEach(el => el.style.borderTop = `20px solid ${userData.character.tshirtColor}` || '20px solid #035891');
+
+  if(userData.character.hairStyle && userData.character.hairStyle === 'long') {
+      document.querySelector('.character-container > span.myhair').style.display = 'inline';
+      document.querySelector('.character-container > span.myhair').style.backgroundColor = userData.character.hairColor || '#111';
+  }
+}
 
 
 const defaultUser = {
   "username": "me",
   "talkTitle": "test",
   "slug": "test",
-  "transcriptLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/Transcript.md",
-  "slidePdfLink": "https://res.cloudinary.com/saurabhdaware/image/upload/v1580631896/npm/random.pdf",
+  "transcriptLink": "../example/Transcript.md",
+  "slidePdfLink": "../example/slides.pdf",
   "eventName": "VisConf <br/>Test",
   "character": {
     "hairStyle": "long",
@@ -91,11 +118,17 @@ const defaultUser = {
     "skinColor": "#724e25",
     "tshirtColor": "#67abd3"
   },
-  "voice": {
-    "index": "2",
-    "lang": "en-GB",
-    "name": "Google UK English Female"
-  }
+  "voiceName": "UK English Female"
 }
 
-export { useWait, isMobile, isURL, openFullscreen, closeFullscreen, defaultUser }
+export { 
+  wait,
+  isMobile, 
+  isURL, 
+  openFullscreen, 
+  closeFullscreen, 
+  getTranscipt,
+  toggleCaptions,
+  setCharacterStyles,
+  defaultUser 
+}
