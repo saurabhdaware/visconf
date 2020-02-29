@@ -9,7 +9,7 @@ const devConfigs = {
 
 const prodConfigs = {
   env: {
-    endpoint: 'https://visconf.netlify.com/functions/routes'
+    endpoint: 'https://visconf.netlify.com/.netlify/functions/routes'
   }
 }
 
