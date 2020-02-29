@@ -33,6 +33,7 @@ Main.getInitialProps = async ctx  => {
       return errResponse;
     }
   }catch(err) {
+    console.log(err.message);
     return errResponse;
   }
 

@@ -30,12 +30,22 @@ class TalkMain {
   }
 
   async read() {
-    this.currentText.innerHTML = this.flatTranscript[this.currentIndex];
+    let text = this.flatTranscript[this.currentIndex];
+    if(text === undefined) return;
+    this.currentText.innerHTML = text.replace(/\$wait(2|5|10)s/g, '');
     slides.setNewSlide(this.currentIndex);
 
-    const timeElapsed = await this.bol.speak(this.flatTranscript[this.currentIndex]);
-    if(this.flatTranscript[this.currentIndex].includes('$wait2s')) {
+    const timeElapsed = await this.bol.speak(text.replace(/\$wait(2|5|10)s/g, ''));
+    if(text.includes('$wait2s')) {
       await wait(2000);
+    }
+
+    if(text.includes('$wait5s')) {
+      await wait(5000);
+    }
+
+    if(text.includes('$wait10s')) {
+      await wait(10000);
     }
 
     if(!this.isPaused) {
