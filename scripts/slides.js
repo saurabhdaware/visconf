@@ -3,7 +3,7 @@ import { isMobile } from '../scripts/helpers';
 
 class Slides {
   constructor() {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@2.2.228/build/pdf.worker.min.js"
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@2.2.228/build/pdf.worker.min.js";
   }
 
   async loadPDF(url) {
@@ -77,16 +77,16 @@ class Slides {
     newSlideEl.classList.add('show');
   }
 
-  setNewSlide(flatIndex, mappedTranscript) {
+  setNewSlide(flatIndex) {
     // On giving flatIndex (index of flat array of transcript) this function calculates the index in the matrix of mapped transcript and goes to that slide.
     let prev = 0;
-    for(let index in mappedTranscript) {
-      if(flatIndex < (prev + mappedTranscript[index].length)) {
+    for(let index in this.mappedTranscript) {
+      if(flatIndex < (prev + this.mappedTranscript[index].length)) {
         this.goToSlideNumber(index);
         return [index, flatIndex - prev];
       }
   
-      prev += mappedTranscript[index].length;
+      prev += this.mappedTranscript[index].length;
     }
   }
   

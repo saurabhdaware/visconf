@@ -64,7 +64,7 @@ const Talk = ({fetchedData}) => {
       {/* Controls */}
       <div className="index-overlay">
         <div className="presentation-controls">
-          <button title="skip previous" className="control skip-previous"><i className="material-icons">skip_previous</i></button>
+          <button onClick={e => talk.prev()} title="skip previous" className="control skip-previous"><i className="material-icons">skip_previous</i></button>
 
           {
             // isTalking
@@ -77,19 +77,19 @@ const Talk = ({fetchedData}) => {
             : null
           }
 
-          <button title="skip next" className="control skip-next"><i className="material-icons">skip_next</i></button>
+          <button onClick={e => talk.next()} title="skip next" className="control skip-next"><i className="material-icons">skip_next</i></button>
 
           {
             // isFullScreen
             isFullScreen
             ? <button 
-                onClick={e => {closeFullscreen(); setIsFullScreen(false)}} 
+                onClick={e => closeFullscreen(setIsFullScreen)} 
                 title="fullscreen exit" 
                 className="control fullscreen-exit float-right"
               ><i className="material-icons">fullscreen_exit</i></button>
 
             : <button 
-                onClick={e => {openFullscreen(); setIsFullScreen(true)}} 
+                onClick={e => openFullscreen(setIsFullScreen)} 
                 title="turn to fullscreen"
                 className="control fullscreen float-right"
               ><i className="material-icons">fullscreen</i></button>
@@ -100,8 +100,8 @@ const Talk = ({fetchedData}) => {
           {
             // isVolumeOn
             isVolumeOn
-            ? <button onClick={e => {setIsVolumeOn(false)}} title="turn on volume" className="control volumeon float-right"><i className="material-icons">volume_off</i></button>
-            : <button onClick={e => {setIsVolumeOn(true)}} title="mute volume" className="control mute float-right"><i className="material-icons">volume_up</i></button>
+            ? <button onClick={e => talk.turnVolumeOff(setIsVolumeOn)} title="turn on volume" className="control volumeon float-right"><i className="material-icons">volume_off</i></button>
+            : <button onClick={e => talk.turnVolumeOn(setIsVolumeOn)} title="mute volume" className="control mute float-right"><i className="material-icons">volume_up</i></button>
           }
 
           <a title="Create talk button" rel="noopener noreferer" href="editor" target="_blank" className="create-talk-button control float-right"> <b>+</b> &nbsp;Create your talk</a>
