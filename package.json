@@ -5,15 +5,18 @@
   "main": "index.js",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "bcrypt": "^4.0.0",
     "bol": "^0.1.1",
+    "faunadb": "^2.11.1",
     "isomorphic-unfetch": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "^9.2.1",
     "pdfjs-dist": "^2.2.228",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "faunadb": "^2.11.1"
+    "now": "^17.0.4"
   },
   "scripts": {
     "dev": "next",
