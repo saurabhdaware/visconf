@@ -121,7 +121,12 @@ const defaultUser = {
     "skinColor": "#724e25",
     "tshirtColor": "#67abd3"
   },
-  "voiceName": "UK English Female"
+  "voice": {
+    "name": "UK English Female",
+    "rate": .3,
+    "volume": 1,
+    "pitch": 2
+  }
 }
 
 export { 

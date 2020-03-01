@@ -79,7 +79,7 @@ body{
 }
 
 .orientation-error{
-  padding:200px 30px;
+  padding:130px 30px;
   box-sizing:border-box;
   display:none;
   position:fixed;
@@ -87,7 +87,7 @@ body{
   z-index:100;
   top:0;left:0;
   height:100%;width:100%;
-  background-color: #222e;
+  background-color: #222;
   color: #ddd;
   font-weight: bold;
 }
@@ -98,8 +98,40 @@ body{
 }
 
 @media (orientation: portrait){
+  .stage-container{
+    position: fixed;
+    bottom: 60px;
+    left: -100px;
+    z-index: 201;
+    transform: rotate(90deg);
+  }
+  .stage-front, .stage-platform{
+    display: none;
+  }
+  .character-container .myhead{
+    transform: rotate(-40deg) translateX(-2px);
+    animation: headTilt 2s infinite ease-in;
+  }
+
+  .character-container .myhair{
+    transform: rotate(-40deg) translateX(2px);
+    animation: headTiltHair 1.9s infinite ease-in;
+  }
   .orientation-error{
-      display: block;
+    display: block;
+  }
+
+  @keyframes headTilt {
+    0% {transform: rotate(-40deg) translateX(-2px);}
+    30% {transform: rotate(0deg) translateX(0px);}
+    70% {transform: rotate(-40deg) translateX(-2px);}
+    100% {transform: rotate(-40deg) translateX(-2px);}
+  }
+
+  @keyframes headTiltHair {
+    0% {transform: rotate(-40deg) translateX(2px);}
+    30% {transform: rotate(0deg) translateX(0px);}
+    100% {transform: rotate(-40deg) translateX(2px);}
   }
 }
 
@@ -154,6 +186,7 @@ body{
   border:none;
   /* padding:10px; */
   cursor: pointer;
+  outline: none;
 }
 .control > .material-icons{
   font-size: 30pt;
@@ -172,6 +205,7 @@ body{
   height:3px; 
   width:100%;
   border-radius: 10px;
+  position: relative;
 }
 .presentation-video-bar{
   padding: 15px 0px 15px 0px;

@@ -17,27 +17,56 @@ import {
 
 import TalkMain from '../scripts/TalkMain';
 
+
+let lastVolume = 1;
+function useVolume(initial) {
+  const [isVolumeOn, setIsVolumeOn] = useState(initial);
+
+  const turnVolume = (to) => {
+    if(to === 'on') {
+      talk.bol.volume = lastVolume;
+      setIsVolumeOn(true);
+    }else {
+      lastVolume = talk.bol.volume === undefined ? 1 : talk.bol.volume;
+      talk.bol.volume = 0;
+      setIsVolumeOn(false);
+      speechSynthesis.cancel();
+    }
+  }
+
+  return {isVolumeOn, turnVolume};
+}
+
+
+
 let talk;
 
 async function init(userData, setIsReadyToTalk) {
-  if(!userData) return;
   slides.setSlides(userData.slidePdfLink);
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
   setCharacterStyles(userData);
   
   const transcript = await getTranscipt(userData.transcriptLink)
-  talk = new TalkMain(userData.voiceName || "UK English Male", transcript);
+  talk = new TalkMain(
+    userData.voice?.name ?? "UK English Male", 
+    transcript
+  );
+
   setIsReadyToTalk(true);
 }
 
 
 const Talk = ({fetchedData}) => {
   const [isReadyToTalk, setIsReadyToTalk] = useState(false);
-  useEffect(() => init(fetchedData, setIsReadyToTalk), [fetchedData]);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isVolumeOn, setIsVolumeOn] = useState(true);
+  useEffect(() => {
+    init(fetchedData, setIsReadyToTalk)
+  }, [fetchedData]);
+
   const [isTalking, setIsTalking] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  
+  const {isVolumeOn, turnVolume} = useVolume(true);
 
   return (
     <div className="presentation-container">
@@ -67,7 +96,6 @@ const Talk = ({fetchedData}) => {
           <button onClick={e => talk.prev()} title="skip previous" className="control skip-previous"><i className="material-icons">skip_previous</i></button>
 
           {
-            // isTalking
             isReadyToTalk
             ? (
               isTalking
@@ -100,12 +128,12 @@ const Talk = ({fetchedData}) => {
           {
             // isVolumeOn
             isVolumeOn
-            ? <button onClick={e => talk.turnVolumeOff(setIsVolumeOn)} title="turn on volume" className="control volumeon float-right"><i className="material-icons">volume_off</i></button>
-            : <button onClick={e => talk.turnVolumeOn(setIsVolumeOn)} title="mute volume" className="control mute float-right"><i className="material-icons">volume_up</i></button>
+            ? <button onClick={e => turnVolume('off')} title="turn on volume" className="control volumeon float-right"><i className="material-icons">volume_off</i></button>
+            : <button onClick={e => turnVolume('on')} title="mute volume" className="control mute float-right"><i className="material-icons">volume_up</i></button>
           }
 
           <a title="Create talk button" rel="noopener noreferer" href="editor" target="_blank" className="create-talk-button control float-right"> <b>+</b> &nbsp;Create your talk</a>
-          <div className="presentation-video-bar">
+          <div className="presentation-video-bar" onClick={e => talk.progressBarClickHandler(e.nativeEvent)}>
             <div className="progress-meter">
               <div className="progress"></div>
             </div>
@@ -116,7 +144,7 @@ const Talk = ({fetchedData}) => {
       {/* Fixed Positioned Content */}
       <div className="orientation-error">
         VisConf is best viewed in landscape! <br/> Please click the button below or rotate your screen to view the talk 🌻 <br/>
-        <br/><button id="rotate-screen-button"><i className="material-icons">screen_rotation</i> <span style={{position: 'relative', top:'-9px', left: '6px', fontSize: '15pt', fontWeight: 'bold'}}>Rotate</span></button>
+        <br/><button id="rotate-screen-button" onClick={e => openFullscreen(setIsFullScreen)}><i className="material-icons">screen_rotation</i> <span style={{position: 'relative', top:'-9px', left: '6px', fontSize: '15pt', fontWeight: 'bold'}}>Rotate</span></button>
       </div>
     </div>
   )

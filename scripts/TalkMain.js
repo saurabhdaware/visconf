@@ -14,43 +14,52 @@ class TalkMain {
     this.flatTranscript = this.mappedTranscript.flatMap(text => text);
 
     this.currentText = document.querySelector('.current-text');
+    this.progressBar = document.querySelector('.presentation-video-bar .progress');
     this.currentText.innerHTML = this.flatTranscript[0];
 
     this.currentIndex = 0;
     this.isPaused = true;
-    
+    this.lastVolume = 1;
+
     this.read = this.read.bind(this);
     this.startHandler = this.startHandler.bind(this);
     this.pauseHandler = this.pauseHandler.bind(this);
     this.moveTo = this.moveTo.bind(this);
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
-    this.turnVolumeOn = this.turnVolumeOn.bind(this);
-    this.turnVolumeOff = this.turnVolumeOff.bind(this);
   }
 
   async read() {
     let text = this.flatTranscript[this.currentIndex];
     if(text === undefined) return;
+    if(this.currentIndex === (this.flatTranscript.length - 1)) {
+      this.pauseHandler();
+      this.currentIndex = 0;
+    }
+    this.progressBar.style.width = this.currentIndex*100/this.flatTranscript.length + '%';
     this.currentText.innerHTML = text.replace(/\$wait(2|5|10)s/g, '');
     slides.setNewSlide(this.currentIndex);
 
     const timeElapsed = await this.bol.speak(text.replace(/\$wait(2|5|10)s/g, ''));
     if(text.includes('$wait2s')) {
+      this.currentText.innerHTML = '...';
       await wait(2000);
     }
 
     if(text.includes('$wait5s')) {
+      this.currentText.innerHTML = '*5s pause*';
       await wait(5000);
+
     }
 
     if(text.includes('$wait10s')) {
+      this.currentText.innerHTML = '*10s pause*';
       await wait(10000);
     }
 
     if(!this.isPaused) {
       this.currentIndex++;
-      this.read();
+      return this.read();
     }
   }
 
@@ -59,10 +68,11 @@ class TalkMain {
     this.isPaused = false;
     this.read();
     setIsTalking(true);
+    this.setIsTalking = setIsTalking
   }
 
-  // called when pause button is pressed
-  pauseHandler(setIsTalking) {
+  // // called when pause button is pressed
+  pauseHandler(setIsTalking = this.setIsTalking) {
     this.isPaused = true;
     speechSynthesis.cancel();
     setIsTalking(false);
@@ -87,16 +97,9 @@ class TalkMain {
     this.moveTo(--this.currentIndex);
   }
 
-  turnVolumeOff(setIsVolumeOn) {
-    setIsVolumeOn(false);
-    this.lastVolume = this.bol.volume;
-    this.bol.volume = 0;
-    speechSynthesis.cancel();
-  }
-
-  turnVolumeOn(setIsVolumeOn) {
-    setIsVolumeOn(true);
-    this.bol.volume = this.lastVolume;
+  progressBarClickHandler(e) {
+    let clickPositionX = Math.floor(e.offsetX*this.flatTranscript.length/e.target.offsetWidth);
+    this.moveTo(clickPositionX);
   }
 
 
