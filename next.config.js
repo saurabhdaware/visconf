@@ -3,7 +3,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
 const devConfigs = {
   env: {
-    endpoint: 'http://localhost:34567/routes'
+    endpoint: 'http://localhost:3000/api'
   }
 }
 
