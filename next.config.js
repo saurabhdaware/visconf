@@ -1,5 +1,23 @@
-const withCSS = require('@zeit/next-css')
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+
+const configs = {
+  webpack: (config, { defaultLoaders }) => {
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        defaultLoaders.babel,
+        {
+          loader: require('styled-jsx/webpack').loader,
+          options: {
+            type: 'scoped'
+          }
+        }
+      ]
+    })
+
+    return config
+  }
+}
 
 const devConfigs = {
   env: {
@@ -18,8 +36,8 @@ console.log("\n🌻 🌻 🌻 🌻 🌻 🌻\n");
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return withCSS(devConfigs)
+    return {...configs, ...devConfigs}
   }
 
-  return withCSS(prodConfigs)
+  return {...configs, ...prodConfigs}
 }

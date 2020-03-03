@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 const Meta = ({metaInfo}) => {
   const description = `Checkout ${metaInfo.title} | VisConf. VisConf lets you generate an animated version of talk from transcript and slides.`
-  const url = metaInfo.url || 'https://visconf.in';
+  const url = metaInfo.url || 'https://visconf.cc';
   const ogImage = metaInfo.ogImage || '';
   const title = metaInfo.title || 'VisConf';
 
@@ -32,9 +32,9 @@ const Meta = ({metaInfo}) => {
         <meta property="og:image:width" content="600" />
         <meta property="og:image:height" content="300" />
 
-        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" />
+
       <title>{title}</title>
     </Head>
   )

@@ -1,5 +1,9 @@
+import css from 'styled-jsx/css';
+
+
+export default css.global/* css */`
 html, body{
-  background-color: #090B10;
+  background-color: #090B10 !important;
   height: 100%;
   width: 100%;
   margin: 0px;
@@ -55,20 +59,6 @@ body{
   width: 100%;
   /* background-color: #212e3d; */
   background-color: #581b1b;
-}
-.mike-holder{
-  position: absolute;
-  height: 150px;
-  width: 100px;
-  /* background: linear-gradient(#0e50df, #082d7e); */
-  background: linear-gradient(#fcee33, #c2b145);
-  color: #222;
-  top: -50px;
-  left: 30px;
-  font-weight: bold;
-  padding: 20px 10px;
-  text-align: center;
-  box-sizing: border-box;
 }
 
 .slide{
@@ -237,28 +227,7 @@ body{
   box-shadow:         3px 10px 16px #1119; 
   border-radius: 2px;
 }
-.mic{
-  width: 3px;
-  height: 30px;
-  background-color: #222;
-  position: absolute;
-  top: -75px;
-  left: 64px;
-  font-size: 9pt;
-  text-align: center;
-  box-sizing: border-box;
-  box-shadow:         3px 10px 5px #111; 
-  border-radius: 2px;
-}
-.mic.one{
-  top: -71px;
-  left: 50px;
-  transform: rotate(20deg);
-}
-.mic.two{
-  left: 77px;
-  transform: rotate(-20deg);
-}
+
 .github-corner svg{
   width: 70px;
   height: 70px;
@@ -379,4 +348,4 @@ body{
       width: 50px;
       height: 50px;
   }
-}
+}`

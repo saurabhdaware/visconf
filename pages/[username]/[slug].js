@@ -3,12 +3,14 @@ import Meta from '../../components/Meta';
 import Talk from '../../components/Talk';
 import fetch from 'isomorphic-unfetch';
 import {defaultUser} from '../../scripts/helpers';
+import styles from '../../styles/talk.css.js';
 
 const Main = ({metaInfo, fetchedData}) => {
   return (
     <Fragment>
       <Meta metaInfo={metaInfo} />
       <Talk fetchedData={fetchedData}/>
+      <style jsx global>{styles}</style>
     </Fragment>
   );
 }

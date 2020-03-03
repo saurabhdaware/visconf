@@ -9,7 +9,7 @@ function talk() {
 export default function Index() {
   return (
     <div>
-      <Link href="/create">
+      <Link href="/[username]/[slug]" as="/me/test">
         <a>Create</a>
       </Link>
       <button onClick={talk}>Talk</button>
