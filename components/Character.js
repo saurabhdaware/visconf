@@ -20,7 +20,7 @@ const Character = () => {
       <div className="mike-holder">VisConf</div>
       <style jsx>{`
       .character-container.hide{
-        top: -50px !important;
+        top: -50px;
         transition: top .5s ease;
       }
 
@@ -144,6 +144,22 @@ const Character = () => {
         left: 77px;
         transform: rotate(-20deg);
       }
+
+      .laptop{
+        width: 50px;
+        height: 30px;
+        background: linear-gradient(#ddd, #999);
+        position: absolute;
+        top: -75px;
+        left: 68px;
+        font-size: 9pt;
+        text-align: center;
+        padding: 5px;
+        box-sizing: border-box;
+        box-shadow:         3px 10px 16px #1119; 
+        border-radius: 2px;
+      }
+      
       
       `}</style>
     </Fragment>

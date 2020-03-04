@@ -27,7 +27,7 @@ const devConfigs = {
 
 const prodConfigs = {
   env: {
-    endpoint: 'https://visconf.netlify.com/.netlify/functions/routes'
+    endpoint: 'https://visconf.now.sh/api'
   }
 }
 

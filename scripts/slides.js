@@ -22,7 +22,8 @@ class Slides {
     if(definedScale){
       scale = definedScale;
     }else{
-      if(isMobile()) {
+      let isSmallPassed = Boolean(location.search.slice(location.search.indexOf("small=") + 6));
+      if(isMobile() || isSmallPassed) {
         scale = 400/page.view[2];
       }else {
         scale = 600/page.view[2];

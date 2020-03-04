@@ -206,26 +206,9 @@ body{
   height: 3px;
   display: inline-block;
   position: absolute;
-  
 }
-
-
 .github-logo{
   width: 40px;
-}
-.laptop{
-  width: 50px;
-  height: 30px;
-  background: linear-gradient(#ddd, #999);
-  position: absolute;
-  top: -75px;
-  left: 68px;
-  font-size: 9pt;
-  text-align: center;
-  padding: 5px;
-  box-sizing: border-box;
-  box-shadow:         3px 10px 16px #1119; 
-  border-radius: 2px;
 }
 
 .github-corner svg{

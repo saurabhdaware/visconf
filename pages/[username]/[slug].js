@@ -44,7 +44,7 @@ Main.getInitialProps = async ctx  => {
     metaInfo: {
       title: `${data.message.talkTitle} @${data.message.eventName} - by ${ctx.query.username} | VisConf`,
       ogImage: `https://res.cloudinary.com/saurabhdaware/image/upload/c_fit,e_colorize:60,l_text:arial_30_bold:${data.message.talkTitle},r_0,w_450,y_-80/g_south_east,c_fit,e_colorize:60,l_text:arial_20:${ctx.query.username},r_0,w_450,y_100,x_80/g_north_west,c_fit,e_colorize:60,l_text:arial_17_bold:${data.message.eventName},r_0,w_100,y_205,x_70/v1581939374/npm/talksog.png`,
-      url: 'https://visconf.now.sh'+ctx.asPath
+      url: 'https://visconf.cc'+ctx.asPath
     },
     fetchedData: data.message
   }

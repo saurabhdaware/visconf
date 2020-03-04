@@ -1,7 +1,16 @@
 import Head from 'next/head';
 
 const Meta = ({metaInfo}) => {
-  const description = `Checkout ${metaInfo.title} | VisConf. VisConf lets you generate an animated version of talk from transcript and slides.`
+  let description;
+  if(!metaInfo) metaInfo = {};
+  if(metaInfo.description) {
+    description = metaInfo.description;
+  }else if(metaInfo.title) {
+    description = `Checkout ${metaInfo.title} on VisConf. VisConf lets you generate an animated version of talk from transcript and slides.`
+  }else {
+    description = `Hey there! Checkout VisConf for some amazing visual talks! Generate animated version of your presentation from transcript and slides.`
+  }
+  
   const url = metaInfo.url || 'https://visconf.cc';
   const ogImage = metaInfo.ogImage || '';
   const title = metaInfo.title || 'VisConf';
