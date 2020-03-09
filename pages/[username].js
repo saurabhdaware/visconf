@@ -24,17 +24,20 @@ import TalkTile from '../components/TalkTile.js';
   }
 </div> */}
 
-const Profile = ({metaInfo, talks}) => {
+const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
+  const authObject = {login, logout, user, isLoggedIn};
+
   useEffect(() => {
     setCharacterStyles(talks[talks.length - 1]);
     setTimeout(() => {
       document.querySelector('.character-container').classList.remove('hide');
     }, 600);
   }, []);
+
   return (
     <Fragment>
     <Meta metaInfo={metaInfo} />
-    <Nav />
+    <Nav {...authObject}/>
     <div className="profile-container">
       <div className="profile-head display-flex">
         <div className="character-relative">
@@ -45,7 +48,7 @@ const Profile = ({metaInfo, talks}) => {
     </div>
     <div className="profile-talks-container">
     {
-      talks?.map(val => <TalkTile talkData={val} />)
+      talks?.map((val, index) => <TalkTile talkData={val} key={index} />)
     }
     </div>
     <style jsx>{styles}</style>
@@ -54,7 +57,7 @@ const Profile = ({metaInfo, talks}) => {
 }
 
 Profile.getInitialProps = async ctx => {
-  // const response = await fetch(`${process.env.endpoint}/get-talks-of-user?username=${ctx.query.username}`);
+  // const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${ctx.query.username}`);
   let resData = [];
   const metaInfo = {
     title: `Talks from ${ctx.query.username}`,

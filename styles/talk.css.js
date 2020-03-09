@@ -3,15 +3,19 @@ import css from 'styled-jsx/css';
 
 export default css.global/* css */`
 html, body{
-  background-color: #090B10 !important;
   height: 100%;
   width: 100%;
   margin: 0px;
   overflow: hidden;
   font-family: 'Oswald', sans-serif;
 }
+#__next, .main-layout, .create-content, .editor-main{
+  height: 100%;
+}
 
-body{
+.talk-page{
+  height: 100%;
+  background-color: #090B10 !important;
   padding: 40px;
   box-sizing: border-box;
 }

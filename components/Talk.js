@@ -5,6 +5,7 @@ import Character from './Character';
 import Sponsors from './Sponsors';
 
 import slides from '../scripts/slides';
+import styles from '../styles/talk.css.js';
 
 import { 
   getTranscipt, 
@@ -40,13 +41,18 @@ function useVolume(initial) {
 
 let talk;
 
-async function init(userData, setIsReadyToTalk) {
+async function init(userData, setIsReadyToTalk, transcriptText) {
   slides.setSlides(userData.slidePdfLink);
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
   setCharacterStyles(userData);
-  
-  const transcript = await getTranscipt(userData.transcriptLink)
+  let transcript;
+  if(transcriptText) {
+    transcript = transcriptText
+  } else {
+    transcript = await getTranscipt(userData.transcriptLink)
+  }
+
   talk = new TalkMain(
     userData.voice?.name ?? "UK English Male", 
     transcript
@@ -56,10 +62,10 @@ async function init(userData, setIsReadyToTalk) {
 }
 
 
-const Talk = ({fetchedData}) => {
+const Talk = ({fetchedData, transcriptText}) => {
   const [isReadyToTalk, setIsReadyToTalk] = useState(false);
   useEffect(() => {
-    init(fetchedData, setIsReadyToTalk)
+    init(fetchedData, setIsReadyToTalk, transcriptText)
   }, [fetchedData]);
 
   const [isTalking, setIsTalking] = useState(false);
@@ -147,6 +153,7 @@ const Talk = ({fetchedData}) => {
           <br/><button id="rotate-screen-button" onClick={e => openFullscreen(setIsFullScreen)}><i className="material-icons">screen_rotation</i> <span style={{position: 'relative', top:'-9px', left: '6px', fontSize: '15pt', fontWeight: 'bold'}}>Rotate</span></button>
         </div>
       </div>
+      <style jsx global>{styles}</style>
     </div>
   )
 }

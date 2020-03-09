@@ -3,10 +3,10 @@ import Link from 'next/link';
 const TalkTile = ({talkData}) => {
   return (
     <Link href="/[username]/[slug]" as={'/'+ talkData.username + '/' + talkData.slug}>
-      <a key={talkData.slug} className="main-talk-container">
+      <a key={talkData.slug} className="main-talk-container shadow">
         <h2>"{talkData.talkTitle}" @{talkData.eventName}</h2>
         <div>
-            <a className="talk-link">/{talkData.username}/{talkData.slug}</a>
+            <span className="talk-link">/{talkData.username}/{talkData.slug}</span>
         </div>
         <style jsx>{/* css */`
         a{

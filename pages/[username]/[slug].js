@@ -3,14 +3,12 @@ import Meta from '../../components/Meta';
 import Talk from '../../components/Talk';
 import fetch from 'isomorphic-unfetch';
 import {defaultUser} from '../../scripts/helpers';
-import styles from '../../styles/talk.css.js';
 
 const Main = ({metaInfo, fetchedData}) => {
   return (
     <Fragment>
       <Meta metaInfo={metaInfo} />
       <Talk fetchedData={fetchedData}/>
-      <style jsx global>{styles}</style>
     </Fragment>
   );
 }
@@ -25,7 +23,7 @@ Main.getInitialProps = async ctx  => {
   
   let data;
   try{
-    const response = await fetch(`${process.env.endpoint}/get-talk?username=${ctx.query.username}&slug=${ctx.query.slug}`);
+    const response = await fetch(`${process.env.ENDPOINT}/get-talk?username=${ctx.query.username}&slug=${ctx.query.slug}`);
     if(!response) {
       return errResponse;
     }
