@@ -18,7 +18,7 @@ export default css.global/* css */`
 .form-field{
   margin:20px 0px;
 }
-.form-field > input[type="text"], .form-field > .textarea{
+.form-field > input[type="text"], .form-field > .textarea, .form-field select{
   display: block;
   padding: 10px 20px;
   width: 100%;
@@ -62,6 +62,47 @@ div.editor-presentation-preview{
 div.editor-slide{
   display: inline-block;
   margin-right: 15px;
+}
+
+
+.flex{
+  display: flex;
+}
+
+.flex-1{
+  flex:1;
+}
+
+.character-edit{
+  display: flex;
+}
+.character-form{
+  flex: 1;
+}
+.character-preview{
+  position: relative;
+  top: 130px;
+  width: 200px;
+}
+.form-field input[type="color"] {
+  display: block;
+  width: 60px;
+  height: 30px;
+  padding: 0px;
+  background-color: transparent;
+  border:none;
+  cursor: pointer;
+}
+.form-field select{
+  width: 90%;
+}
+@media (max-width: 768px) {
+  .character-edit{
+    display: block;
+  }
+  .form-field select{
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {

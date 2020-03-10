@@ -91,19 +91,19 @@ function toggleCaptions() {
   }
 }
 
-function setCharacterStyles(userData) {
+function setCharacterStyles(characterStyles) {
   document.querySelectorAll(".character-container > span")
-      .forEach(el => el.style.backgroundColor = userData.character.skinColor || '#ffe0bd');
+      .forEach(el => el.style.backgroundColor = characterStyles.skinColor || '#ffe0bd');
 
-  document.querySelector('.character-container > span.myhead').style.backgroundColor = userData.character.skinColor || "#ffe0bd";
-  document.querySelector('.character-container > span.myhead').style.borderTop = `15px solid ${userData.character.hairColor}` || "15px solid #111";
-  document.querySelector('.character-container > span.mybody').style.backgroundColor = userData.character.tshirtColor || '#09f';
+  document.querySelector('.character-container > span.myhead').style.backgroundColor = characterStyles.skinColor || "#ffe0bd";
+  document.querySelector('.character-container > span.myhead').style.borderTop = `15px solid ${characterStyles.hairColor}` || "15px solid #111";
+  document.querySelector('.character-container > span.mybody').style.backgroundColor = characterStyles.tshirtColor || '#09f';
   document.querySelectorAll('.character-container > span.hands')
-      .forEach(el => el.style.borderTop = `20px solid ${userData.character.tshirtColor}` || '20px solid #035891');
+      .forEach(el => el.style.borderTop = `20px solid ${characterStyles.tshirtColor}` || '20px solid #035891');
 
-  if(userData.character.hairStyle && userData.character.hairStyle === 'long') {
+  if(characterStyles.hairStyle && characterStyles.hairStyle === 'long') {
       document.querySelector('.character-container > span.myhair').style.display = 'inline';
-      document.querySelector('.character-container > span.myhair').style.backgroundColor = userData.character.hairColor || '#111';
+      document.querySelector('.character-container > span.myhair').style.backgroundColor = characterStyles.hairColor || '#111';
   }
 }
 
@@ -129,6 +129,42 @@ const defaultUser = {
   }
 }
 
+const defaultTranscriptText = `
+Hi there!
+| John Doe here!
+| I am here to show you guys random pictures!!!
+
+|| This is slide 2
+| Here's a random lorem ipsum text
+| lots of lorem ipsum
+
+|| Here's baby yoda with a tea
+| Drink tea
+| Also drink water
+| Water you doing?
+
+|| umm i dont know why morty's here..
+
+|| Doggo!!!
+| Let's wait here for 10 seconds and appreciate doggo hair spaghetti $wait10s
+
+|| Here's phineas looking at you 
+| are you a platypus? 
+| Perry's a platypus
+| but hey, where's perry?
+
+|| a telly tubby! 
+| or a kitty?? 
+| or a telly tubby
+| noo its a kitty
+| could be a telly tubby tho
+| anyway
+
+|| Thenks
+| Bye!
+`
+
+
 export { 
   wait,
   isMobile, 
@@ -138,5 +174,6 @@ export {
   getTranscipt,
   toggleCaptions,
   setCharacterStyles,
-  defaultUser 
+  defaultUser,
+  defaultTranscriptText
 }

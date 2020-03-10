@@ -11,8 +11,7 @@ import {
   getTranscipt, 
   openFullscreen, 
   closeFullscreen ,
-  toggleCaptions,
-  setCharacterStyles
+  toggleCaptions
 } from '../scripts/helpers';
 
 import TalkMain from '../scripts/TalkMain';
@@ -45,7 +44,6 @@ async function init(userData, setIsReadyToTalk, transcriptText) {
   slides.setSlides(userData.slidePdfLink);
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
-  setCharacterStyles(userData);
   let transcript;
   if(transcriptText) {
     transcript = transcriptText
@@ -90,7 +88,7 @@ const Talk = ({fetchedData, transcriptText}) => {
         <div className="stage-container">
           <div className="stage-platform"></div>
           <div className="stage-front"></div>
-          <Character />
+          <Character characterStyles={fetchedData?.character}/>
         </div>
 
 

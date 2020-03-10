@@ -1,6 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
+import { setCharacterStyles } from '../scripts/helpers';
 
-const Character = () => {
+const Character = ({characterStyles}) => {
+  useEffect(() => {
+    setCharacterStyles(characterStyles);
+  }, [characterStyles]);
+
   return (
     <Fragment>
       <div className="character-container hide">

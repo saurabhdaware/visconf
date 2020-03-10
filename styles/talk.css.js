@@ -21,10 +21,10 @@ html, body{
 }
 
 @media (max-width: 768px) {
-  body{
-      padding: 20px;
-      width: 100%;
-      overflow: hidden;
+  .talk-page{
+    padding: 20px;
+    width: 100%;
+    overflow: hidden;
   }
 }
 

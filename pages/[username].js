@@ -28,7 +28,6 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
   const authObject = {login, logout, user, isLoggedIn};
 
   useEffect(() => {
-    setCharacterStyles(talks[talks.length - 1]);
     setTimeout(() => {
       document.querySelector('.character-container').classList.remove('hide');
     }, 600);
@@ -41,7 +40,7 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
     <div className="profile-container">
       <div className="profile-head display-flex">
         <div className="character-relative">
-          <Character/>
+          <Character characterStyles={talks[talks.length - 1]?.character}/>
         </div>
         <span className="profile-username">saurabhdaware</span>
       </div>

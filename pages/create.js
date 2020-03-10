@@ -1,6 +1,6 @@
 import Nav from '../components/Nav';
 import Meta from '../components/Meta';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { EditorForm } from '../components/EditorForm';
 import styles from '../styles/create.css';
 import Talk from '../components/Talk';
@@ -10,10 +10,22 @@ export default function Create({login, logout, user, isLoggedIn}) {
   const authObject = {login, logout, user, isLoggedIn};
   const [isEditorShown, setIsEditorShown] = useState(true);
   const [transcriptText, setTranscriptText] = useState('');
+  const [userData, setUserData] = useState(defaultUser);
+
+  useEffect(() => {
+    if(isEditorShown) {
+      document.querySelector('.show-editor-button').style.opacity = 1;
+      document.querySelector('.show-talk-button').style.opacity = .7;
+    }else {
+      document.querySelector('.show-editor-button').style.opacity = .7;
+      document.querySelector('.show-talk-button').style.opacity = 1;
+    }
+  }, [isEditorShown])
 
 
   const openTalk = () => {
     setTranscriptText(document.querySelector('.textarea')?.innerText);
+    setUserData({...userData, slidePdfLink: document.querySelector('#slides-input').value});
     setIsEditorShown(false);
   }
 
@@ -33,8 +45,8 @@ export default function Create({login, logout, user, isLoggedIn}) {
           </div>
           {
             isEditorShown
-            ? <EditorForm />
-            : <Talk fetchedData={defaultUser} transcriptText={transcriptText}/>
+            ? <EditorForm openTalk={openTalk} user={user} />
+            : <Talk fetchedData={userData} transcriptText={transcriptText}/>
           }
         </div>
       </div>
