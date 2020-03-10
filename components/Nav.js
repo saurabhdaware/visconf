@@ -28,7 +28,7 @@ function Nav({login, user, isLoggedIn}) {
         <style jsx global>{/*css*/`
         nav a{
           text-decoration: none;
-          padding: 20px 15px;
+          padding: 20px 23px;
           display: inline-block;
           color: #ccc;
           font-size: 14pt;
@@ -52,7 +52,7 @@ function Nav({login, user, isLoggedIn}) {
         }
 
         nav a.brand-title{
-          padding: 20px 15px;
+          padding: 20px 35px;
         }
 
 
@@ -62,7 +62,7 @@ function Nav({login, user, isLoggedIn}) {
           left:0;
           width: 100%;
           display: block;
-          padding: 0px 30px;
+          padding: 0px 0px;
           box-sizing: border-box;
           background-color: #282828;
           color: #ccc;
