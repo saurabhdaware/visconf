@@ -4,10 +4,20 @@ function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
-  const login = (response) => {
+  const login = async response => {
     setIsLoggedIn(true);
     setUser(response.profileObj);
-    // I guess Ill have to add access token here
+    const token = response.getAuthResponse().id_token;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    }
+
+    const res = await ((await fetch(`${process.env.ENDPOINT}/get-userdata`, options)).json());
+    setUser({...response.profileObj, username: res.data.username});
   }
 
   const logout = () => {

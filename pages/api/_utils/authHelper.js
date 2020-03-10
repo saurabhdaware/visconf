@@ -1,28 +1,21 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID_LOCALHOST);
 
-const getAuthToken = id => {
-  const token = jwt.sign(
-    {uid: id}, 
-    process.env.AUTH_SECRET, 
-    {expiresIn: '2h', algorithm: 'HS256'}
-  );
+async function verifyToken(token) {
+  const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID_LOCALHOST,  // Specify the CLIENT_ID of the app that accesses the backend
+      // Or, if multiple clients access the backend:
+      //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+  });
+  const payload = ticket.getPayload();
 
-  return token;
-}
+  return payload;
 
-const getUidFromToken = token => {
-  const decoded = jwt.verify(token, process.env.AUTH_SECRET);
-  return decoded.uid;
-}
-
-const getHash = async password => {
-  return bcrypt.hash(password, saltRounds);
+  // If request specified a G Suite domain:
+  //const domain = payload['hd'];
 }
 
 module.exports = {
-  getAuthToken,
-  getUidFromToken,
-  getHash
+  verifyToken
 }

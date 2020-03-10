@@ -16,7 +16,7 @@ function Nav({login, user, isLoggedIn}) {
             isLoggedIn
             ? <Link 
                 href="[username]" 
-                as="saurabhdaware"
+                as={user.username}
               >
                 <a><img className="profile-image" src={user.imageUrl}/> <span style={{marginLeft: '40px'}}>{user.name}</span></a>
               </Link>

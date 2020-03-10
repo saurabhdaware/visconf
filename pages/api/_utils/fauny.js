@@ -5,18 +5,25 @@ async function create(collection, data) {
 }
 
 async function read(index, value) {
-    return client.query(q.Get(q.Match(q.Index(index), value)));
+	let result;
+	try{
+		result = await client.query(q.Get(q.Match(q.Index(index), value)));
+	} catch(err) {
+		result = {data: null};
+	}
+
+	return result;
 }
 
 async function readAll(index, value = null) {
-    return client.query(
-        q.Paginate(
-            q.Match(
-                q.Index(index),
-                value
-            )
-        )
-    );
+	return client.query(
+		q.Paginate(
+			q.Match(
+				q.Index(index),
+				value
+			)
+		)
+	);
 }
 
 module.exports = {
