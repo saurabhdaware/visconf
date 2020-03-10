@@ -44,8 +44,7 @@ function prettifyTranscript(data) {
 }
 
 function editorDataLoad() {
-  document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(window.localStorage.getItem('editor-content') || defaultTranscriptText);
-  document.querySelector('#slides-input').value = window.localStorage.getItem('editor-slides-url') || "https://res.cloudinary.com/saurabhdaware/image/upload/v1580631896/npm/random.pdf";
+
   setEditorSlides();
 }
 
@@ -67,20 +66,26 @@ function handleAutoSave() {
 }
 
 // Create 
+function setFormValues() {
+  const savedCharacterStyles = JSON.parse(window.localStorage.getItem('editor-character'));
+  document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(window.localStorage.getItem('editor-content') || defaultTranscriptText);
+  document.querySelector('#hairstyle').value = savedCharacterStyles?.hairStyle || defaultUser.character.hairStyle;
+  document.querySelector('#event-name').value = window.localStorage.getItem("editor-event") || 'VisConf'
+  document.querySelector('#talk-title').value = window.localStorage.getItem("editor-title") || ''
+  document.querySelector('#hair-color').value = savedCharacterStyles?.hairColor || defaultUser.character.hairColor;
+  document.querySelector('#skin-color').value = savedCharacterStyles?.skinColor || defaultUser.character.skinColor;
+  document.querySelector('#tshirt-color').value = savedCharacterStyles?.tshirtColor || defaultUser.character.tshirtColor;
+  document.querySelector('#slides-input').value = window.localStorage.getItem('editor-slides-url') || "https://res.cloudinary.com/saurabhdaware/image/upload/v1580631896/npm/random.pdf";
+}
 
 export function EditorForm({openTalk, userData, setUserData}) {
 
   useEffect(() => {
     document.querySelector('#transcript-editor').addEventListener('input', handleAutoSave);
-    document.querySelector('.fetch-slides-btn').addEventListener('click', setEditorSlides)
-    editorDataLoad();
-    const savedCharacterStyles = JSON.parse(window.localStorage.getItem('editor-character'));
-    document.querySelector('#hairstyle').value = savedCharacterStyles?.hairStyle || defaultUser.character.hairStyle;
-    document.querySelector('#event-name').value = window.localStorage.getItem("editor-event") || 'VisConf'
-    document.querySelector('#talk-title').value = window.localStorage.getItem("editor-title") || ''
-    document.querySelector('#hair-color').value = savedCharacterStyles?.hairColor || defaultUser.character.hairColor;
-    document.querySelector('#skin-color').value = savedCharacterStyles?.skinColor || defaultUser.character.skinColor;
-    document.querySelector('#tshirt-color').value = savedCharacterStyles?.tshirtColor || defaultUser.character.tshirtColor;
+    document.querySelector('.fetch-slides-btn').addEventListener('click', setEditorSlides);
+    setFormValues();
+    setEditorSlides();
+
     if(savedCharacterStyles) {
       changeCharacterStylesHandler();
     }
