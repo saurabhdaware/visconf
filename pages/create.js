@@ -45,7 +45,7 @@ export default function Create({login, logout, user, isLoggedIn}) {
           </div>
           {
             isEditorShown
-            ? <EditorForm openTalk={openTalk} user={user} />
+            ? <EditorForm openTalk={openTalk} userData={userData} setUserData={setUserData} />
             : <Talk fetchedData={userData} transcriptText={transcriptText}/>
           }
         </div>

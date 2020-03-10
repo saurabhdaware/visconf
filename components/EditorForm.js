@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { defaultTranscriptText, isURL, defaultUser } from '../scripts/helpers';
+import { defaultTranscriptText, isURL, setCharacterStyles, defaultUser } from '../scripts/helpers';
 import slides from '../scripts/slides';
 import Character from '../components/Character';
 
@@ -68,13 +68,50 @@ function handleAutoSave() {
 
 // Create 
 
+export function EditorForm({openTalk, userData, setUserData}) {
 
-export function EditorForm({openTalk}) {
   useEffect(() => {
     document.querySelector('#transcript-editor').addEventListener('input', handleAutoSave);
     document.querySelector('.fetch-slides-btn').addEventListener('click', setEditorSlides)
     editorDataLoad();
+    const savedCharacterStyles = JSON.parse(window.localStorage.getItem('editor-character'));
+    document.querySelector('#hairstyle').value = savedCharacterStyles?.hairStyle || defaultUser.character.hairStyle;
+    document.querySelector('#event-name').value = 'VisConf'
+    document.querySelector('#hair-color').value = savedCharacterStyles?.hairColor || defaultUser.character.hairColor;
+    document.querySelector('#skin-color').value = savedCharacterStyles?.skinColor || defaultUser.character.skinColor;
+    document.querySelector('#tshirt-color').value = savedCharacterStyles?.tshirtColor || defaultUser.character.tshirtColor;
+    if(savedCharacterStyles) {
+      changeCharacterStylesHandler();
+    }
   }, []);
+
+
+  const changeCharacterStylesHandler = e => {
+    const hairStyleSelect = document.querySelector('#hairstyle');
+    const eventNameInput = document.querySelector('#event-name');
+    const hairColorSelect = document.querySelector('#hair-color');
+    const skinColorSelect = document.querySelector('#skin-color');
+    const tshirtColorSelect = document.querySelector('#tshirt-color');
+
+    const newUserChanges = {
+      ...userData,
+      "eventName": eventNameInput.value,
+      character: {
+        ...userData.character,
+        "hairStyle": hairStyleSelect.value,
+        "hairColor": hairColorSelect.value,
+        "skinColor": skinColorSelect.value,
+        "tshirtColor": tshirtColorSelect.value
+      }
+    }
+
+    window.localStorage.setItem('editor-character', JSON.stringify(newUserChanges.character));
+
+    document.querySelector('.mike-holder').innerHTML = eventNameInput.value;
+
+    setUserData(newUserChanges)
+  }
+
 
   return (
     <Fragment>
@@ -98,35 +135,35 @@ export function EditorForm({openTalk}) {
       </div>
       <div className="form-field">
         <label htmlFor="event-name">Event Name</label>
-        <input type="text" id="event-name" required/>
+        <input onChange={changeCharacterStylesHandler} type="text" id="event-name" required/>
       </div>
       <div className="character-edit">
         <div className="character-form">
           <h2>Character Config</h2>
           <div className="form-field">
             <label htmlFor="hairstyle">Character Hair Style</label>
-            <select id="hairstyle" required>
-              <option defaultValue="long">Long</option>
+            <select onChange={changeCharacterStylesHandler} id="hairstyle" required>
+              <option defaultValue="long" value="long">Long</option>
               <option value="short">Short</option>
             </select>
           </div>
           <div className="flex">
             <div className="flex-1 form-field">
               <label htmlFor="hair-color">Hair Color</label>
-              <input type="color" id="hair-color" required />
+              <input onInput={changeCharacterStylesHandler} type="color" id="hair-color" required />
             </div>
             <div className="flex-1 form-field">
               <label htmlFor="skin-color">Skin Color</label>
-              <input type="color" id="skin-color" required />
+              <input onInput={changeCharacterStylesHandler} type="color" id="skin-color" required />
             </div>
             <div className="flex-1 form-field">
               <label htmlFor="tshirt-color">TShirt Color</label>
-              <input type="color" id="tshirt-color" required />
+              <input onInput={changeCharacterStylesHandler} type="color" id="tshirt-color" required />
             </div>
           </div>
         </div>
         <div className="character-preview">
-          <Character characterStyles={defaultUser.character} />
+          <Character characterStyles={userData.character} />
         </div>
       </div>
       <div className="form-field">

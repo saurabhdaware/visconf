@@ -93,17 +93,20 @@ function toggleCaptions() {
 
 function setCharacterStyles(characterStyles) {
   document.querySelectorAll(".character-container > span")
-      .forEach(el => el.style.backgroundColor = characterStyles.skinColor || '#ffe0bd');
+    .forEach(el => el.style.backgroundColor = characterStyles.skinColor || '#ffe0bd');
 
   document.querySelector('.character-container > span.myhead').style.backgroundColor = characterStyles.skinColor || "#ffe0bd";
   document.querySelector('.character-container > span.myhead').style.borderTop = `15px solid ${characterStyles.hairColor}` || "15px solid #111";
   document.querySelector('.character-container > span.mybody').style.backgroundColor = characterStyles.tshirtColor || '#09f';
   document.querySelectorAll('.character-container > span.hands')
-      .forEach(el => el.style.borderTop = `20px solid ${characterStyles.tshirtColor}` || '20px solid #035891');
+    .forEach(el => el.style.borderTop = `20px solid ${characterStyles.tshirtColor}` || '20px solid #035891');
 
   if(characterStyles.hairStyle && characterStyles.hairStyle === 'long') {
-      document.querySelector('.character-container > span.myhair').style.display = 'inline';
-      document.querySelector('.character-container > span.myhair').style.backgroundColor = characterStyles.hairColor || '#111';
+    document.querySelector('.character-container > span.myhair').style.display = 'inline';
+    document.querySelector('.character-container > span.myhair').style.backgroundColor = characterStyles.hairColor || '#111';
+  } else {
+    document.querySelector('.character-container > span.myhair').style.display = 'none';
+    document.querySelector('.character-container > span.myhair').style.backgroundColor = characterStyles.hairColor || '#111';
   }
 }
 
