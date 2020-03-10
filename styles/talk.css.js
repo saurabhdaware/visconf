@@ -286,9 +286,6 @@ html, body{
   .github-logo{
     width: 30px;
   }
-  body{
-    padding: 10px 20px;
-  }
   .current-text{
     bottom: 70px;
     font-size: 9pt;

@@ -23,6 +23,7 @@ export default css.global/* css */`
   padding: 10px 20px;
   width: 100%;
   box-sizing: border-box;
+  font-family: 'Oswald', arial;
   font-size: 11pt;
   background-color: #fff;
   border: 1px solid #ddd;

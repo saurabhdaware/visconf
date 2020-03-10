@@ -76,32 +76,34 @@ export function EditorForm({openTalk, userData, setUserData}) {
     editorDataLoad();
     const savedCharacterStyles = JSON.parse(window.localStorage.getItem('editor-character'));
     document.querySelector('#hairstyle').value = savedCharacterStyles?.hairStyle || defaultUser.character.hairStyle;
-    document.querySelector('#event-name').value = 'VisConf'
+    document.querySelector('#event-name').value = window.localStorage.getItem("editor-event") || 'VisConf'
+    document.querySelector('#talk-title').value = window.localStorage.getItem("editor-title") || ''
     document.querySelector('#hair-color').value = savedCharacterStyles?.hairColor || defaultUser.character.hairColor;
     document.querySelector('#skin-color').value = savedCharacterStyles?.skinColor || defaultUser.character.skinColor;
     document.querySelector('#tshirt-color').value = savedCharacterStyles?.tshirtColor || defaultUser.character.tshirtColor;
     if(savedCharacterStyles) {
       changeCharacterStylesHandler();
     }
+
+    return () => {
+      window.localStorage.setItem('editor-event', document.querySelector('#event-name').value);
+      window.localStorage.setItem('editor-title', document.querySelector('#talk-title').value);
+    }
   }, []);
 
 
   const changeCharacterStylesHandler = e => {
-    const hairStyleSelect = document.querySelector('#hairstyle');
     const eventNameInput = document.querySelector('#event-name');
-    const hairColorSelect = document.querySelector('#hair-color');
-    const skinColorSelect = document.querySelector('#skin-color');
-    const tshirtColorSelect = document.querySelector('#tshirt-color');
 
     const newUserChanges = {
       ...userData,
       "eventName": eventNameInput.value,
       character: {
         ...userData.character,
-        "hairStyle": hairStyleSelect.value,
-        "hairColor": hairColorSelect.value,
-        "skinColor": skinColorSelect.value,
-        "tshirtColor": tshirtColorSelect.value
+        "hairStyle": document.querySelector('#hairstyle').value,
+        "hairColor": document.querySelector('#hair-color').value,
+        "skinColor": document.querySelector('#skin-color').value,
+        "tshirtColor": document.querySelector('#tshirt-color').value
       }
     }
 
