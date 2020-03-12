@@ -1,15 +1,16 @@
 # VisConf
 ![Version badge of the repository](https://img.shields.io/github/package-json/v/saurabhdaware/visconf?style=for-the-badge)
 
+**NOT READY TO USE**
+
 A web based talk visualiser for the conference/meetup talks. 
 
 VisConf lets you generate an animated version of your talk from your slides and transcript.
 
 
-***Example:*** https://visconf.netlify.com/saurabhdaware/visconf-intro
+***Example:*** https://visconf.now.sh/saurabhdaware/visconf-intro
 
-![Screenshot of VisConf giving a visual look of conference](screenshot.png)
-
+![Screenshot of VisConf](https://res.cloudinary.com/saurabhdaware/image/upload/v1580809861/saurabh2019/projects/screenshot.png)
 
 ---
 # Table of Content
@@ -19,10 +20,7 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ---
 
 # How to Create your Visual Talk
-- Convert your slides to **PDF** file and upload to CDN or GitHub repository.
-- Write and test your transcript on [visconf.netlify.com/editor](https://visconf.netlify.com/editor) and upload the transcript file to CDN or GitHub repository.
-- Visit https://visconf.netlify.com/create and fill the form 
-(You can checkout https://github.com/saurabhdaware/visconf-example for example of transcript and slides)
+- Currently you can't.
 
 # Transcript Markdown
 In transcript you can use characters like `|`, `||` and `$wait5s`.
@@ -47,13 +45,11 @@ Hey There!
 ```
 
 # Contributing
-Checkout [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing and local setup.
-
+I will be opening up the contributions as soon as I complete NextJS migration.
 
 ---
 
 [<img alt="Buy me a Coffee Button" width=200 src="https://cdn.buymeacoffee.com/buttons/default-orange.png">](https://www.buymeacoffee.com/ctd6809)
 
-Built with Vanilla JavaScript, WebPack, Netlify, FaunaDB <3
 
 Thank You 🌻
