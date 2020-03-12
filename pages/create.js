@@ -76,7 +76,6 @@ function fillFormValues(formData) {
 export default function Create({login, logout, user, isLoggedIn}) {
   const authObject = {login, logout, user, isLoggedIn};
   const [isEditorShown, setIsEditorShown] = useState(true);
-  const [transcriptText, setTranscriptText] = useState('');
   const [userData, setUserData] = useState(defaultUser);
 
 
@@ -116,8 +115,11 @@ export default function Create({login, logout, user, isLoggedIn}) {
 
 
   const openTalk = () => {
-    setTranscriptText(document.querySelector('.textarea')?.innerText);
-    setUserData({...userData, slidePdfLink: document.querySelector('#slides-input').value});
+    setUserData({
+      ...userData, 
+      slidePdfLink: document.querySelector('#slides-input').value,
+      transcriptText: document.querySelector('.textarea')?.innerText
+    });
     setIsEditorShown(false);
   }
 
@@ -143,7 +145,7 @@ export default function Create({login, logout, user, isLoggedIn}) {
                 userData={userData} 
                 setUserData={setUserData}
               />
-            : <Talk fetchedData={userData} transcriptText={transcriptText}/>
+            : <Talk fetchedData={userData} />
           }
         </div>
       </div>

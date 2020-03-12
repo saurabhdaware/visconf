@@ -40,7 +40,7 @@ function useVolume(initial) {
 
 let talk;
 
-async function init(userData, setIsReadyToTalk, transcriptText) {
+async function init(userData, setIsReadyToTalk) {
   slides.setSlides(userData.slidePdfLink);
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
@@ -55,10 +55,10 @@ async function init(userData, setIsReadyToTalk, transcriptText) {
 }
 
 
-const Talk = ({fetchedData, transcriptText}) => {
+const Talk = ({fetchedData}) => {
   const [isReadyToTalk, setIsReadyToTalk] = useState(false);
   useEffect(() => {
-    init(fetchedData, setIsReadyToTalk, transcriptText)
+    init(fetchedData, setIsReadyToTalk)
   }, [fetchedData]);
 
   const [isTalking, setIsTalking] = useState(false);
