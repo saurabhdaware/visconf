@@ -4,13 +4,34 @@ import { Fragment, useState, useEffect } from 'react';
 import { EditorForm } from '../components/EditorForm';
 import styles from '../styles/create.css';
 import Talk from '../components/Talk';
-import { defaultUser } from '../scripts/helpers';
+import { defaultUser, getLocalStorageData, defaultTranscriptText } from '../scripts/helpers';
 
+
+/*** 
+ * TODO:
+ * - /create?talk=visconf-intro to edit the existing talk!
+ * HOW?
+ * - read queryParams and send title name to editForm
+ * - in EditForm, add the talk slug as key in setLocalStorage's second paramter
+*/
 export default function Create({login, logout, user, isLoggedIn}) {
   const authObject = {login, logout, user, isLoggedIn};
   const [isEditorShown, setIsEditorShown] = useState(true);
   const [transcriptText, setTranscriptText] = useState('');
   const [userData, setUserData] = useState(defaultUser);
+  const [defaultFormData, setDefaultFormData] = useState(defaultUser);
+
+  useEffect(() => {
+    // getLocalStorageData returns {} when no value is present.
+    const locallyStoredData = getLocalStorageData();
+    setDefaultFormData({
+      transcriptText: locallyStoredData.transcriptText || defaultTranscriptText,
+      talkTitle: locallyStoredData.talkTitle || '',
+      eventName: locallyStoredData.eventName || 'VisConf',
+      slidePdfLink: locallyStoredData.slidePdfLink || defaultUser.slidePdfLink,
+      character: locallyStoredData.character || defaultUser.character
+    });
+  }, [])
 
   useEffect(() => {
     if(isEditorShown) {
@@ -45,7 +66,13 @@ export default function Create({login, logout, user, isLoggedIn}) {
           </div>
           {
             isEditorShown
-            ? <EditorForm openTalk={openTalk} userData={userData} setUserData={setUserData} />
+            ? <EditorForm 
+                openTalk={openTalk} 
+                defaultFormData={defaultFormData} 
+                setDefaultFormData={setDefaultFormData}
+                userData={userData} 
+                setUserData={setUserData} 
+              />
             : <Talk fetchedData={userData} transcriptText={transcriptText}/>
           }
         </div>

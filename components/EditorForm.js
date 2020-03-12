@@ -1,16 +1,15 @@
 import { Fragment, useEffect } from "react";
-import { defaultTranscriptText, isURL, setCharacterStyles, defaultUser } from '../scripts/helpers';
+import { isURL, setLocalStorageValue} from '../scripts/helpers';
 import slides from '../scripts/slides';
 import Character from '../components/Character';
 
 // Slides Helpers
-function setEditorSlides() {
+function applyEditorSlides() {
   let slidesInput = document.querySelector('#slides-input');
-  window.localStorage.setItem('editor-slides-url', slidesInput.value);
+  setLocalStorageValue({slidePdfLink: slidesInput.value});
 
   if(slidesInput.value && isURL(slidesInput.value) && slidesInput.value.includes('.pdf')){
     fetchEditorSlides();
-    window.localStorage.setItem('editor-slides-url', slidesInput.value);
   }
 }
 
@@ -43,58 +42,71 @@ function prettifyTranscript(data) {
   return prettifiedData;
 }
 
-function editorDataLoad() {
 
-  setEditorSlides();
-}
 
-function saveText() {
-  window.localStorage.setItem('editor-content', document.querySelector('#transcript-editor').innerText);
-}
-
-let isSaved;
 let autoSaveTimeout;
-function handleAutoSave() {
-  isSaved = false;
-
+function handleAutoSave(whatToSave = 'transcript') {
   if(autoSaveTimeout) clearTimeout(autoSaveTimeout);
-
   autoSaveTimeout = setTimeout(() => {
-    isSaved = true;
-    saveText();
+    if(whatToSave === 'transcript') {
+      setLocalStorageValue({transcriptText: document.querySelector('#transcript-editor').innerText})
+      setDefaultFormData({...defaultFormData, transcriptText: document.querySelector('#transcript-editor').innerText})
+    }else{
+      const objToStore = {
+        eventName: document.querySelector('#event-name').value,
+        talkTitle: document.querySelector('#talk-title').value
+      }
+
+      setLocalStorageValue();
+      setDefaultFormData({...defaultFormData, ...objToStore});
+    }
+
+    console.log("saved");
   }, 800)
 }
 
 // Create 
-function setFormValues() {
-  const savedCharacterStyles = JSON.parse(window.localStorage.getItem('editor-character'));
-  document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(window.localStorage.getItem('editor-content') || defaultTranscriptText);
-  document.querySelector('#hairstyle').value = savedCharacterStyles?.hairStyle || defaultUser.character.hairStyle;
-  document.querySelector('#event-name').value = window.localStorage.getItem("editor-event") || 'VisConf'
-  document.querySelector('#talk-title').value = window.localStorage.getItem("editor-title") || ''
-  document.querySelector('#hair-color').value = savedCharacterStyles?.hairColor || defaultUser.character.hairColor;
-  document.querySelector('#skin-color').value = savedCharacterStyles?.skinColor || defaultUser.character.skinColor;
-  document.querySelector('#tshirt-color').value = savedCharacterStyles?.tshirtColor || defaultUser.character.tshirtColor;
-  document.querySelector('#slides-input').value = window.localStorage.getItem('editor-slides-url') || "https://res.cloudinary.com/saurabhdaware/image/upload/v1580631896/npm/random.pdf";
+function fillFormValues(formData) {
+  if(!formData.transcriptText) return;
+  document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(formData.transcriptText);
+  document.querySelector('#hairstyle').value = formData.character.hairStyle;
+  document.querySelector('#event-name').value = formData.eventName;
+  document.querySelector('#talk-title').value = formData.talkTitle;
+  document.querySelector('#hair-color').value = formData.character.hairColor;
+  document.querySelector('#skin-color').value = formData.character.skinColor;
+  document.querySelector('#tshirt-color').value = formData.character.tshirtColor;
+  document.querySelector('#slides-input').value = formData.slidePdfLink;
 }
 
-export function EditorForm({openTalk, userData, setUserData}) {
+
+function publish() {
+  console.log("Lets publish!!");
+}
+
+
+export function EditorForm({
+  openTalk, 
+  defaultFormData, 
+  setDefaultFormData,
+  userData, 
+  setUserData
+}) {
 
   useEffect(() => {
-    document.querySelector('#transcript-editor').addEventListener('input', handleAutoSave);
-    document.querySelector('.fetch-slides-btn').addEventListener('click', setEditorSlides);
-    setFormValues();
-    setEditorSlides();
+    document.querySelector('#transcript-editor').addEventListener('input', e => handleAutoSave('transcript'));
+    document.querySelector('#talk-title').addEventListener('input', e => handleAutoSave('talktitle'));
 
-    if(savedCharacterStyles) {
-      changeCharacterStylesHandler();
-    }
-
-    return () => {
-      window.localStorage.setItem('editor-event', document.querySelector('#event-name').value);
-      window.localStorage.setItem('editor-title', document.querySelector('#talk-title').value);
-    }
+    document.querySelector('.fetch-slides-btn').addEventListener('click', applyEditorSlides);
   }, []);
+
+  // Intentionally this only runs once in the beginning.
+  useEffect(() => {
+    fillFormValues(defaultFormData);
+    if(defaultFormData.slidePdfLink) {
+      applyEditorSlides();
+    }
+  }, [defaultFormData])
+
 
 
   const changeCharacterStylesHandler = e => {
@@ -102,7 +114,7 @@ export function EditorForm({openTalk, userData, setUserData}) {
 
     const newUserChanges = {
       ...userData,
-      "eventName": eventNameInput.value,
+      eventName: eventNameInput.value,
       character: {
         ...userData.character,
         "hairStyle": document.querySelector('#hairstyle').value,
@@ -112,11 +124,15 @@ export function EditorForm({openTalk, userData, setUserData}) {
       }
     }
 
-    window.localStorage.setItem('editor-character', JSON.stringify(newUserChanges.character));
+    setLocalStorageValue(newUserChanges)
+    setUserData(newUserChanges)
+    setDefaultFormData({
+      ...defaultFormData, 
+      eventName: newUserChanges.eventName,
+      character: newUserChanges.character
+    })
 
     document.querySelector('.mike-holder').innerHTML = eventNameInput.value;
-
-    setUserData(newUserChanges)
   }
 
 
@@ -170,13 +186,13 @@ export function EditorForm({openTalk, userData, setUserData}) {
           </div>
         </div>
         <div className="character-preview">
-          <Character characterStyles={userData.character} />
+          <Character characterStyles={defaultFormData.character} />
         </div>
       </div>
       <div className="form-field">
         {/* <button className="btn editor-btn download-transcript-button">Download Transcript.md</button>&nbsp; &nbsp; */}
         <button onClick={openTalk} className="btn editor-btn show-talk-button-2">Preview</button>&nbsp; &nbsp;
-        <button className="btn editor-btn download-transcript-button">Publish</button>
+        <button onClick={publish} className="btn editor-btn download-transcript-button">Publish</button>
       </div>
     </div>
     <style jsx global>{`

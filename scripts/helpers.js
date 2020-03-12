@@ -111,25 +111,13 @@ function setCharacterStyles(characterStyles) {
 }
 
 
-const defaultUser = {
-  "username": "me",
-  "talkTitle": "test",
-  "slug": "test",
-  "transcriptLink": "../example/Transcript.md",
-  "slidePdfLink": "../example/slides.pdf",
-  "eventName": "VisConf <br/>Test",
-  "character": {
-    "hairStyle": "long",
-    "hairColor": "#1f0900",
-    "skinColor": "#724e25",
-    "tshirtColor": "#67abd3"
-  },
-  "voice": {
-    "name": "UK English Female",
-    "rate": .3,
-    "volume": 1,
-    "pitch": 2
-  }
+function setLocalStorageValue(newValues, key='default-form') {
+  const currentFormData = JSON.parse(window.localStorage.getItem(key));
+  window.localStorage.setItem(key, JSON.stringify({...currentFormData, ...newValues}))
+}
+
+function getLocalStorageData() {
+  return JSON.parse((window.localStorage.getItem("default-form") || "{}"));
 }
 
 const defaultTranscriptText = `
@@ -167,6 +155,27 @@ Hi there!
 | Bye!
 `
 
+const defaultUser = {
+  "username": "me",
+  "talkTitle": "test",
+  "slug": "test",
+  "transcriptText": defaultTranscriptText,
+  "slidePdfLink": "https://raw.githubusercontent.com/saurabhdaware/visconf-example/master/default-slides.pdf",
+  "eventName": "VisConf <br/>Test",
+  "character": {
+    "hairStyle": "long",
+    "hairColor": "#1f0900",
+    "skinColor": "#724e25",
+    "tshirtColor": "#67abd3"
+  },
+  "voice": {
+    "name": "UK English Female",
+    "rate": .3,
+    "volume": 1,
+    "pitch": 2
+  }
+}
+
 
 export { 
   wait,
@@ -177,6 +186,8 @@ export {
   getTranscipt,
   toggleCaptions,
   setCharacterStyles,
+  setLocalStorageValue,
+  getLocalStorageData,
   defaultUser,
   defaultTranscriptText
 }
