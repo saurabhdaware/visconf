@@ -47,7 +47,9 @@ async function publish(user) {
   }
 
   const res = await ((await fetch(`${process.env.ENDPOINT}/submit-talk`, options)).json());
-  console.log(res);
+  if(res.success === true) {
+    window.location.href = res.data.path;
+  }
 }
 
 

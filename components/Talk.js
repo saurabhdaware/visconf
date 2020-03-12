@@ -44,12 +44,7 @@ async function init(userData, setIsReadyToTalk, transcriptText) {
   slides.setSlides(userData.slidePdfLink);
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
-  let transcript;
-  if(transcriptText) {
-    transcript = transcriptText
-  } else {
-    transcript = await getTranscipt(userData.transcriptLink)
-  }
+  let transcript = userData.transcriptText;
 
   talk = new TalkMain(
     userData.voice?.name ?? "UK English Male", 

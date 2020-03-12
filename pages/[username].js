@@ -56,50 +56,51 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
 }
 
 Profile.getInitialProps = async ctx => {
-  // const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${ctx.query.username}`);
+  const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${ctx.query.username}`);
   let resData = [];
   const metaInfo = {
     title: `Talks from ${ctx.query.username}`,
     url: 'https://visconf.cc'+ctx.asPath
   }
 
-  // try{
-  //   resData = await response.json();
-  // }catch(err) {
-  //   resData = []
-  // }
-
-  resData = {
-    "success":true,
-    "data":[
-      {
-        "username":"saurabhdaware",
-        "talkTitle":"VisConf Intro",
-        "slug":"visconf-intro",
-        "eventName":"VisConf",
-        "uid":"525097a7-6149-42d9-b17e-afcfc0e48e1c",
-        "character":{
-          "hairStyle":"short",
-          "hairColor":"#111111",
-          "skinColor":"#e2c4a1",
-          "tshirtColor":"#0099ff"
-        }
-      },
-      {
-        "username":"saurabhdaware",
-        "talkTitle":"Web Performance Hacks at Mumbai JS",
-        "slug":"web-performance-hacks-at-mumbai-js",
-        "eventName":"Mumbai Javascript",
-        "uid":"525097a7-6149-42d9-b17e-afcfc0e48e1c",
-        "character":{
-          "hairStyle":"short",
-          "hairColor":"#111111",
-          "skinColor":"#c4a27a",
-          "tshirtColor":"#f8f8f8"
-        }
-      }
-    ]
+  try{
+    resData = await response.json();
+  }catch(err) {
+    resData = []
   }
+
+
+  // resData = {
+  //   "success":true,
+  //   "data":[
+  //     {
+  //       "username":"saurabhdaware",
+  //       "talkTitle":"VisConf Intro",
+  //       "slug":"visconf-intro",
+  //       "eventName":"VisConf",
+  //       "uid":"525097a7-6149-42d9-b17e-afcfc0e48e1c",
+  //       "character":{
+  //         "hairStyle":"short",
+  //         "hairColor":"#111111",
+  //         "skinColor":"#e2c4a1",
+  //         "tshirtColor":"#0099ff"
+  //       }
+  //     },
+  //     {
+  //       "username":"saurabhdaware",
+  //       "talkTitle":"Web Performance Hacks at Mumbai JS",
+  //       "slug":"web-performance-hacks-at-mumbai-js",
+  //       "eventName":"Mumbai Javascript",
+  //       "uid":"525097a7-6149-42d9-b17e-afcfc0e48e1c",
+  //       "character":{
+  //         "hairStyle":"short",
+  //         "hairColor":"#111111",
+  //         "skinColor":"#c4a27a",
+  //         "tshirtColor":"#f8f8f8"
+  //       }
+  //     }
+  //   ]
+  // }
 
   return {
     metaInfo,
