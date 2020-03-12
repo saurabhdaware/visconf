@@ -105,10 +105,13 @@ div.editor-slide{
     width: 100%;
   }
   .character-preview{
-    min-height: 300px;
+    height: 100px;
   }
   .editor-main{
     padding: 10px 10px;
+  }
+  .form-submit{
+    margin-top: 160px;
   }
 }
 

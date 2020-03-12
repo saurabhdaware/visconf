@@ -17,7 +17,7 @@ function useAuth() {
     }
 
     const res = await ((await fetch(`${process.env.ENDPOINT}/get-userdata`, options)).json());
-    setUser({...response.profileObj, username: res.data.username});
+    setUser({...response.profileObj, username: res.data.username, token});
   }
 
   const logout = () => {

@@ -138,9 +138,10 @@ export default function Create({login, logout, user, isLoggedIn}) {
           {
             isEditorShown
             ? <EditorForm 
+                {...authObject}
                 openTalk={openTalk}
                 userData={userData} 
-                setUserData={setUserData} 
+                setUserData={setUserData}
               />
             : <Talk fetchedData={userData} transcriptText={transcriptText}/>
           }

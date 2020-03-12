@@ -19,12 +19,39 @@ function handleAutoSave(whatToSave = 'transcript') {
   }, 800)
 }
 
-function publish() {
-  console.log("Lets publish!!");
+async function publish(user) {
+  const finalData = {
+    talkTitle: document.querySelector('#talk-title').value,
+    slug: document.querySelector('#talk-title').value.replace(/ /g, '-').toLowerCase(),
+    transcriptText: document.querySelector('#transcript-editor').innerText,
+    slidePdfLink: document.querySelector('#slides-input').value,
+    eventName: document.querySelector('#event-name').value,
+    character: {
+      hairStyle: document.querySelector('#hairstyle').value,
+      hairColor: document.querySelector('#hair-color').value,
+      skinColor: document.querySelector('#skin-color').value,
+      tshirtColor: document.querySelector('#tshirt-color').value    
+    },
+    voice: {
+      name: 'UK English Female'
+    }
+  }
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + user.token 
+    },
+    body: JSON.stringify(finalData)
+  }
+
+  const res = await ((await fetch(`${process.env.ENDPOINT}/submit-talk`, options)).json());
+  console.log(res);
 }
 
 
-export function EditorForm({openTalk, userData, setUserData}) {
+export function EditorForm({openTalk, userData, user, setUserData}) {
 
   useEffect(() => {
     document.querySelector('#transcript-editor').addEventListener('input', e => handleAutoSave('transcript'));
@@ -107,10 +134,10 @@ export function EditorForm({openTalk, userData, setUserData}) {
           <Character characterStyles={userData.character} />
         </div>
       </div>
-      <div className="form-field">
+      <div className="form-field form-submit">
         {/* <button className="btn editor-btn download-transcript-button">Download Transcript.md</button>&nbsp; &nbsp; */}
         <button onClick={openTalk} className="btn editor-btn show-talk-button-2">Preview</button>&nbsp; &nbsp;
-        <button onClick={publish} className="btn editor-btn download-transcript-button">Publish</button>
+        <button onClick={e => publish(user)} className="btn editor-btn download-transcript-button">Publish</button>
       </div>
     </div>
     <style jsx global>{`
