@@ -38,4 +38,27 @@ export default css.global/* css */`
 .profile-talks-container{
   padding: 200px;
 }
+
+@media (max-width: 768px) {
+  .profile-head{
+    text-align:center;
+  }
+  .character-relative{
+    top: 220px;
+    left: 0px;
+    transform: translateX(-80px);
+    display: inline-block;
+  }
+  .profile-username{
+    position: relative;
+    display: block;
+    left: 0px;
+    padding: 25px 30px;
+    top: 0px;
+  }
+
+  .profile-talks-container{
+    padding: 200px 10px;
+  }
+}
 `

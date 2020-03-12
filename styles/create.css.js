@@ -104,6 +104,12 @@ div.editor-slide{
   .form-field select{
     width: 100%;
   }
+  .character-preview{
+    min-height: 300px;
+  }
+  .editor-main{
+    padding: 10px 10px;
+  }
 }
 
 @media (max-width: 768px) {

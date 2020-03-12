@@ -1,47 +1,6 @@
 import { Fragment, useEffect } from "react";
-import { isURL, setLocalStorageValue} from '../scripts/helpers';
-import slides from '../scripts/slides';
+import { setLocalStorageValue } from '../scripts/helpers';
 import Character from '../components/Character';
-
-// Slides Helpers
-function applyEditorSlides() {
-  let slidesInput = document.querySelector('#slides-input');
-  setLocalStorageValue({slidePdfLink: slidesInput.value});
-
-  if(slidesInput.value && isURL(slidesInput.value) && slidesInput.value.includes('.pdf')){
-    fetchEditorSlides();
-  }
-}
-
-async function fetchEditorSlides() {
-  let slidesInput = document.querySelector('#slides-input');
-  if(slidesInput.value.includes('https://github.com/')){
-    // change usual github URLs to Raw URLs
-    slidesInput.value = slidesInput.value.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/blob', '');
-  }
-  return slides.loadPDF(slidesInput.value)
-    .then(pdf => {
-      document.querySelector('.editor-presentation-preview').innerHTML = '';
-      for(let pageNumber=1;pageNumber <= pdf._pdfInfo.numPages; pageNumber++) {
-        document.querySelector('.editor-presentation-preview').innerHTML += /* html */`
-          <div class="editor-slide">
-            <canvas id="canvas-page-${pageNumber}"></canvas>
-          </div>
-        `;
-
-        slides.renderPage(pageNumber, 0.5);
-      }
-    })
-}
-
-
-
-// Transcript Helpers
-function prettifyTranscript(data) {
-  const prettifiedData = data.split('||').map(page => page.split('|').join('<br>|')).join('<br><br>||');
-  return prettifiedData;
-}
-
 
 
 let autoSaveTimeout;
@@ -50,65 +9,29 @@ function handleAutoSave(whatToSave = 'transcript') {
   autoSaveTimeout = setTimeout(() => {
     if(whatToSave === 'transcript') {
       setLocalStorageValue({transcriptText: document.querySelector('#transcript-editor').innerText})
-      setDefaultFormData({...defaultFormData, transcriptText: document.querySelector('#transcript-editor').innerText})
     }else{
       const objToStore = {
         eventName: document.querySelector('#event-name').value,
         talkTitle: document.querySelector('#talk-title').value
       }
-
-      setLocalStorageValue();
-      setDefaultFormData({...defaultFormData, ...objToStore});
+      setLocalStorageValue(objToStore);
     }
-
-    console.log("saved");
   }, 800)
 }
-
-// Create 
-function fillFormValues(formData) {
-  if(!formData.transcriptText) return;
-  document.querySelector('#transcript-editor').innerHTML = prettifyTranscript(formData.transcriptText);
-  document.querySelector('#hairstyle').value = formData.character.hairStyle;
-  document.querySelector('#event-name').value = formData.eventName;
-  document.querySelector('#talk-title').value = formData.talkTitle;
-  document.querySelector('#hair-color').value = formData.character.hairColor;
-  document.querySelector('#skin-color').value = formData.character.skinColor;
-  document.querySelector('#tshirt-color').value = formData.character.tshirtColor;
-  document.querySelector('#slides-input').value = formData.slidePdfLink;
-}
-
 
 function publish() {
   console.log("Lets publish!!");
 }
 
 
-export function EditorForm({
-  openTalk, 
-  defaultFormData, 
-  setDefaultFormData,
-  userData, 
-  setUserData
-}) {
+export function EditorForm({openTalk, userData, setUserData}) {
 
   useEffect(() => {
     document.querySelector('#transcript-editor').addEventListener('input', e => handleAutoSave('transcript'));
     document.querySelector('#talk-title').addEventListener('input', e => handleAutoSave('talktitle'));
-
-    document.querySelector('.fetch-slides-btn').addEventListener('click', applyEditorSlides);
   }, []);
 
-  // Intentionally this only runs once in the beginning.
-  useEffect(() => {
-    fillFormValues(defaultFormData);
-    if(defaultFormData.slidePdfLink) {
-      applyEditorSlides();
-    }
-  }, [defaultFormData])
-
-
-
+  
   const changeCharacterStylesHandler = e => {
     const eventNameInput = document.querySelector('#event-name');
 
@@ -126,11 +49,6 @@ export function EditorForm({
 
     setLocalStorageValue(newUserChanges)
     setUserData(newUserChanges)
-    setDefaultFormData({
-      ...defaultFormData, 
-      eventName: newUserChanges.eventName,
-      character: newUserChanges.character
-    })
 
     document.querySelector('.mike-holder').innerHTML = eventNameInput.value;
   }
@@ -186,7 +104,7 @@ export function EditorForm({
           </div>
         </div>
         <div className="character-preview">
-          <Character characterStyles={defaultFormData.character} />
+          <Character characterStyles={userData.character} />
         </div>
       </div>
       <div className="form-field">

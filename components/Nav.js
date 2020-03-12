@@ -2,8 +2,7 @@
 
 import { Fragment } from "react";
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { LoginButton, LogoutButton } from "./AuthButtons";
+import { LoginButton } from "./AuthButtons";
 
 function Nav({login, user, isLoggedIn}) {
   return (
@@ -11,7 +10,7 @@ function Nav({login, user, isLoggedIn}) {
       <nav>
         <Link href="/"><a className="brand-title">VisConf</a></Link>
         <div className="right-items">
-          <Link href="create"><a>+ &nbsp;Create</a></Link>
+          <Link href="create"><a className="create-button-item">+ &nbsp;Create</a></Link>
           {
             isLoggedIn
             ? <Link 
@@ -69,6 +68,12 @@ function Nav({login, user, isLoggedIn}) {
         }
         nav .right-items{
           float: right;
+        }
+
+        @media (max-width: 768px) {
+          .right-items .create-button-item{
+            display: none;
+          }
         }
         `}</style>
       </nav>

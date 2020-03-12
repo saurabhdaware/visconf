@@ -28,6 +28,12 @@ const TalkTile = ({talkData}) => {
         .talk-link{
           color: #999;
         }
+
+        @media (max-width: 768px) {
+          .main-talk-container{
+            padding: 30px 20px;
+          }
+        }
         `}</style>
       </a>
     </Link>
