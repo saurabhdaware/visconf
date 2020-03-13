@@ -1,35 +1,24 @@
 import fetch from 'isomorphic-unfetch';
-import Link from 'next/link';
 import styles from '../styles/profile.css.js';
 import Character from '../components/Character';
 import { Fragment, useEffect } from 'react';
 import Meta from '../components/Meta.js';
 import Nav from '../components/Nav.js';
+import { useRouter } from 'next/router'
+import { LogoutButton } from '../components/AuthButtons';
 
-import {setCharacterStyles} from '../scripts/helpers';
 import TalkTile from '../components/TalkTile.js';
 
-{/* <div>
-  {
-    talks.data.map(val => 
-      <div key={val.slug}>
-        "{val.talkTitle}" @{val.eventName}
-        <div>
-          <Link href="/[username]/[slug]" as="/saurabhdaware/visconf-intro">
-            <a>{val.slug}</a>
-          </Link>
-        </div>
-      </div>
-    )
-  }
-</div> */}
 
 const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
   const authObject = {login, logout, user, isLoggedIn};
 
+  const router = useRouter();
+  const { username: usernameParam } = router.query;
+
   useEffect(() => {
     setTimeout(() => {
-      document.querySelector('.character-container').classList.remove('hide');
+      document.querySelector('.character-container')?.classList.remove('hide');
     }, 600);
   }, []);
 
@@ -40,9 +29,16 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
     <div className="profile-container">
       <div className="profile-head display-flex">
         <div className="character-relative">
-          <Character characterStyles={talks[talks.length - 1]?.character}/>
+          {talks?.length > 0 ? <Character characterStyles={talks[0].character}/> : null}
         </div>
-        <span className="profile-username">saurabhdaware</span>
+        <div className="profile-username">
+          <h1>{usernameParam}</h1>
+          {
+            isLoggedIn 
+            ? <LogoutButton logout={logout} renderElement={renderProps => <button {...renderProps} className="logout-button">Logout</button>} /> 
+            : null 
+          }
+        </div>
       </div>
     </div>
     <div className="profile-talks-container">
@@ -68,39 +64,6 @@ Profile.getInitialProps = async ctx => {
   }catch(err) {
     resData = []
   }
-
-
-  // resData = {
-  //   "success":true,
-  //   "data":[
-  //     {
-  //       "username":"saurabhdaware",
-  //       "talkTitle":"VisConf Intro",
-  //       "slug":"visconf-intro",
-  //       "eventName":"VisConf",
-  //       "uid":"525097a7-6149-42d9-b17e-afcfc0e48e1c",
-  //       "character":{
-  //         "hairStyle":"short",
-  //         "hairColor":"#111111",
-  //         "skinColor":"#e2c4a1",
-  //         "tshirtColor":"#0099ff"
-  //       }
-  //     },
-  //     {
-  //       "username":"saurabhdaware",
-  //       "talkTitle":"Web Performance Hacks at Mumbai JS",
-  //       "slug":"web-performance-hacks-at-mumbai-js",
-  //       "eventName":"Mumbai Javascript",
-  //       "uid":"525097a7-6149-42d9-b17e-afcfc0e48e1c",
-  //       "character":{
-  //         "hairStyle":"short",
-  //         "hairColor":"#111111",
-  //         "skinColor":"#c4a27a",
-  //         "tshirtColor":"#f8f8f8"
-  //       }
-  //     }
-  //   ]
-  // }
 
   return {
     metaInfo,

@@ -2,15 +2,17 @@ const fauny = require('./_utils/fauny');
 
 const getTalksOfUser = async (req, res) => {
   const { username } = req.query;
-  const result = await fauny.readAll("talks_by_username", username);
+  const {data: {uid}} = await fauny.read('users_by_username', username);
+  const result = await fauny.readAll("talks_by_uid", uid);
+  
   const talksData = [];
   result.data.forEach(val => {
     talksData.push({
-      username: val[0], 
+      username: username,
+      uid: val[0],
       talkTitle: val[1], 
       slug: val[2], 
       eventName: val[3], 
-      uid: val[8],
       character: {
         hairStyle: val[4],
         hairColor: val[5],
@@ -19,6 +21,7 @@ const getTalksOfUser = async (req, res) => {
       }
     })
   })
+
   res.json({success: true, data: talksData});
 }
 

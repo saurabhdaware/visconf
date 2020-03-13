@@ -64,18 +64,6 @@ async function wait(time) {
   })
 }
 
-async function getTranscipt(transcriptData, isText = false) {
-  let transcript;
-  if(!isText){
-    let data = await (await fetch(transcriptData)).text();
-    transcript = data;
-  }else{
-    transcript = transcriptData;
-  }
-
-  return transcript;
-}
-
 
 function toggleCaptions() {
   const captionHolder = document.querySelector('.current-text');
@@ -183,7 +171,6 @@ export {
   isURL, 
   openFullscreen, 
   closeFullscreen, 
-  getTranscipt,
   toggleCaptions,
   setCharacterStyles,
   setLocalStorageValue,

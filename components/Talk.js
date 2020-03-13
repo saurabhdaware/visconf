@@ -8,9 +8,8 @@ import slides from '../scripts/slides';
 import styles from '../styles/talk.css.js';
 
 import { 
-  getTranscipt, 
   openFullscreen, 
-  closeFullscreen ,
+  closeFullscreen,
   toggleCaptions
 } from '../scripts/helpers';
 

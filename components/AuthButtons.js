@@ -6,19 +6,27 @@ function LoginButton({login}) {
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Login"
       onSuccess={login}
-      render={renderProps => <a onClick={renderProps.onClick} disabled={renderProps.disabled}><i className="material-icons icon-pos-fix">face</i>&nbsp; Login</a>}
+      render={renderProps => 
+        <a 
+          onClick={renderProps.onClick} 
+          disabled={renderProps.disabled}
+        >
+          <img src="https://i.ya-webdesign.com/images/transparent-g-black-and-white-4.png" className="icon-pos-fix" style={{opacity: .8}} width="20" />&nbsp;&nbsp; Login
+        </a>
+      }
+      
       cookiePolicy={'single_host_origin'}
       isSignedIn={true}
     />
   )
 }
 
-function LogoutButton({logout}) {
+function LogoutButton({logout, renderElement}) {
   return (
     <GoogleLogout
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Logout"
-      render={renderProps => <a {...renderProps}>Logout</a>}
+      render={renderElement}
       onLogoutSuccess={logout}
     />
   )

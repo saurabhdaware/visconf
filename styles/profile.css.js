@@ -31,8 +31,20 @@ export default css.global/* css */`
   font-weight: bold;
   color: #222;
   top: 60px;
-  font-size: 35pt;
   display: inline-block;
+}
+
+.profile-username > h1{
+  font-size: 30pt;
+  margin-bottom: 5px;
+}
+.profile-username .logout-button{
+  padding: 10px 30px;
+  border: none;
+  background-color: #333;
+  color: #ddd;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .profile-talks-container{

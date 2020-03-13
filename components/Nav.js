@@ -41,7 +41,7 @@ function Nav({login, user, isLoggedIn}) {
         }
         .icon-pos-fix{
           position: relative;
-          top: 5px;
+          top: 3px;
         }
 
         nav > .right-items > a:hover{
@@ -52,6 +52,7 @@ function Nav({login, user, isLoggedIn}) {
 
         nav a.brand-title{
           padding: 20px 35px;
+          font-weight: bold;
         }
 
 
