@@ -41,7 +41,7 @@ Main.getInitialProps = async ctx  => {
   return {
     metaInfo: {
       title: `${data.message.talkTitle} @${data.message.eventName} - by ${ctx.query.username} | VisConf`,
-      ogImage: `https://res.cloudinary.com/saurabhdaware/image/upload/c_fit,e_colorize:60,l_text:arial_30_bold:${data.message.talkTitle},r_0,w_450,y_-80/g_south_east,c_fit,e_colorize:60,l_text:arial_20:${ctx.query.username},r_0,w_450,y_100,x_80/g_north_west,c_fit,e_colorize:60,l_text:arial_17_bold:${data.message.eventName},r_0,w_100,y_205,x_70/v1581939374/npm/talksog.png`,
+      ogImage: `https://res.cloudinary.com/visconf/image/upload/g_north_west,c_fit,e_colorize:60,l_text:arial_30_bold:${data.message.talkTitle},r_0,w_430,y_40,x_190/g_south_east,c_fit,e_colorize:60,l_text:arial_20:${ctx.query.username},r_0,w_500,y_100,x_50/v1584124133/og/og-talk_aprfkp.png`,
       url: 'https://visconf.cc'+ctx.asPath
     },
     fetchedData: data.message

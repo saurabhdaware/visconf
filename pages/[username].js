@@ -60,7 +60,8 @@ Profile.getInitialProps = async ctx => {
   let resData = [];
   const metaInfo = {
     title: `Talks from ${ctx.query.username}`,
-    url: 'https://visconf.cc'+ctx.asPath
+    url: 'https://visconf.cc'+ctx.asPath,
+    ogImage: `https://res.cloudinary.com/visconf/image/upload/c_fit,e_colorize:50,l_text:arial_45_bold:${ctx.query.username},r_0,w_450,y_-70/v1584122962/og/og-profile_kzamh8.png`
   }
 
   try{

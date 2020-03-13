@@ -12,6 +12,7 @@ import {
   isURL 
 } from '../scripts/helpers';
 import slides from '../scripts/slides';
+import Footer from '../components/Footer';
 
 
 // Slides Helpers
@@ -149,6 +150,7 @@ export default function Create({login, logout, user, isLoggedIn}) {
           }
         </div>
       </div>
+      <Footer />
       <style jsx global>{styles}</style>
     </Fragment>
   );
