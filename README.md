@@ -12,7 +12,7 @@ VisConf lets you generate an animated version of your talk from your slides and 
 
 ***Demo VisTalk:*** https://visconf.now.sh/saurabhdaware/visconf-intro
 
-![Screenshot of VisConf](https://res.cloudinary.com/visconf/image/upload/v1584110061/main_m5rzon.png)
+![Screenshot of VisConf](https://res.cloudinary.com/visconf/image/upload/c_scale,w_500/v1584110061/main_m5rzon.png)
 
 ---
 ## Table of Content
