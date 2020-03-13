@@ -18,6 +18,25 @@ function handleAutoSave(whatToSave = 'transcript') {
     }
   }, 800)
 }
+function saveForm() {
+  const finalData = {
+    talkTitle: document.querySelector('#talk-title').value,
+    slug: document.querySelector('#talk-title').value.replace(/ /g, '-').toLowerCase(),
+    transcriptText: document.querySelector('#transcript-editor').innerText,
+    slidePdfLink: document.querySelector('#slides-input').value,
+    eventName: document.querySelector('#event-name').value,
+    character: {
+      hairStyle: document.querySelector('#hairstyle').value,
+      hairColor: document.querySelector('#hair-color').value,
+      skinColor: document.querySelector('#skin-color').value,
+      tshirtColor: document.querySelector('#tshirt-color').value    
+    },
+    voice: {
+      name: 'UK English Female'
+    }
+  }
+  setLocalStorageValue(finalData);
+}
 
 async function publish(user) {
   const finalData = {
@@ -58,6 +77,8 @@ export function EditorForm({openTalk, userData, user, setUserData}) {
   useEffect(() => {
     document.querySelector('#transcript-editor').addEventListener('input', e => handleAutoSave('transcript'));
     document.querySelector('#talk-title').addEventListener('input', e => handleAutoSave('talktitle'));
+
+    return saveForm;
   }, []);
 
   
@@ -138,8 +159,16 @@ export function EditorForm({openTalk, userData, user, setUserData}) {
       </div>
       <div className="form-field form-submit">
         {/* <button className="btn editor-btn download-transcript-button">Download Transcript.md</button>&nbsp; &nbsp; */}
-        <button onClick={openTalk} className="btn editor-btn show-talk-button-2">Preview</button>&nbsp; &nbsp;
-        <button onClick={e => publish(user)} className="btn editor-btn download-transcript-button">Publish</button>
+        <button onClick={openTalk} className="btn editor-btn">Preview</button>&nbsp; &nbsp;
+        <button onClick={saveForm} className="btn editor-btn">Save Draft</button>&nbsp; &nbsp;
+        {
+          user.username
+          ? <button onClick={e => publish(user)} className="btn editor-btn" style={{backgroundColor: '#09f', color: '#fff'}}>Publish</button>
+          : <span>
+              <button className="btn editor-btn download-transcript-button" style={{opacity: .4}}>Publish</button>
+              <br/> <span style={{color: '#f30'}}>Login to publish talk</span>
+            </span>
+        }
       </div>
     </div>
     <style jsx global>{`
