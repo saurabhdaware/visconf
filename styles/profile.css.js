@@ -50,10 +50,28 @@ export default css.global/* css */`
 .profile-talks-container{
   padding: 200px;
 }
+.create-button{
+  display: none;
+}
 
 @media (max-width: 768px) {
   .profile-head{
     text-align:center;
+  }
+  .create-button{
+    display: inline-block;
+    position: fixed;
+    font-family: arial;
+    bottom: 20px;
+    right: 12px;
+    background-color: #efe13d;
+    padding: 14px 23px;
+    font-size: 25pt;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 100%;
+    color: #222;
+    box-shadow: 6px 8px 8px -6px #0006;
   }
   .character-relative{
     top: 220px;
@@ -66,6 +84,12 @@ export default css.global/* css */`
     display: block;
     left: 0px;
     padding: 25px 30px;
+    top: 0px;
+  }
+
+  .profile-username .logout-button{
+    position: absolute;
+    right: 0px;
     top: 0px;
   }
 

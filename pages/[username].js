@@ -1,13 +1,15 @@
+import { Fragment, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import styles from '../styles/profile.css.js';
 import Character from '../components/Character';
-import { Fragment, useEffect } from 'react';
 import Meta from '../components/Meta.js';
 import Nav from '../components/Nav.js';
-import { useRouter } from 'next/router'
+import Footer from '../components/Footer.js';
+import TalkTile from '../components/TalkTile.js';
 import { LogoutButton } from '../components/AuthButtons';
 
-import TalkTile from '../components/TalkTile.js';
+import { useRouter } from 'next/router'
+import Link from 'next/link';
 
 
 const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
@@ -34,7 +36,7 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
         <div className="profile-username">
           <h1>{usernameParam}</h1>
           {
-            isLoggedIn 
+            isLoggedIn && user.username === usernameParam
             ? <LogoutButton logout={logout} renderElement={renderProps => <button {...renderProps} className="logout-button">Logout</button>} /> 
             : null 
           }
@@ -46,6 +48,8 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
       talks?.map((val, index) => <TalkTile talkData={val} key={index} />)
     }
     </div>
+    <Link href="create"><a className="create-button">+</a></Link>
+    <Footer></Footer>
     <style jsx>{styles}</style>
     </Fragment>
   )

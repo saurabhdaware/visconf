@@ -18,11 +18,13 @@ const getTalksOfUser = async (req, res) => {
         hairColor: val[5],
         skinColor: val[6],
         tshirtColor: val[7]
-      }
+      },
+      timestamp: val[8]
     })
   })
 
-  res.json({success: true, data: talksData});
+  const sortedTalks = talksData.sort((a, b) => a.timestamp < b.timestamp);
+  res.json({success: true, data: sortedTalks});
 }
 
 module.exports = getTalksOfUser;
