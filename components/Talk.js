@@ -130,7 +130,7 @@ const Talk = ({fetchedData}) => {
               : <button onClick={e => turnVolume('on')} title="mute volume" className="control mute float-right"><i className="material-icons">volume_up</i></button>
             }
 
-            <a title="Create talk button" rel="noopener noreferer" href="editor" target="_blank" className="create-talk-button control float-right"> <b>+</b> &nbsp;Create your talk</a>
+            <a title="Create talk button" href="../create" className="create-talk-button control float-right"> <b>+</b> &nbsp;Create your talk</a>
             <div className="presentation-video-bar" onClick={e => talk.progressBarClickHandler(e.nativeEvent)}>
               <div className="progress-meter">
                 <div className="progress"></div>
