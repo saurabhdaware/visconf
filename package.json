@@ -20,6 +20,7 @@
   },
   "scripts": {
     "dev": "next",
+    "now": "now dev",
     "build": "next build",
     "export": "next export",
     "start": "next start",

@@ -95,7 +95,7 @@ export function EditorForm({openTalk, userData, user, setUserData}) {
         <div className="editor-presentation-preview"></div>
       </div>
       <div className="form-field transcript-editor">
-        <label>Transcript &nbsp;<small>(Auto Save Active)</small></label>
+        <label>Transcript</label>
         <div className="textarea" id="transcript-editor" contentEditable="true"></div>
       </div>
       <div className="form-field">
