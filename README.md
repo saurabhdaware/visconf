@@ -66,6 +66,7 @@ Here's a list of awesome projects that made VisConf Possible!!
 - [Bol](https://github.com/saurabhdaware/bol)
 - [PDFJS](https://github.com/mozilla/pdf.js)
 - [react-google-login](https://github.com/anthonyjgrove/react-google-login)
+- [NoSleep.js](https://github.com/richtr/NoSleep.js)
 - [Cloudinary](https://cloudinary.com/)
 
 ... and other smaller dependencies mentioned in [package.json](package.json)

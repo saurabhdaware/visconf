@@ -1,12 +1,13 @@
 import {wait} from './helpers';
 import Bol from 'bol';
 import slides from '../scripts/slides';
-
+import NoSleep from 'nosleep.js';
 
 class TalkMain {
   constructor(voice, transcript, options = {}) {
     this.bol = new Bol(voice, options);
-    
+    this.noSleep = new NoSleep();
+
     this.transcript = transcript;
     this.mappedTranscript = transcript.split('||').map(slide => slide.split('|'));
     slides.mappedTranscript = this.mappedTranscript;
@@ -68,6 +69,7 @@ class TalkMain {
     this.isPaused = false;
     this.read();
     setIsTalking(true);
+    this.noSleep.enable();
     this.setIsTalking = setIsTalking
   }
 
@@ -75,6 +77,7 @@ class TalkMain {
   pauseHandler(setIsTalking = this.setIsTalking) {
     this.isPaused = true;
     speechSynthesis.cancel();
+    this.noSleep.disable();
     setIsTalking(false);
   }
 
