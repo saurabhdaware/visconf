@@ -43,6 +43,7 @@ const Meta = ({metaInfo}) => {
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
 
       <title>{title}</title>
     </Head>

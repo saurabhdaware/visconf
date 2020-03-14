@@ -8,7 +8,7 @@ function Nav({login, user, isLoggedIn}) {
   return (
     <Fragment>
       <nav>
-        <Link href="/"><a className="brand-title">VisConf</a></Link>
+        <Link href="/"><a className="brand-title">VisConf <small style={{fontWeight: 100}}>(Beta)</small></a></Link>
         <div className="right-items">
           <Link href="create"><a className="create-button-item">+ &nbsp;Create</a></Link>
           {
