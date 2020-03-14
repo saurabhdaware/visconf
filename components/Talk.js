@@ -70,7 +70,7 @@ const Talk = ({fetchedData}) => {
       <div className="presentation-container">
         <div className="sponsor-holder">
           <div className="sponsor-title"><small>🌠</small> VisConf <small>🌠</small></div>
-          <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button" target="_blank" rel="noopner">Become a Supporter &nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
+          <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button">Become a Supporter &nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
           <div className="sponsor-container">
             {
               sponsorData(45).map(sponsor => (
