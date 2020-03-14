@@ -12,7 +12,7 @@
 ## Backend Setup Guide
 VisConf uses [Zeit Now Serverless Functions](https://zeit.co/docs/v2/serverless-functions/introduction) for Backend APIs and [FaunaDB](https://dashboard.fauna.com/) for Database.
 
-If you don't want to work on backend, open `next.config.js` file in repository and change `devConfig.ENDPOINT` to `https://visconf.now.sh/api`. This will make use of production API and thus you won't have to configure local APIs.
+If you don't want to work on backend, open `next.config.js` file in repository and change `devConfig.ENDPOINT` to `https://visconf.cc/api`. This will make use of production API and thus you won't have to configure local APIs.
 
 
 If you want to work on backend, 

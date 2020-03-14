@@ -10,7 +10,7 @@ VisConf lets you generate an animated version of your talk from your slides and 
 
 ![Version badge of the repository](https://img.shields.io/github/package-json/v/saurabhdaware/visconf?style=for-the-badge)
 
-***Demo VisTalk:*** https://visconf.now.sh/saurabhdaware/visconf-intro
+***Demo VisTalk:*** https://visconf.cc/saurabhdaware/visconf-intro
 
 ![Screenshot of VisConf](https://res.cloudinary.com/visconf/image/upload/c_scale,w_500/v1584110061/main_m5rzon.png)
 
@@ -26,7 +26,7 @@ VisConf lets you generate an animated version of your talk from your slides and 
 ### How to Create your Visual Talk
 - Convert your .pptx slides to .pdf format
 - Upload slides to any of the CDNs or GitHub
-- Visit https://visconf.now.sh/create and everything else is as easy as writing a blog!
+- Visit https://visconf.cc/create and everything else is as easy as writing a blog!
 
 ---
 
