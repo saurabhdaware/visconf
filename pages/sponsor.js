@@ -51,6 +51,15 @@ const Sponsor = ({user, login, isLoggedIn}) => {
       .sponsor-info > img{
         width: 500px;
       }
+
+      @media (max-width: 768px){
+        .sponsor-page{
+          padding: 50px 10px;
+        }
+        .sponsor-info > img{
+          width: 100%;
+        }
+      }
       `}</style>
     </div>
   )
