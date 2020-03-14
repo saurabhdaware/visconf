@@ -12,7 +12,7 @@ const Meta = ({metaInfo}) => {
   }
   
   const url = metaInfo.url || 'https://visconf.cc';
-  const ogImage = metaInfo.ogImage || '';
+  const ogImage = metaInfo.ogImage || 'https://res.cloudinary.com/visconf/image/upload/c_scale,h_300,w_600/v1584110061/main_m5rzon.png';
   const title = metaInfo.title || 'VisConf';
 
   return (
@@ -43,7 +43,6 @@ const Meta = ({metaInfo}) => {
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
 
       <title>{title}</title>
     </Head>

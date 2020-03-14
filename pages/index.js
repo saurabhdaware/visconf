@@ -22,7 +22,7 @@ const Index = ({user, login, isLoggedIn}) => {
           <h2>VisConf, Why?</h2>
           <div>
             A lot of times in small meetups, it is not possible for organizers to record talks. Using VisConf, you can generate an animated version of talk from transcript and slides. Thus giving speakers a platform to create and share their meetup talks. <br/><br/>You can create & customize your character and publish your talk  (we call it VisTalk!).<br/>
-            <img src="https://res.cloudinary.com/visconf/image/upload/e_bgremoval/v1584111107/speakers_nhzksa.png" />
+            <img className="responsive-image" src="https://res.cloudinary.com/visconf/image/upload/e_bgremoval/v1584111107/speakers_nhzksa.png" />
           </div>
           
           <br/><br/><h2>VisConf, How?</h2>
@@ -76,6 +76,16 @@ const Index = ({user, login, isLoggedIn}) => {
       }
 
       @media (max-width: 768px){
+        .index-content-container{
+          padding: 60px 30px;
+        }
+        .index-header{
+          padding:100px 30px;
+          box-sizing: border-box;
+        }
+        .responsive-image{
+          width: 100%;
+        }
       }
       `}</style>
     </div>
