@@ -165,6 +165,21 @@ const defaultUser = {
 }
 
 
+const sponsorData = (logoWidth=100) => {
+  return [
+    {
+      name: 'PocketBook.cc',
+      href: 'https://pocketbook.cc',
+      image: `https://res.cloudinary.com/visconf/image/upload/c_scale,w_${logoWidth}/v1584118382/sponsors/logo-512_cyflq8.png`
+    },
+    {
+      name: 'EoTM.ml',
+      href: 'https://eotm.ml',
+      image: `https://res.cloudinary.com/saurabhdaware/image/upload/c_scale,w_${logoWidth}/v1541420665/brands/logo.png`
+    }
+  ]
+}
+
 export { 
   wait,
   isMobile, 
@@ -176,5 +191,6 @@ export {
   setLocalStorageValue,
   getLocalStorageData,
   defaultUser,
-  defaultTranscriptText
+  defaultTranscriptText,
+  sponsorData
 }

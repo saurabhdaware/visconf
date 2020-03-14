@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import Character from './Character';
-import Sponsors from './Sponsors';
 
 import slides from '../scripts/slides';
 import styles from '../styles/talk.css.js';
@@ -10,7 +9,8 @@ import styles from '../styles/talk.css.js';
 import { 
   openFullscreen, 
   closeFullscreen,
-  toggleCaptions
+  toggleCaptions,
+  sponsorData
 } from '../scripts/helpers';
 
 import TalkMain from '../scripts/TalkMain';
@@ -71,7 +71,18 @@ const Talk = ({fetchedData}) => {
         <div className="sponsor-holder">
           <div className="sponsor-title"><small>🌠</small> VisConf <small>🌠</small></div>
           <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button" target="_blank" rel="noopner">Become a Supporter &nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
-          <Sponsors />
+          <div className="sponsor-container">
+            {
+              sponsorData(45).map(sponsor => (
+                <div className="sponsor-col">
+                  <a href={sponsor.href} target="_blank" rel="noopener norefferer">
+                    <img src={sponsor.image}/>
+                    <span>{sponsor.name}</span>
+                  </a>
+                </div>
+              ))
+            }
+          </div>
         </div>
         <div className="slides-display-container"><span className="default-nosignal-text"><small>Source: HDMI <br/>NO SIGNAL<br/>Attempting to Connect...</small> </span></div>
         <a href="https://github.com/saurabhdaware/visconf" target="_blank" className="github-corner" aria-label="View source on GitHub">

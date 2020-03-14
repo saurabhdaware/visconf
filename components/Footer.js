@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { sponsorData } from '../scripts/helpers';
 
 function Footer() {
   return (
@@ -7,29 +8,27 @@ function Footer() {
         <div className="col">
           <Link href="/"><a>Home</a></Link>
           <Link href="create"><a>Create</a></Link>
-          <a href="https://github.com/saurabhdaware/visconf/blob/master/LICENSE">License</a>
+          <a href="https://github.com/saurabhdaware/visconf/blob/master/LICENSE">License <i className="material-icons ext-link">call_made</i></a>
         </div>
         <div className="col">
-          <a href="https://github.com/saurabhdaware/visconf">GitHub Repo</a>
-          <a href="https://github.com/saurabhdaware/visconf/blob/master/CONTRIBUTING.md">Contributing</a>
-          <a href="https://github.com/saurabhdaware/visconf#dependencies">Dependencies</a>
+          <a href="https://github.com/saurabhdaware/visconf">GitHub Repo <i className="material-icons ext-link">call_made</i></a>
+          <a href="https://github.com/saurabhdaware/visconf/blob/master/CONTRIBUTING.md">Contributing <i className="material-icons ext-link">call_made</i></a>
+          <a href="https://github.com/saurabhdaware/visconf#dependencies">Dependencies <i className="material-icons ext-link">call_made</i></a>
         </div>
       </div>
       <div className="footer-sponsors-container">
         <div style={{fontSize: '15pt', color: '#ddd', marginBottom: '30px'}}>- Sponsors -</div>
         <div className="footer-sponsors">
-          <div>
-            <a href="https://pocketbook.cc" target="_blank" rel="noopener norefferer">
-              <img src="https://res.cloudinary.com/visconf/image/upload/c_scale,w_100/v1584118382/sponsors/logo-512_cyflq8.png"/>
-              <span className="sponsor-name">PocketBook.cc</span>
-            </a>
-          </div>
-          <div>
-            <a href="https://eotm.ml" target="_blank" rel="noopener norefferer">
-              <img src="https://res.cloudinary.com/saurabhdaware/image/upload/c_scale,w_100/v1541420665/brands/logo.png"/>
-              <span className="sponsor-name">Edge of The Matrix</span>
-            </a>
-          </div>
+          {
+            sponsorData(100).map(sponsor => (
+              <div>
+                <a href={sponsor.href} target="_blank" rel="noopener norefferer">
+                  <img src={sponsor.image}/>
+                  <span className="sponsor-name">{sponsor.name} <i className="material-icons ext-link">call_made</i></span>
+                </a>
+              </div>
+            ))
+          }
         </div>
         <Link href="sponsor"><a className="footer-button btn">Sponsor us 🌻</a></Link>
       </div>
@@ -55,6 +54,9 @@ function Footer() {
       .row > .col{
         flex:1;
         padding: 60px 60px;
+      }
+      .material-icons.ext-link{
+        font-size: 10pt;
       }
       .col > a{
         display: block;
