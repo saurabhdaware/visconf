@@ -23,7 +23,7 @@ const getTalksOfUser = async (req, res) => {
     })
   })
 
-  const sortedTalks = talksData.sort((a, b) => a.timestamp < b.timestamp);
+  const sortedTalks = talksData.sort((a, b) => b.timestamp - a.timestamp);
   res.json({success: true, data: sortedTalks});
 }
 

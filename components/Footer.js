@@ -21,7 +21,7 @@ function Footer() {
         <div className="footer-sponsors">
           {
             sponsorData(100).map(sponsor => (
-              <div>
+              <div key={sponsor.title}>
                 <a href={sponsor.href} target="_blank" rel="noopener norefferer">
                   <img src={sponsor.image}/>
                   <span className="sponsor-name">{sponsor.name} <i className="material-icons ext-link">call_made</i></span>

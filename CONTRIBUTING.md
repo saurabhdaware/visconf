@@ -6,7 +6,7 @@
 - `cd visconf`
 - `npm install` to install dependencies
 - There may be extra steps you need to follow depending on what you want to work on. Checkout [Backend Setup Guide](#backend-setup-guide) for Backend and Database setup.
-- `npm run now` to run
+- `npm start` to run
 
 
 ## Backend Setup Guide
@@ -19,7 +19,7 @@ If you want to work on backend,
 - Create Account in https://fauna.com/
 - In faunadb, Create two collections, `talks` and `users`
 - In repository, rename `.env.sample` to `.env` and set `FAUNADB_SECRET_KEY=<your faunadb secret key>`.
-- Run `npm run now` to run APIs and Frontend.
+- Run `npm start` to run APIs and Frontend.
 
 ---
 

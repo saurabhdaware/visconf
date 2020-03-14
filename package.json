@@ -23,9 +23,7 @@
     "dev": "next",
     "now": "now dev",
     "build": "next build",
-    "export": "next export",
-    "start": "next start",
-    "deploy": "next build && next export"
+    "start": "now dev"
   },
   "repository": {
     "type": "git",
