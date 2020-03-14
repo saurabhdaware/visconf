@@ -6,6 +6,7 @@ function LoginButton({login}) {
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Login"
       onSuccess={login}
+      onFailure={err => alert(JSON.stringify({err}))}
       render={renderProps => 
         <a 
           onClick={renderProps.onClick} 

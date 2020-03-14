@@ -31,7 +31,7 @@ const devEnv = {
 
 const prodEnv = {
   ...commonEnv,
-  ENDPOINT: 'https://visconf.now.sh/api',
+  ENDPOINT: 'https://visconf.cc/api',
   GOOGLE_CLIENT_ID: '72230708921-vh8fs49a0g1m26bf6kkfn43ke4a6ro90.apps.googleusercontent.com' // This key won't work in your domain so make sure you change the key with your project's client id to test
 }
 
