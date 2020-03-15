@@ -24,7 +24,7 @@ const Meta = ({metaInfo}) => {
         <meta name="theme-color" content="#111111" />
         <meta name="description" content={description} />
 
-        <link rel="icon" sizes="64x64" href="/images/favicon.ico" />
+        <link rel="icon" sizes="64x64" href="/favicon.ico" />
         <link rel="icon" sizes="192x192" href="/images/logo-192.png" />
 
         <meta property="og:type" content="website" />
