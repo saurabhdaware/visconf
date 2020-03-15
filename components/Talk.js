@@ -44,6 +44,12 @@ async function init(userData, setIsReadyToTalk) {
   document.querySelector('.mike-holder').innerHTML = userData.eventName;
   document.querySelector('.character-container').classList.remove('hide');
   let transcript = userData.transcriptText;
+  if(!transcript) {
+    const res = await (await fetch(`${process.env.ENDPOINT}/get-transcript?uid=${userData.uid}&slug=${userData.slug}`)).json();
+    console.log(res);
+    transcript = res.message;
+
+  }
 
   talk = new TalkMain(
     userData.voice?.name ?? "UK English Male", 
