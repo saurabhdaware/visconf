@@ -33,10 +33,15 @@ Main.getInitialProps = async ctx  => {
       return errResponse;
     }
   }catch(err) {
-    console.log(err.message);
+    console.log(err);
     return errResponse;
   }
 
+  if(!data.message) {
+    console.log("No data.message");
+    console.log(data);
+    return errResponse
+  }
 
   return {
     metaInfo: {

@@ -73,8 +73,8 @@ const Talk = ({fetchedData}) => {
           <div className="become-sponsor-container"><Link href="/sponsor"><a className="become-sponsor-button">Become a Supporter &nbsp;<span className="material-icons">favorite_border</span></a></Link></div>
           <div className="sponsor-container">
             {
-              sponsorData(45).map(sponsor => (
-                <div className="sponsor-col">
+              sponsorData(45).map((sponsor, index) => (
+                <div kee={index} className="sponsor-col">
                   <a href={sponsor.href} target="_blank" rel="noopener norefferer">
                     <img src={sponsor.image}/>
                     <span>{sponsor.name}</span>
