@@ -56,16 +56,31 @@ class Slides {
 
   async setSlides(pdfPath) {
     const pdf = await this.loadPDF(pdfPath);
-    document.querySelector('.slides-display-container').innerHTML = ''
-    for(let pageNumber=1; pageNumber<=pdf._pdfInfo.numPages; pageNumber++) {
-      document.querySelector('.slides-display-container').innerHTML += `
-      <div class="slide slide-${pageNumber} ${pageNumber === 1 ? 'show' : '' }" data-slide=${pageNumber}>
+    const slideDisplayContainerEl = document.querySelector('.slides-display-container');
+    
+    // rendering first slide ASAP
+    slideDisplayContainerEl.innerHTML = /* html */`
+      <div class="slide slide-1 show" data-slide=1 >
+        <canvas id="canvas-page-1"></canvas>
+      </div>
+    `
+    this.renderPage(1);
+
+    // later rendering other slides
+    let nextSlidesHTMLContainer = '';
+    for(let pageNumber=2; pageNumber<=pdf._pdfInfo.numPages; pageNumber++) {
+      nextSlidesHTMLContainer += /* html */`
+      <div class="slide slide-${pageNumber}" data-slide=${pageNumber}>
         <canvas id="canvas-page-${pageNumber}"></canvas>
       </div>
       `;
-
-      this.renderPage(pageNumber);
     }
+
+    slideDisplayContainerEl.innerHTML += nextSlidesHTMLContainer;
+    for(let pageNumber=2; pageNumber<=pdf._pdfInfo.numPages; pageNumber++) {
+      this.renderPage(pageNumber)
+    }
+
   }
 
   goToSlideNumber(slideNumber) {
