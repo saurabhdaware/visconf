@@ -17,6 +17,10 @@ const getTalk = async (req, res) => {
       skinColor: response[6],
       tshirtColor: response[7]
     },
+    timestamp: response[8],
+    voice: {
+      name: response[9]
+    },
     username,
     uid
   }

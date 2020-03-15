@@ -4,10 +4,9 @@ import slides from '../scripts/slides';
 import NoSleep from 'nosleep.js';
 
 class TalkMain {
-  constructor(voice, transcript, options = {}) {
+  constructor(voice, transcript, options = {rate: 1}) {
     this.bol = new Bol(voice, options);
     this.noSleep = new NoSleep();
-
     this.transcript = transcript;
     this.mappedTranscript = transcript.split('||').map(slide => slide.split('|'));
     slides.mappedTranscript = this.mappedTranscript;

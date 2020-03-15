@@ -46,7 +46,6 @@ async function init(userData, setIsReadyToTalk) {
   let transcript = userData.transcriptText;
   if(!transcript) {
     const res = await (await fetch(`${process.env.ENDPOINT}/get-transcript?uid=${userData.uid}&slug=${userData.slug}`)).json();
-    console.log(res);
     transcript = res.message;
 
   }
