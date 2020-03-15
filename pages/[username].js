@@ -56,7 +56,6 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
 }
 
 Profile.getInitialProps = async ctx => {
-  const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${ctx.query.username}`);
   let resData = [];
   const metaInfo = {
     title: `Talks from ${ctx.query.username}`,
@@ -65,9 +64,11 @@ Profile.getInitialProps = async ctx => {
   }
 
   try{
+    const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${ctx.query.username}`);
     resData = await response.json();
   }catch(err) {
-    resData = []
+    console.log(err);
+    resData = {data:[]}
   }
 
   return {
