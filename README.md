@@ -75,7 +75,7 @@ Here's a list of awesome projects that made VisConf Possible!!
 ---
 Thank You 🌻
 
-![Picture of multiple animated characters from visconf with the setup of laptop and stage](https://res.cloudinary.com/visconf/image/upload/v1584111107/speakers_nhzksa.png)
+![Picture of multiple animated characters from visconf with the setup of laptop and stage](https://res.cloudinary.com/visconf/image/upload/e_bgremoval/v1584111107/speakers_nhzksa.png)
 
 I would be super happy to have sponsors for this project! you can Buy me a Coffee or email me at saurabhdaware99@gmail.com
 
