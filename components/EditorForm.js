@@ -2,22 +2,6 @@ import { Fragment, useEffect } from "react";
 import { setLocalStorageValue } from '../scripts/helpers';
 import Character from '../components/Character';
 
-
-let autoSaveTimeout;
-function handleAutoSave(whatToSave = 'transcript') {
-  if(autoSaveTimeout) clearTimeout(autoSaveTimeout);
-  autoSaveTimeout = setTimeout(() => {
-    if(whatToSave === 'transcript') {
-      setLocalStorageValue({transcriptText: document.querySelector('#transcript-editor').innerText})
-    }else{
-      const objToStore = {
-        eventName: document.querySelector('#event-name').value,
-        talkTitle: document.querySelector('#talk-title').value
-      }
-      setLocalStorageValue(objToStore);
-    }
-  }, 800)
-}
 function saveForm() {
   const finalData = {
     talkTitle: document.querySelector('#talk-title').value,
@@ -36,6 +20,8 @@ function saveForm() {
     }
   }
   setLocalStorageValue(finalData);
+  document.querySelector('#message').innerHTML = '<span>Draft Saved</span>';
+  setTimeout(() => document.querySelector('#message').innerHTML = '', 3000);
 }
 
 async function publish(user) {
@@ -72,12 +58,9 @@ async function publish(user) {
 }
 
 
-export function EditorForm({openTalk, userData, user, setUserData}) {
+export function EditorForm({openTalk, userData, user, setUserData, editKey}) {
 
   useEffect(() => {
-    document.querySelector('#transcript-editor').addEventListener('input', e => handleAutoSave('transcript'));
-    document.querySelector('#talk-title').addEventListener('input', e => handleAutoSave('talktitle'));
-
     return saveForm;
   }, []);
 
@@ -97,9 +80,7 @@ export function EditorForm({openTalk, userData, user, setUserData}) {
       }
     }
 
-    setLocalStorageValue(newUserChanges)
     setUserData(newUserChanges)
-
     document.querySelector('.mike-holder').innerHTML = eventNameInput.value;
   }
 
@@ -116,7 +97,7 @@ export function EditorForm({openTalk, userData, user, setUserData}) {
         <div className="editor-presentation-preview"></div>
       </div>
       <div className="form-field transcript-editor">
-        <label>Transcript</label>
+        <label>Transcript (Make sure to save form before you close)</label>
         <div className="textarea" id="transcript-editor" contentEditable="true"></div>
       </div>
       <div className="form-field">
@@ -169,6 +150,9 @@ export function EditorForm({openTalk, userData, user, setUserData}) {
               <br/> <span style={{color: '#f30'}}>Login to publish talk</span>
             </span>
         }
+      </div>
+      <div className="form-field">
+        <div id="message"></div>
       </div>
     </div>
     <style jsx global>{`

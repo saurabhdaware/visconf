@@ -104,8 +104,8 @@ function setLocalStorageValue(newValues, key='default-form') {
   window.localStorage.setItem(key, JSON.stringify({...currentFormData, ...newValues}))
 }
 
-function getLocalStorageData() {
-  return JSON.parse((window.localStorage.getItem("default-form") || "{}"));
+function getLocalStorageData(key='default-form') {
+  return JSON.parse((window.localStorage.getItem(key) || "{}"));
 }
 
 const defaultTranscriptText = `

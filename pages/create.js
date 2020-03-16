@@ -3,6 +3,8 @@ import Meta from '../components/Meta';
 import { Fragment, useState, useEffect } from 'react';
 import { EditorForm } from '../components/EditorForm';
 import styles from '../styles/create.css';
+import { useRouter } from 'next/router'
+
 import Talk from '../components/Talk';
 import { 
   defaultUser,
@@ -72,16 +74,18 @@ function fillFormValues(formData) {
  * - /create?talk=visconf-intro to edit the existing talk!
  * HOW?
  * - read queryParams and send title name to editForm
- * - in EditForm, add the talk slug as key in setLocalStorage's second paramter
+ * - in EditForm, add the talk slug as key i1n setLocalStorage's second paramter
 */
 export default function Create({login, logout, user, isLoggedIn}) {
+  const slugToEdit = useRouter().query.slug;
+  console.log(slugToEdit);
+  
   const authObject = {login, logout, user, isLoggedIn};
   const [isEditorShown, setIsEditorShown] = useState(true);
   const [userData, setUserData] = useState(defaultUser);
 
-
   const initFormData = () => {
-    const locallyStoredData = getLocalStorageData();
+    let locallyStoredData = getLocalStorageData();
     const dataToFill = {
       transcriptText: locallyStoredData.transcriptText || defaultTranscriptText,
       talkTitle: locallyStoredData.talkTitle || '',
@@ -145,6 +149,7 @@ export default function Create({login, logout, user, isLoggedIn}) {
                 openTalk={openTalk}
                 userData={userData} 
                 setUserData={setUserData}
+                editKey={slugToEdit}
               />
             : <Talk fetchedData={userData} />
           }
