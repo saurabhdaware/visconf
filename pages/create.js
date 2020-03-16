@@ -185,7 +185,12 @@ function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername}) {
 Create.getInitialProps = async ctx => {
   return {
     slugToEdit: ctx.query.slug,
-    tempUsername: ctx.query.username
+    tempUsername: ctx.query.username,
+    metaInfo: {
+      title: 'Create animated version of talk from transcript and slides | VisConf',
+      url: 'https://visconf.cc/create',
+      ogImage: 'https://res.cloudinary.com/visconf/image/upload/c_fit,e_colorize:50,l_text:arial_45_bold:Create%20animated%20talk,r_0,w_450,y_-70/v1584122962/og/og-profile_kzamh8.png',
+    }
   }
 }
 
