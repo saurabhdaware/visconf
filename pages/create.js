@@ -76,7 +76,7 @@ function fillFormValues(formData) {
  * - read queryParams and send title name to editForm
  * - in EditForm, add the talk slug as key i1n setLocalStorage's second paramter
 */
-function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername}) {
+function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername, metaInfo}) {
   const authObject = {login, logout, user, isLoggedIn};
   const [isEditorShown, setIsEditorShown] = useState(true);
   const [userData, setUserData] = useState(defaultUser);
@@ -150,7 +150,7 @@ function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername}) {
 
   return (
     <Fragment>
-      <Meta/>
+      <Meta metaInfo={metaInfo}/>
       {
         isEditorShown
         ? <Nav {...authObject}/>
