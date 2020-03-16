@@ -25,14 +25,17 @@ function Nav({login, user, isLoggedIn}) {
           {/* <Link href="[username]" as="saurabhdaware"><a><i className="material-icons icon-pos-fix">face</i> {user.name}</a></Link> */}
         </div>
         <style jsx global>{/*css*/`
-        nav a{
+        nav a, nav > .right-items > button{
           text-decoration: none;
           padding: 20px 23px;
           display: inline-block;
           color: #ccc;
           font-size: 14pt;
+          font-family: inherit;
+          border: none;
           border-bottom: 3px solid transparent;
           cursor: pointer;
+          background: transparent;
         }
         nav .profile-image{
           position: absolute;
@@ -44,7 +47,7 @@ function Nav({login, user, isLoggedIn}) {
           top: 3px;
         }
 
-        nav > .right-items > a:hover{
+        nav > .right-items > a:hover, nav > .right-items > button:hover{
           background-color: #333;
           border-bottom: 3px solid #ff0;
           transition: all .3s ease;

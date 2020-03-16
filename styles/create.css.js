@@ -108,16 +108,14 @@ div.editor-slide{
     height: 100px;
   }
   .editor-main{
-    padding: 10px 10px;
+    padding: 0px 10px;
   }
   .form-submit{
     margin-top: 160px;
   }
-}
-
-@media (max-width: 768px) {
   .editor-component{
-      padding: 30px 20px;
+    padding: 30px 20px;
   }
 }
+
 `

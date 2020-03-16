@@ -67,6 +67,13 @@ const Talk = ({fetchedData}) => {
 
   const [isTalking, setIsTalking] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  useEffect(() => {
+    return () => {
+      try{
+        closeFullscreen();
+      }catch(err){}
+    }
+  }, []);
   
   const {isVolumeOn, turnVolume} = useVolume(true);
 

@@ -10,7 +10,9 @@ import {
   defaultUser,
   getLocalStorageData, 
   defaultTranscriptText, 
-  isURL 
+  isURL, 
+  openFullscreen,
+  isMobile
 } from '../scripts/helpers';
 import slides from '../scripts/slides';
 import Footer from '../components/Footer';
@@ -121,13 +123,18 @@ function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername}) {
 
   useEffect(() => {
     if(isEditorShown) {
+      // Editor form
       document.querySelector('.show-editor-button').style.opacity = 1;
       document.querySelector('.show-talk-button').style.opacity = .7;
       document.querySelector('.editor-component .fetch-slides-btn').addEventListener('click', applyEditorSlides);
       (async () => await initFormData())();
     }else {
+      // Talk preview
       document.querySelector('.show-editor-button').style.opacity = .7;
       document.querySelector('.show-talk-button').style.opacity = 1;
+      if(isMobile()) {
+        openFullscreen();
+      }
     }
   }, [isEditorShown])
 

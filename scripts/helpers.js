@@ -25,7 +25,7 @@ function isURL(str) {
 
 
 /* View in fullscreen */
-function openFullscreen(setIsFullScreen) {
+function openFullscreen(setIsFullScreen = () => {}) {
   const elem = document.documentElement;
 
   if (elem.requestFullscreen) {
@@ -46,7 +46,7 @@ function openFullscreen(setIsFullScreen) {
 /* Close fullscreen */
 function closeFullscreen(setIsFullScreen) {
   if (document.exitFullscreen) {
-    document.exitFullscreen();
+    document.exitFullscreen().catch(err => Promise.resolve(err));
   } else if (document.mozCancelFullScreen) { /* Firefox */
     document.mozCancelFullScreen();
   } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */

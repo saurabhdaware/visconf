@@ -6,15 +6,14 @@ function LoginButton({login}) {
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Login"
       onSuccess={login}
-      onFailure={err => alert(JSON.stringify({err}))}
+      onFailure={err => console.log(JSON.stringify({err}))}
       render={renderProps => 
-        <a 
+        <button 
           onClick={renderProps.onClick} 
           disabled={renderProps.disabled}
-          href="javascript:void(0);"
         >
           <img src="https://i.ya-webdesign.com/images/transparent-g-black-and-white-4.png" className="icon-pos-fix" style={{opacity: .8}} width="20" />&nbsp;&nbsp; Login
-        </a>
+        </button>
       }
       
       cookiePolicy={'single_host_origin'}
