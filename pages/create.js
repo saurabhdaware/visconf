@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import Talk from '../components/Talk';
 import { 
   defaultUser,
-  setLocalStorageValue,
   getLocalStorageData, 
   defaultTranscriptText, 
   isURL 
@@ -21,7 +20,6 @@ import Footer from '../components/Footer';
 function applyEditorSlides() {
   let slidesInput = document.querySelector('#slides-input');
   if(!slidesInput) return;
-  setLocalStorageValue({slidePdfLink: slidesInput.value});
 
   if(slidesInput.value && isURL(slidesInput.value) && slidesInput.value.includes('.pdf')){
     fetchEditorSlides();
@@ -76,23 +74,39 @@ function fillFormValues(formData) {
  * - read queryParams and send title name to editForm
  * - in EditForm, add the talk slug as key i1n setLocalStorage's second paramter
 */
-export default function Create({login, logout, user, isLoggedIn}) {
-  const slugToEdit = useRouter().query.slug;
-  console.log(slugToEdit);
-  
+function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername}) {
   const authObject = {login, logout, user, isLoggedIn};
   const [isEditorShown, setIsEditorShown] = useState(true);
   const [userData, setUserData] = useState(defaultUser);
 
-  const initFormData = () => {
-    let locallyStoredData = getLocalStorageData();
-    const dataToFill = {
-      transcriptText: locallyStoredData.transcriptText || defaultTranscriptText,
-      talkTitle: locallyStoredData.talkTitle || '',
-      eventName: locallyStoredData.eventName || 'VisConf',
-      slidePdfLink: locallyStoredData.slidePdfLink || defaultUser.slidePdfLink,
-      character: locallyStoredData.character || defaultUser.character
-    };
+  const initFormData = async () => {
+    let locallyStoredData;
+    let dataToFill;
+    if(slugToEdit) {
+      // Editing published talk
+        const talkData = await (await fetch(`${process.env.ENDPOINT}/get-talk?username=${tempUsername}&slug=${slugToEdit}`)).json();
+        console.log(talkData);
+        const transcriptData = await (await (await (fetch(`${process.env.ENDPOINT}/get-transcript?uid=${talkData.message.uid}&slug=${slugToEdit}`))).json())
+        locallyStoredData = getLocalStorageData((tempUsername + '**' + slugToEdit));
+        dataToFill = {
+          transcriptText: locallyStoredData.transcriptText || transcriptData.message,
+          talkTitle: locallyStoredData.talkTitle || talkData.message.talkTitle,
+          eventName: locallyStoredData.eventName || talkData.message.eventName,
+          slidePdfLink: locallyStoredData.slidePdfLink ||talkData.message.slidePdfLink,
+          character: locallyStoredData.character || talkData.message.character
+        };
+
+    }else{
+      // Editing unpublished talk / create new talk
+      locallyStoredData = getLocalStorageData();
+      dataToFill = {
+        transcriptText: locallyStoredData.transcriptText || defaultTranscriptText,
+        talkTitle: locallyStoredData.talkTitle || '',
+        eventName: locallyStoredData.eventName || 'VisConf',
+        slidePdfLink: locallyStoredData.slidePdfLink || defaultUser.slidePdfLink,
+        character: locallyStoredData.character || defaultUser.character
+      };
+    }
 
 
     fillFormValues(dataToFill);
@@ -111,7 +125,7 @@ export default function Create({login, logout, user, isLoggedIn}) {
       document.querySelector('.show-editor-button').style.opacity = 1;
       document.querySelector('.show-talk-button').style.opacity = .7;
       document.querySelector('.editor-component .fetch-slides-btn').addEventListener('click', applyEditorSlides);
-      initFormData();
+      (async () => await initFormData())();
     }else {
       document.querySelector('.show-editor-button').style.opacity = .7;
       document.querySelector('.show-talk-button').style.opacity = 1;
@@ -149,7 +163,7 @@ export default function Create({login, logout, user, isLoggedIn}) {
                 openTalk={openTalk}
                 userData={userData} 
                 setUserData={setUserData}
-                editKey={slugToEdit}
+                editKey={(tempUsername + '**' + slugToEdit)}
               />
             : <Talk fetchedData={userData} />
           }
@@ -160,3 +174,13 @@ export default function Create({login, logout, user, isLoggedIn}) {
     </Fragment>
   );
 }
+
+
+Create.getInitialProps = async ctx => {
+  return {
+    slugToEdit: ctx.query.slug,
+    tempUsername: ctx.query.username
+  }
+}
+
+export default Create;

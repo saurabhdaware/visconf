@@ -11,6 +11,7 @@ function LoginButton({login}) {
         <a 
           onClick={renderProps.onClick} 
           disabled={renderProps.disabled}
+          href="javascript:void(0);"
         >
           <img src="https://i.ya-webdesign.com/images/transparent-g-black-and-white-4.png" className="icon-pos-fix" style={{opacity: .8}} width="20" />&nbsp;&nbsp; Login
         </a>

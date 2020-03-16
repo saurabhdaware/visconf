@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import fetch from 'isomorphic-unfetch';
 import styles from '../styles/profile.css.js';
 import Character from '../components/Character';
@@ -8,20 +8,44 @@ import Footer from '../components/Footer.js';
 import TalkTile from '../components/TalkTile.js';
 import { LogoutButton } from '../components/AuthButtons';
 
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Link from 'next/link';
 
+async function fetchTalks(username) {
+  let resData = {};
+  try{
+    const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${username}`);
+    resData = await response.json();
+  }catch(err) {
+    console.log(err);
+    resData = {data:[]}
+  }
 
-const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
+  return resData;
+
+}
+
+function setAllTalks(username) {
+  
+}
+
+const Profile = ({metaInfo, login, logout, user, isLoggedIn}) => {
   const authObject = {login, logout, user, isLoggedIn};
+  const [talks, setTalks] = useState([]);
 
   const router = useRouter();
   const { username: usernameParam } = router.query;
 
-  useEffect(() => {
+  const setAllTalks = async () => {
+    const {data} = await fetchTalks(usernameParam);
+    setTalks(data);
     setTimeout(() => {
       document.querySelector('.character-container')?.classList.remove('hide');
     }, 600);
+  }
+
+  useEffect(() => {
+    setAllTalks();
   }, []);
 
   return (
@@ -45,7 +69,9 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
     </div>
     <div className="profile-talks-container">
     {
-      talks?.map((val, index) => <TalkTile talkData={val} key={index} />)
+      talks.length > 0
+      ? talks.map((val, index) => <TalkTile talkData={val} key={index} user={user} setAllTalks={setAllTalks}/>)
+      : <TalkTile user={user} talkData={{TalkTile: '...', slug: '...', eventName: '...', username: usernameParam}} />
     }
     </div>
     <Link href="create"><a className="create-button">+</a></Link>
@@ -56,24 +82,14 @@ const Profile = ({metaInfo, talks, login, logout, user, isLoggedIn}) => {
 }
 
 Profile.getInitialProps = async ctx => {
-  let resData = [];
   const metaInfo = {
     title: `Talks from ${ctx.query.username}`,
     url: 'https://visconf.cc'+ctx.asPath,
     ogImage: `https://res.cloudinary.com/visconf/image/upload/c_fit,e_colorize:50,l_text:arial_45_bold:${ctx.query.username},r_0,w_450,y_-70/v1584122962/og/og-profile_kzamh8.png`
   }
 
-  try{
-    const response = await fetch(`${process.env.ENDPOINT}/get-talks-of-user?username=${ctx.query.username}`);
-    resData = await response.json();
-  }catch(err) {
-    console.log(err);
-    resData = {data:[]}
-  }
-
   return {
     metaInfo,
-    talks: resData.data
   }
 }
 

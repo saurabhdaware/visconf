@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { setLocalStorageValue } from '../scripts/helpers';
 import Character from '../components/Character';
 
-function saveForm() {
+function saveForm(editKey=undefined) {
   const finalData = {
     talkTitle: document.querySelector('#talk-title').value,
     slug: document.querySelector('#talk-title').value.replace(/ /g, '-').toLowerCase(),
@@ -19,9 +19,19 @@ function saveForm() {
       name: 'UK English Female'
     }
   }
-  setLocalStorageValue(finalData);
+
+  if(editKey !== undefined && editKey !== null && editKey !== 'undefined**undefined') {
+    setLocalStorageValue(finalData, editKey);
+  } else {
+    setLocalStorageValue(finalData);
+  }
+
   document.querySelector('#message').innerHTML = '<span>Draft Saved</span>';
-  setTimeout(() => document.querySelector('#message').innerHTML = '', 3000);
+  setTimeout(() => {
+    if(document.querySelector('#message')) {
+      document.querySelector('#message').innerHTML = ''
+    }
+  }, 3000);
 }
 
 async function publish(user) {
@@ -53,15 +63,15 @@ async function publish(user) {
 
   const res = await ((await fetch(`${process.env.ENDPOINT}/submit-talk`, options)).json());
   if(res.success === true) {
-    window.location.href = res.data.path;
+    window.location.href = `/${user.username}/${res.data.slug}`;
   }
 }
 
 
-export function EditorForm({openTalk, userData, user, setUserData, editKey}) {
+export function EditorForm({openTalk, userData, user, setUserData, editKey=undefined}) {
 
   useEffect(() => {
-    return saveForm;
+    return () => saveForm(editKey);
   }, []);
 
   
@@ -141,10 +151,12 @@ export function EditorForm({openTalk, userData, user, setUserData, editKey}) {
       <div className="form-field form-submit">
         {/* <button className="btn editor-btn download-transcript-button">Download Transcript.md</button>&nbsp; &nbsp; */}
         <button onClick={openTalk} className="btn editor-btn">Preview</button>&nbsp; &nbsp;
-        <button onClick={saveForm} className="btn editor-btn">Save Draft</button>&nbsp; &nbsp;
+        <button onClick={e => saveForm(editKey)} className="btn editor-btn">Save Draft</button>&nbsp; &nbsp;
         {
           user.username
-          ? <button onClick={e => publish(user)} className="btn editor-btn" style={{backgroundColor: '#09f', color: '#fff'}}>Publish</button>
+          ? <span>
+              <button onClick={e => publish(user)} className="btn editor-btn" style={{backgroundColor: '#09f', color: '#fff'}}>Publish</button>&nbsp; &nbsp;
+            </span>
           : <span>
               <button className="btn editor-btn download-transcript-button" style={{opacity: .4}}>Publish</button>
               <br/> <span style={{color: '#f30'}}>Login to publish talk</span>

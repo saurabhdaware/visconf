@@ -26,8 +26,22 @@ async function readAll(index, value = null) {
 	);
 }
 
+async function deleteValue(index, value) {
+	return client.query(
+		q.Get(
+			q.Match(
+				q.Index(index),
+				value
+			)
+		)
+	).then(({ref}) => {
+		return client.query(q.Delete(ref))
+	})
+}
+
 module.exports = {
     create,
     read,
-    readAll
+		readAll,
+		deleteValue
 }

@@ -3,12 +3,10 @@ const { verifyToken } = require('./_utils/authHelper');
 
 const submitTalk = async (req, res) => {
   const { sub } = await verifyToken(req.headers.authorization.slice(7));
-  const { data } = await fauny.read('users_by_uid', sub);
 
   const talkDataToStore = {
     ...req.body,
-    uid: data.uid,
-    username: data.username,
+    uid: sub,
     timestamp: new Date().getTime()
   }
 
@@ -17,7 +15,7 @@ const submitTalk = async (req, res) => {
     res.json({
       success: true,
       data: {
-        path: `/${talkDataToStore.username}/${talkDataToStore.slug}`
+        slug: talkDataToStore.slug
       }
     })
   }catch(err) {
@@ -26,9 +24,6 @@ const submitTalk = async (req, res) => {
       err
     })
   }
-
-  
-
 }
 
 
