@@ -20,14 +20,6 @@ html, body{
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .talk-page{
-    padding: 20px;
-    width: 100%;
-    overflow: hidden;
-  }
-}
-
 .presentation-container{
   background-color: #151e2c;
   height: 350px;
@@ -89,44 +81,6 @@ html, body{
 #rotate-screen-button{
   text-align: center;display:block;width: 100%;padding: 10px;
   box-shadow:3px 10px 16px #1119; 
-}
-
-@media (orientation: portrait){
-  .stage-container{
-    position: fixed;
-    bottom: 60px;
-    left: -100px;
-    z-index: 201;
-    transform: rotate(90deg);
-  }
-  .stage-front, .stage-platform{
-    display: none;
-  }
-  .character-container .myhead{
-    transform: rotate(-40deg) translateX(-2px);
-    animation: headTilt 2s infinite ease-in;
-  }
-
-  .character-container .myhair{
-    transform: rotate(-40deg) translateX(2px);
-    animation: headTiltHair 1.9s infinite ease-in;
-  }
-  .orientation-error{
-    display: block;
-  }
-
-  @keyframes headTilt {
-    0% {transform: rotate(-40deg) translateX(-2px);}
-    30% {transform: rotate(0deg) translateX(0px);}
-    70% {transform: rotate(-40deg) translateX(-2px);}
-    100% {transform: rotate(-40deg) translateX(-2px);}
-  }
-
-  @keyframes headTiltHair {
-    0% {transform: rotate(-40deg) translateX(2px);}
-    30% {transform: rotate(0deg) translateX(0px);}
-    100% {transform: rotate(-40deg) translateX(2px);}
-  }
 }
 
 .orientation-error  .material-icons{
@@ -282,9 +236,56 @@ html, body{
 .float-right{
   float: right !important;
 }
+
+.end-banner{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(#000000e7, #000000f7);
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  display: none;
+  color: #bbb;
+  padding: 100px 100px;
+  font-size: 15pt;
+}
+.end-banner a:not(.no-new-style){
+  text-decoration: none;
+  color: #fcee33dd;
+}
+.end-banner-close{
+  position: absolute;
+  top:0;right:0;
+  padding: 50px;
+  background: transparent;
+  font-family: inherit;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+.end-banner-close > .material-icons{
+  font-size: 34pt;
+}
 @media (max-width: 768px) {
   .github-logo{
     width: 30px;
+  }
+  .end-banner{
+    font-size: 13pt;
+    padding: 50px 50px;
+  }
+  .end-banner-close{
+    padding: 20px;
+  }
+  .end-banner-close > .material-icons{
+    font-size: 24pt;
+  }
+  .talk-page{
+    padding: 20px;
+    width: 100%;
+    overflow: hidden;
   }
   .current-text{
     bottom: 70px;
@@ -332,4 +333,45 @@ html, body{
       width: 50px;
       height: 50px;
   }
-}`
+}
+
+
+@media (orientation: portrait){
+  .stage-container{
+    position: fixed;
+    bottom: 60px;
+    left: -100px;
+    z-index: 201;
+    transform: rotate(90deg);
+  }
+  .stage-front, .stage-platform{
+    display: none;
+  }
+  .character-container .myhead{
+    transform: rotate(-40deg) translateX(-2px);
+    animation: headTilt 2s infinite ease-in;
+  }
+
+  .character-container .myhair{
+    transform: rotate(-40deg) translateX(2px);
+    animation: headTiltHair 1.9s infinite ease-in;
+  }
+  .orientation-error{
+    display: block;
+  }
+
+  @keyframes headTilt {
+    0% {transform: rotate(-40deg) translateX(-2px);}
+    30% {transform: rotate(0deg) translateX(0px);}
+    70% {transform: rotate(-40deg) translateX(-2px);}
+    100% {transform: rotate(-40deg) translateX(-2px);}
+  }
+
+  @keyframes headTiltHair {
+    0% {transform: rotate(-40deg) translateX(2px);}
+    30% {transform: rotate(0deg) translateX(0px);}
+    100% {transform: rotate(-40deg) translateX(2px);}
+  }
+}
+
+`

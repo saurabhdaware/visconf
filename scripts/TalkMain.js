@@ -35,6 +35,10 @@ class TalkMain {
     if(this.currentIndex === (this.flatTranscript.length - 1)) {
       this.pauseHandler();
       this.currentIndex = 0;
+      document.querySelector('.end-banner').style.display = 'block';
+      document.querySelector('.end-banner-close').addEventListener('click', e => {
+        document.querySelector('.end-banner').style.display = 'none';
+      })
     }
     this.progressBar.style.width = this.currentIndex*100/this.flatTranscript.length + '%';
     this.currentText.innerHTML = text.replace(/\$wait(2|5|10)s/g, '');
