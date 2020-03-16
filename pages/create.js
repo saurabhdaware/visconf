@@ -85,7 +85,6 @@ function Create({login, logout, user, isLoggedIn, slugToEdit, tempUsername}) {
     if(slugToEdit) {
       // Editing published talk
         const talkData = await (await fetch(`${process.env.ENDPOINT}/get-talk?username=${tempUsername}&slug=${slugToEdit}`)).json();
-        console.log(talkData);
         const transcriptData = await (await (await (fetch(`${process.env.ENDPOINT}/get-transcript?uid=${talkData.message.uid}&slug=${slugToEdit}`))).json())
         locallyStoredData = getLocalStorageData((tempUsername + '**' + slugToEdit));
         dataToFill = {

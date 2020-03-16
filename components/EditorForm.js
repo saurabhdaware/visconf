@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { setLocalStorageValue } from '../scripts/helpers';
 import Character from '../components/Character';
 
-function saveForm(editKey=undefined) {
+function getFinalData() {
   const finalData = {
     talkTitle: document.querySelector('#talk-title').value,
     slug: document.querySelector('#talk-title').value.replace(/ /g, '-').toLowerCase(),
@@ -19,6 +19,12 @@ function saveForm(editKey=undefined) {
       name: 'UK English Female'
     }
   }
+
+  return finalData;
+}
+
+function saveForm(editKey=undefined) {
+  const finalData = getFinalData();
 
   if(editKey !== undefined && editKey !== null && editKey !== 'undefined**undefined') {
     setLocalStorageValue(finalData, editKey);
@@ -34,24 +40,16 @@ function saveForm(editKey=undefined) {
   }, 3000);
 }
 
-async function publish(user) {
-  const finalData = {
-    talkTitle: document.querySelector('#talk-title').value,
-    slug: document.querySelector('#talk-title').value.replace(/ /g, '-').toLowerCase(),
-    transcriptText: document.querySelector('#transcript-editor').innerText,
-    slidePdfLink: document.querySelector('#slides-input').value,
-    eventName: document.querySelector('#event-name').value,
-    character: {
-      hairStyle: document.querySelector('#hairstyle').value,
-      hairColor: document.querySelector('#hair-color').value,
-      skinColor: document.querySelector('#skin-color').value,
-      tshirtColor: document.querySelector('#tshirt-color').value    
-    },
-    voice: {
-      name: 'UK English Female'
-    }
+async function updateTalk(user, editKey) {
+  const [username, slug] = editKey.split('**');
+  if(username !== user.username) {
+    // Invalid user
+    return;
   }
 
+  const finalData = {...getFinalData(), oldTalkData: {username, slug}};
+
+ // Creating new Talk
   const options = {
     method: 'POST',
     headers: {
@@ -60,6 +58,33 @@ async function publish(user) {
     },
     body: JSON.stringify(finalData)
   }
+
+  document.querySelector('#message').innerHTML = 'Publishing...';
+
+  const res = await ((await fetch(`${process.env.ENDPOINT}/update-talk`, options)).json());
+  if(res.success === true) {
+    localStorage.removeItem(editKey);
+    window.location.href = `/${user.username}/${res.data.slug}`;
+  }else{
+    document.querySelector('#message').innerHTML = 'oops.. something went wrong';
+  }
+
+}
+
+async function publish(user) {
+  const finalData = getFinalData();
+
+  // Creating new Talk
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + user.token 
+    },
+    body: JSON.stringify(finalData)
+  }
+
+  document.querySelector('#message').innerHTML = 'Publishing...';
 
   const res = await ((await fetch(`${process.env.ENDPOINT}/submit-talk`, options)).json());
   if(res.success === true) {
@@ -154,9 +179,15 @@ export function EditorForm({openTalk, userData, user, setUserData, editKey=undef
         <button onClick={e => saveForm(editKey)} className="btn editor-btn">Save Draft</button>&nbsp; &nbsp;
         {
           user.username
-          ? <span>
-              <button onClick={e => publish(user)} className="btn editor-btn" style={{backgroundColor: '#09f', color: '#fff'}}>Publish</button>&nbsp; &nbsp;
-            </span>
+          ? 
+            editKey !== undefined && editKey !== null && editKey !== 'undefined**undefined'
+            // if editKey is defined then edit the talk
+            ? <span>
+                <button onClick={e => updateTalk(user, editKey)} className="btn editor-btn" style={{backgroundColor: '#09f', color: '#fff'}}>Republish</button>
+              </span>
+            : <span>
+                <button onClick={e => publish(user)} className="btn editor-btn" style={{backgroundColor: '#09f', color: '#fff'}}>Publish</button>
+              </span>
           : <span>
               <button className="btn editor-btn download-transcript-button" style={{opacity: .4}}>Publish</button>
               <br/> <span style={{color: '#f30'}}>Login to publish talk</span>
