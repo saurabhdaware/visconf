@@ -15,7 +15,7 @@ function Nav({login, user, isLoggedIn}) {
             isLoggedIn
             ? <Link 
                 href="[username]" 
-                as={user.username}
+                as={user.username ?? user.name?.replace(/ /g, '').toLowerCase()}
               >
                 <a><img className="profile-image" src={user.imageUrl}/> <span style={{marginLeft: '40px'}}>{user.name}</span></a>
               </Link>
