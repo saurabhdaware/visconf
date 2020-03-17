@@ -9,11 +9,13 @@ function Footer() {
           <Link href="/"><a>Home</a></Link>
           <Link href="create"><a>Create</a></Link>
           <a href="https://github.com/saurabhdaware/visconf/blob/master/LICENSE">License <i className="material-icons ext-link">call_made</i></a>
+          <a href="https://github.com/saurabhdaware/visconf/blob/master/CONTRIBUTING.md">Contributing <i className="material-icons ext-link">call_made</i></a>
         </div>
         <div className="col">
           <a href="https://github.com/saurabhdaware/visconf">GitHub Repo <i className="material-icons ext-link">call_made</i></a>
-          <a href="https://github.com/saurabhdaware/visconf/blob/master/CONTRIBUTING.md">Contributing <i className="material-icons ext-link">call_made</i></a>
           <a href="https://github.com/saurabhdaware/visconf#dependencies">Dependencies <i className="material-icons ext-link">call_made</i></a>
+          <a href="mailto:visconfcc@gmail.com">Drop an email&nbsp;<i className="material-icons ext-link">mail</i></a>
+          <a href="https://twitter.com/visconf">Tweet us @visconf<i className="material-icons ext-link">call_made</i></a>
         </div>
       </div>
       <div className="footer-sponsors-container">
