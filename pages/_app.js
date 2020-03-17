@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { Fragment } from "react";
 import Head from "next/head";
 import Router from 'next/router'
+import withGA from "next-ga";
 
 import { useAuth } from '../scripts/hooks';
 
@@ -29,4 +30,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp;
+export default withGA("UA-160907444-1", Router)(MyApp);
