@@ -14,7 +14,7 @@ const Index = ({user, login, isLoggedIn}) => {
           <div>
             <h1 className="index-title">VisConf</h1>
             <span>Generate animated version of your talk from transcript and slides!</span><br/>
-            <Link href="/[username]/[slug]" as="/me/test"><a className="btn">I dont even know what VisConf is</a></Link>
+            <Link href="/[username]/[slug]" as="/saurabhdaware/visconf-intro"><a className="btn">I dont even know what VisConf is</a></Link>
             <Link href="create"><a className="btn">Create your VisTalk</a></Link>
           </div>
         </div>
