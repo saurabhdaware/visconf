@@ -20,7 +20,7 @@ const Sponsor = ({user, login, isLoggedIn}) => {
         <div className="sponsor-info">
           <img src="https://res.cloudinary.com/visconf/image/upload/v1584186805/sponsors/sponsor-1_neeqlg.png"/>
           <ul>
-            <li>Name and Logo in Talk page</li>
+            <li>Name and Logo in Talk page (non-clickable)</li>
             <li>Name and Logo in Footer</li>
           </ul>
         </div>
