@@ -115,6 +115,9 @@ function Footer() {
           padding: 60px 20px;
         }
 
+        .row > .col > a{
+          font-size: 13pt;
+        }
         .footer-sponsors-container{
           padding: 20px;
         }
