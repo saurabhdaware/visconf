@@ -165,7 +165,7 @@ const Talk = ({fetchedData}) => {
           <button className="end-banner-close"><i className="material-icons">close</i></button>
           
           Liked {fetchedData.talkTitle}? Checkout other talks from author <a href={'../' + fetchedData.username}>@{fetchedData.username}</a>
-          <br/><br/> <a href={`https://twitter.com/intent/tweet?text=Hello%20beautiful%20people!%20Check%20out%20this%20VisTalk%20from%20${fetchedData.username}%20about%20%22${fetchedData.talkTitle}%22.%0A%0A%40visconf%0A%0Ahttps://visconf.cc/${fetchedData.username}/${fetchedData.slug}%0A`}>Share this talk on Twitter</a>
+          <br/><br/> <a target="_blank" rel="noopener noreferer" href={`https://twitter.com/intent/tweet?text=Hello%20beautiful%20people!%20Check%20out%20this%20VisTalk%20from%20${fetchedData.username}%20about%20%22${fetchedData.talkTitle}%22.%0A%0A%40visconf%0A%0Ahttps://visconf.cc/${fetchedData.username}/${fetchedData.slug}%0A`}>Share this talk on Twitter</a>
           <br/><br/>
           <div>
             You can sponsor us to remove the financial barriers for this and other projects🌻<br/>
