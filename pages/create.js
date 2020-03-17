@@ -23,7 +23,7 @@ function applyEditorSlides() {
   let slidesInput = document.querySelector('#slides-input');
   if(!slidesInput) return;
 
-  if(slidesInput.value && isURL(slidesInput.value) && slidesInput.value.includes('.pdf')){
+  if(slidesInput.value && isURL(slidesInput.value)){
     fetchEditorSlides();
   }
 }

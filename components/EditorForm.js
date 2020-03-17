@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { setLocalStorageValue } from '../scripts/helpers';
 import Character from '../components/Character';
+import slides from "../scripts/slides";
 
 function getFinalData() {
   const finalData = {
@@ -92,6 +93,35 @@ async function publish(user) {
   }
 }
 
+function fileSelectHandler(e) {
+  const file = e.target.files[0];
+  if(file.type !== 'application/pdf'){
+    alert("Not valid PDF file. If you have PPT please use online tools to convert it to PDF and then upload");
+    return;
+  }
+  const fileReader = new FileReader();
+  fileReader.onload = function() {
+    const typedArray = new Uint8Array(this.result);
+    slides.loadPDF(typedArray)
+      .then(pdf => {
+        document.querySelector('.editor-presentation-preview').innerHTML = '';
+        for(let pageNumber=1;pageNumber <= pdf._pdfInfo.numPages; pageNumber++) {
+          document.querySelector('.editor-presentation-preview').innerHTML += /* html */`
+            <div class="editor-slide">
+              <canvas id="canvas-page-${pageNumber}"></canvas>
+            </div>
+          `;
+
+          slides.renderPage(pageNumber, 0.5);
+        }
+
+        // Clear URL input
+        document.querySelector('#slides-input').value = '';
+      })
+  }
+
+  fileReader.readAsArrayBuffer(file);
+}
 
 export function EditorForm({openTalk, userData, user, setUserData, editKey=undefined}) {
 
@@ -124,12 +154,15 @@ export function EditorForm({openTalk, userData, user, setUserData, editKey=undef
     <Fragment>
     <div className="editor-component">
       <div className="form-field">
-        <label>Slides (PDF) URL <small>(<a target="_blank" rel="noopener" href="https://smallpdf.com/ppt-to-pdf">Convert your PPT to PDF file</a> and upload it to a CDN like <a target="_blank" rel="noopener" href="https://cloudinary.com">cloudinary</a> (even GitHub works))</small></label>
+        <label htmlFor="slides-file-select">Slides (PDF) File input <small>(<a target="_blank" rel="noopener" href="https://smallpdf.com/ppt-to-pdf">Convert your PPT to PDF file</a> and upload)</small> </label>
+        <br/><input onChange={fileSelectHandler} type="file" id="slides-file-select" />
+        <br/><br/>or<br/><br/>
+        <label htmlFor="slides-input">Slides (PDF) URL <small>(<a target="_blank" rel="noopener" href="https://smallpdf.com/ppt-to-pdf">Convert your PPT to PDF file</a> and upload it to a CDN like <a target="_blank" rel="noopener" href="https://cloudinary.com">cloudinary</a> (even GitHub works))</small></label>
         <input id="slides-input" type="text" />
         <button className="btn editor-btn fetch-slides-btn">
           Fetch Slides
         </button>
-        <div className="editor-presentation-preview"></div>
+        <br/><br/><div className="editor-presentation-preview"></div>
       </div>
       <div className="form-field transcript-editor">
         <label>Transcript (Make sure to save form before you close)</label>
