@@ -8,7 +8,7 @@ import Footer from '../components/Footer.js';
 import TalkTile from '../components/TalkTile.js';
 import { LogoutButton } from '../components/AuthButtons';
 
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import Link from 'next/link';
 
 async function fetchTalks(username) {
@@ -23,10 +23,6 @@ async function fetchTalks(username) {
 
   return resData;
 
-}
-
-function setAllTalks(username) {
-  
 }
 
 const Profile = ({metaInfo, login, logout, user, isLoggedIn}) => {
@@ -69,9 +65,7 @@ const Profile = ({metaInfo, login, logout, user, isLoggedIn}) => {
     </div>
     <div className="profile-talks-container">
     {
-      talks.length > 0
-      ? talks.map((val, index) => <TalkTile talkData={val} key={index} user={user} setAllTalks={setAllTalks}/>)
-      : <TalkTile user={user} talkData={{TalkTile: '...', slug: '...', eventName: '...', username: usernameParam}} />
+      talks?.map((val, index) => <TalkTile talkData={val} key={index} user={user} setAllTalks={setAllTalks}/>)
     }
     </div>
     <Link href="create"><a className="create-button">+</a></Link>
