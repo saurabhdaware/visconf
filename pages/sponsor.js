@@ -12,6 +12,8 @@ const Sponsor = ({user, login, isLoggedIn}) => {
         <h1>Individual Sponsors</h1>
         If you're an individual who wants to support VisConf directly, you can Buy Me a Coffee!
         <br/><br/><a href="https://www.buymeacoffee.com/saurabhdaware" target="_blank" rel="noopener noreferer"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" className="buy-me-a-coffee-button shadow"/></a>
+        &nbsp;&nbsp;<a href="https://www.patreon.com/bePatron?u=31891872" data-patreon-widget-type="become-patron-button"><img  className="buy-me-a-coffee-button shadow" src="https://cloakandmeeple.files.wordpress.com/2017/06/become_a_patron_button3x.png?w=300"/></a> &nbsp;
+
         <br/><br/><br/>
         <h1>Sponsorship Plans for Organizations</h1>
         <h2>Gold Sponsors</h2>
