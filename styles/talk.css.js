@@ -246,7 +246,7 @@ html, body{
   height: 100%;
   width: 100%;
   z-index: 999;
-  display: none;
+  display: block;
   color: #bbb;
   padding: 100px 100px;
   font-size: 15pt;

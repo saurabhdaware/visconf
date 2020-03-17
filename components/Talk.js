@@ -163,12 +163,12 @@ const Talk = ({fetchedData}) => {
         </div>
         <div className="end-banner">
           <button className="end-banner-close"><i className="material-icons">close</i></button>
-          Thank you for watching the talk! 
-          <br/>Checkout other talks from author <a href={'../' + fetchedData.username}>@{fetchedData.username}</a>
-          <br/><br/>VisConf is currently in its Beta version and you can help us reach v1.0.0 ASAP by contributing to our <a href="https://github.com/saurabhdaware/visconf">GitHub Repository</a>
+          
+          Liked {fetchedData.talkTitle}? Checkout other talks from author <a href={'../' + fetchedData.username}>@{fetchedData.username}</a>
+          <br/><br/> <a href={`https://twitter.com/intent/tweet?text=Hello%20beautiful%20people!%20Check%20out%20this%20VisTalk%20from%20${fetchedData.username}%20about%20%22${fetchedData.talkTitle}%22.%0A%0A%40visconf%0A%0Ahttps://visconf.cc/${fetchedData.username}/${fetchedData.slug}%0A`}>Share this talk on Twitter</a>
           <br/><br/>
           <div>
-            You can also sponsor us to remove the financial barriers for this and other projects!<br/>
+            You can sponsor us to remove the financial barriers for this and other projects🌻<br/>
             <a className="no-new-style" href="https://www.patreon.com/bePatron?u=31891872" data-patreon-widget-type="become-patron-button"><img src="https://cloakandmeeple.files.wordpress.com/2017/06/become_a_patron_button3x.png?w=150"/></a> &nbsp;
             <a href="https://www.buymeacoffee.com/saurabhdaware" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" width="150" /></a>
           </div>
