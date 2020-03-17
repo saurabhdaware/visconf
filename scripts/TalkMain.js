@@ -53,7 +53,6 @@ class TalkMain {
     if(text.includes('$wait5s')) {
       this.currentText.innerHTML = '*5s pause*';
       await wait(5000);
-
     }
 
     if(text.includes('$wait10s')) {

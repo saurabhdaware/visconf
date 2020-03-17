@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
-    "bol": "^0.1.5",
+    "bol": "^0.1.6",
     "faunadb": "^2.11.1",
     "google-auth-library": "^5.10.1",
     "isomorphic-unfetch": "^3.0.0",
