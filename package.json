@@ -24,7 +24,8 @@
   "scripts": {
     "dev": "next",
     "now": "now dev",
-    "build": "next build",
+    "clean": "rimraf .out/ && rimraf .next/",
+    "build": "npm run clean && next build",
     "start": "now dev"
   },
   "repository": {
